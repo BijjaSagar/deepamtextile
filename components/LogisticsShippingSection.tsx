@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Ship, Clock, Box, FileText, CheckCircle2, ShieldCheck, ArrowRight, Palmtree, Landmark } from "lucide-react";
 
 interface LogisticsShippingSectionProps {
@@ -296,6 +297,17 @@ export function LogisticsShippingSection({ onRequestQuote }: LogisticsShippingSe
               <span className="text-[#dfba77] font-semibold">JNPT Port Code: INNSA1</span>
             </div>
           </div>
+        </div>
+
+        {/* View Full Logistics Hub */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/logistics"
+            className="inline-flex items-center gap-2.5 rounded-sm border border-[#0d2818] bg-[#0d2818] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#dfba77] shadow-md transition-all hover:bg-[#06140b] hover:shadow-lg"
+          >
+            <span>View Full Port Routing &amp; Container Packing Guide</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

@@ -101,26 +101,35 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
               onMouseEnter={() => setCorridorsDropdown(true)}
               onMouseLeave={() => setCorridorsDropdown(false)}
             >
-              <button className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white hover:text-[#dfba77] transition-colors py-2">
+              <Link
+                href="/corridors"
+                className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white hover:text-[#dfba77] transition-colors py-2"
+              >
                 <span>3 Target Corridors</span>
                 <ChevronDown className={`h-3.5 w-3.5 text-[#dfba77] transition-transform ${corridorsDropdown ? "rotate-180" : ""}`} />
-              </button>
+              </Link>
 
               {corridorsDropdown && (
                 <div className="absolute left-0 top-full pt-2 w-[340px] z-50">
                   <div className="rounded-sm border border-[#c49a45]/30 bg-[#06140b] p-4 shadow-2xl backdrop-blur-xl">
-                    <p className="font-body text-[10px] font-bold uppercase tracking-[0.24em] text-[#dfba77] mb-3 border-b border-white/10 pb-2">
-                      Specialized Export Divisions
-                    </p>
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+                      <p className="font-body text-[10px] font-bold uppercase tracking-[0.24em] text-[#dfba77]">
+                        Specialized Export Divisions
+                      </p>
+                      <Link
+                        href="/corridors"
+                        className="text-[10px] text-white/60 hover:text-[#dfba77] underline"
+                      >
+                        View All
+                      </Link>
+                    </div>
                     <div className="space-y-2">
                       {regions.map((reg) => (
-                        <button
+                        <Link
                           key={reg.id}
-                          onClick={() => {
-                            setCorridorsDropdown(false);
-                            onRequestQuote(reg.name);
-                          }}
-                          className="w-full text-left p-2.5 rounded-sm hover:bg-white/5 border border-transparent hover:border-[#c49a45]/30 transition-all cursor-pointer group"
+                          href="/corridors"
+                          onClick={() => setCorridorsDropdown(false)}
+                          className="w-full block text-left p-2.5 rounded-sm hover:bg-white/5 border border-transparent hover:border-[#c49a45]/30 transition-all cursor-pointer group"
                         >
                           <div className="flex items-center justify-between">
                             <span className="font-display text-sm font-semibold text-white group-hover:text-[#dfba77] flex items-center gap-2">
@@ -131,7 +140,7 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
                           </div>
                           <p className="text-[11px] text-white/60 mt-0.5">{reg.sub}</p>
                           <p className="text-[10.5px] text-[#dfba77] mt-1 font-medium">{reg.highlight}</p>
-                        </button>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -139,33 +148,33 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
               )}
             </div>
 
-            <a
-              href="#specs-matrix"
+            <Link
+              href="/collections"
               className="text-xs font-semibold uppercase tracking-[0.16em] text-white/90 hover:text-[#dfba77] transition-colors"
             >
-              Regional Specs
-            </a>
+              Collections
+            </Link>
 
-            <a
-              href="#collections"
+            <Link
+              href="/infrastructure"
               className="text-xs font-semibold uppercase tracking-[0.16em] text-white/90 hover:text-[#dfba77] transition-colors"
             >
-              Curated Collections
-            </a>
+              Mill Tech
+            </Link>
 
-            <a
-              href="#logistics"
+            <Link
+              href="/logistics"
               className="text-xs font-semibold uppercase tracking-[0.16em] text-white/90 hover:text-[#dfba77] transition-colors"
             >
               Shipping &amp; Ports
-            </a>
+            </Link>
 
-            <a
-              href="#mill-tech"
+            <Link
+              href="/rfq"
               className="text-xs font-semibold uppercase tracking-[0.16em] text-white/90 hover:text-[#dfba77] transition-colors"
             >
-              Mill Technology
-            </a>
+              RFQ Desk
+            </Link>
 
             <Link
               href="/admin"
@@ -177,13 +186,13 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
 
           {/* Right Action Buttons */}
           <div className="hidden sm:flex items-center gap-3">
-            <button
-              onClick={() => onRequestQuote()}
+            <Link
+              href="/rfq"
               className="btn-gold text-[11px] py-2.5 px-5 cursor-pointer"
             >
               <span>Request Export Quote</span>
               <ArrowRight className="h-3.5 w-3.5" />
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Trigger */}
@@ -201,17 +210,24 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
       {mobileMenuOpen && (
         <div className="lg:hidden border-b border-[#c49a45]/30 bg-[#06140b]/98 p-6 backdrop-blur-xl shadow-2xl">
           <div className="space-y-4">
-            <p className="font-body text-[10px] font-bold uppercase tracking-[0.24em] text-[#dfba77]">
-              Target Export Corridors
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="font-body text-[10px] font-bold uppercase tracking-[0.24em] text-[#dfba77]">
+                Export Corridors
+              </p>
+              <Link
+                href="/corridors"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-[10px] text-white/60 hover:text-[#dfba77] underline"
+              >
+                View Details
+              </Link>
+            </div>
             <div className="grid grid-cols-1 gap-2">
               {regions.map((reg) => (
-                <button
+                <Link
                   key={reg.id}
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onRequestQuote(reg.name);
-                  }}
+                  href="/corridors"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-between p-3 rounded-sm bg-white/5 border border-white/10 text-left text-xs font-semibold text-white"
                 >
                   <span className="flex items-center gap-2">
@@ -219,39 +235,39 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
                     <span>{reg.name}</span>
                   </span>
                   <span className="text-[10px] text-[#dfba77]">{reg.transit}</span>
-                </button>
+                </Link>
               ))}
             </div>
 
             <div className="pt-4 border-t border-white/10 space-y-3">
-              <a
-                href="#specs-matrix"
+              <Link
+                href="/collections"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-sm font-medium text-white/80 hover:text-[#dfba77]"
               >
-                Regional Specifications Matrix
-              </a>
-              <a
-                href="#collections"
+                Export Collections &amp; Products
+              </Link>
+              <Link
+                href="/infrastructure"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-sm font-medium text-white/80 hover:text-[#dfba77]"
               >
-                Curated Regional Collections
-              </a>
-              <a
-                href="#logistics"
+                Solapur Mill Infrastructure &amp; Tech
+              </Link>
+              <Link
+                href="/logistics"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-sm font-medium text-white/80 hover:text-[#dfba77]"
               >
-                Port Logistics &amp; Shipping
-              </a>
-              <a
-                href="#mill-tech"
+                JNPT Mumbai Port Logistics &amp; Shipping
+              </Link>
+              <Link
+                href="/rfq"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-sm font-medium text-white/80 hover:text-[#dfba77]"
               >
-                Mill Infrastructure &amp; Quality Lab
-              </a>
+                Factory RFQ Desk &amp; Sample Swatches
+              </Link>
               <Link
                 href="/admin"
                 onClick={() => setMobileMenuOpen(false)}
@@ -262,15 +278,13 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
             </div>
 
             <div className="pt-4">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onRequestQuote();
-                }}
-                className="btn-gold w-full text-center"
+              <Link
+                href="/rfq"
+                onClick={() => setMobileMenuOpen(false)}
+                className="btn-gold w-full text-center block"
               >
                 Request Export Quote
-              </button>
+              </Link>
             </div>
           </div>
         </div>

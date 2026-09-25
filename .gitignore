@@ -17,9 +17,11 @@
 .DS_Store
 *.pem
 
-# Local env files
+# Local and production env files (hide keys and credentials)
 .env*.local
 .env
+.env.production
+.env.*
 
 # Database
 /data/*.db

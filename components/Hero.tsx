@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Ship, Sparkles, ShieldCheck, CheckCircle2, Clock, Globe2, ChevronRight, Palmtree, Landmark } from "lucide-react";
 
 interface HeroProps {
@@ -199,13 +200,13 @@ export function Hero({ onRequestQuote }: HeroProps) {
                 <ArrowRight className="h-4 w-4" />
               </button>
 
-              <a
-                href="#specs-matrix"
+              <Link
+                href="/corridors"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#dfba77] hover:text-white transition-colors"
               >
-                <span>Compare Specs</span>
+                <span>Explore Corridor Specs</span>
                 <ChevronRight className="h-3.5 w-3.5" />
-              </a>
+              </Link>
             </div>
           </div>
 

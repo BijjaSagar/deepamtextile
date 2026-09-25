@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Sparkles, Filter, Check, Eye, Palmtree, Landmark, ShieldCheck, Globe, X } from "lucide-react";
 import { ProductItem } from "@/lib/types";
 
@@ -185,6 +186,17 @@ export function CorridorCollectionsSection({
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View All Collections Button */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/collections"
+            className="inline-flex items-center gap-2.5 rounded-sm border border-[#0d2818] bg-[#0d2818] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#dfba77] shadow-md transition-all hover:bg-[#06140b] hover:shadow-lg"
+          >
+            <span>Browse Complete 12-Category Collections Catalog</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
         {/* Bottom Fast Quote Banner */}

@@ -293,74 +293,8 @@ async function main() {
   }
   console.log(`✓ Seeded ${products.length} products`);
 
-  // 4. Seed Inquiries across target regions
-  const inquiries = [
-    {
-      refNumber: "DT-RFQ-SEA-2026-001",
-      fullName: "Tan Wei Ming",
-      email: "weiming.tan@singaporeresorts.com.sg",
-      phone: "+65 6789 1234",
-      companyName: "Sentosa Heritage Luxury Resorts",
-      targetRegion: "South East Asia",
-      destinationCountry: "Singapore",
-      productCategory: "Pool & Lounger Towels",
-      estimatedQuantity: "15,000 pcs",
-      gsmSpecification: "600 GSM Vat-Dyed Cabana Stripe",
-      isSampleRequested: true,
-      privateLabelInterest: true,
-      message:
-        "Seeking supply for our flagship 5-star island resort. Need chlorine-resistant pool towels and quick-dry cabana towels with custom woven logo.",
-      status: "QUOTED",
-      notes: "Quotation sent via CIF Singapore. Awaiting sample approval.",
-    },
-    {
-      refNumber: "DT-RFQ-ME-2026-002",
-      fullName: "Rashid Al-Maktoum",
-      email: "procurement@alfuttaim-hospitality.ae",
-      phone: "+971 4 388 9000",
-      companyName: "Al-Futtaim Hospitality Group",
-      targetRegion: "Middle East",
-      destinationCountry: "United Arab Emirates (Dubai)",
-      productCategory: "Bath Towels & Hotel Linen",
-      estimatedQuantity: "30,000 pcs (2 x 40ft HQ Containers)",
-      gsmSpecification: "700 GSM Combed Zero-Twist + 400 TC Bedding",
-      isSampleRequested: true,
-      privateLabelInterest: true,
-      message:
-        "We are opening a new luxury property in Downtown Dubai. Need high-end bath towels (700 GSM) and matching bath sheets with gold dobby borders.",
-      status: "CONTACTED",
-      notes: "Spoke with procurement team over WhatsApp. Arranging courier of physical samples to Dubai office.",
-    },
-    {
-      refNumber: "DT-RFQ-EUR-2026-003",
-      fullName: "Sophie Laurent",
-      email: "s.laurent@nordic-textil.de",
-      phone: "+49 30 8923 4410",
-      companyName: "Nordic Organic Living GmbH",
-      targetRegion: "Europe",
-      destinationCountry: "Germany (Hamburg)",
-      productCategory: "Bath Robes & Spa Towels",
-      estimatedQuantity: "8,000 pcs",
-      gsmSpecification: "450 GSM Organic Cotton OEKO-TEX Standard 100",
-      isSampleRequested: true,
-      privateLabelInterest: true,
-      message:
-        "We require OEKO-TEX Standard 100 and GOTS compliant bathrobes and wellness spa towels in natural earth tones (Sage, Taupe, Oat). Please send certification dossiers.",
-      status: "NEW",
-      notes: "Lead received from website RFQ. High-potential European retail buyer.",
-    },
-  ];
-
-  for (const inq of inquiries) {
-    await prisma.inquiry.upsert({
-      where: { refNumber: inq.refNumber },
-      update: inq,
-      create: inq,
-    });
-  }
-  console.log(`✓ Seeded ${inquiries.length} initial inquiries across target regions`);
-
-  console.log("Deepam Textile seed completed successfully!");
+  // 4. Inquiries table starts clean with 0 test data for production
+  console.log("Deepam Textile initial database seeding completed successfully!");
 }
 
 main()

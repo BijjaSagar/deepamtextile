@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { ArrowRight, Check, Sparkles, Ship, ShieldCheck, Download, Palmtree, Landmark } from "lucide-react";
 
 interface RegionalMatrixSectionProps {
@@ -191,6 +192,17 @@ export function RegionalMatrixSection({ onRequestQuote }: RegionalMatrixSectionP
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View Full Corridors Hub */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/corridors"
+            className="inline-flex items-center gap-2.5 rounded-sm border border-[#0d2818] bg-[#0d2818] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#dfba77] shadow-md transition-all hover:bg-[#06140b] hover:shadow-lg"
+          >
+            <span>Explore Comprehensive Corridor Analysis &amp; Climatic Formulations</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

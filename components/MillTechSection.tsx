@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Cpu, ShieldCheck, Factory, Microscope, Layers, Sparkles, Check } from "lucide-react";
 
 interface MillTechSectionProps {
@@ -164,6 +165,17 @@ export function MillTechSection({ onRequestQuote }: MillTechSectionProps) {
               </span>
             </div>
           </div>
+        </div>
+
+        {/* View Full Infrastructure Hub */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/infrastructure"
+            className="inline-flex items-center gap-2.5 rounded-sm border border-[#0d2818] bg-[#0d2818] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#dfba77] shadow-md transition-all hover:bg-[#06140b] hover:shadow-lg"
+          >
+            <span>Inspect Solapur Mill Infrastructure, Looms &amp; Testing Lab</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

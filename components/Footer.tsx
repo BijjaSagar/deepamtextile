@@ -36,34 +36,34 @@ export function Footer({ onRequestQuote }: FooterProps) {
             </p>
             <ul className="space-y-3">
               <li>
-                <button
-                  onClick={() => onRequestQuote("South East Asia")}
-                  className="font-body text-[13.5px] text-[#f4efe6]/80 hover:text-white transition-colors text-left group"
+                <Link
+                  href="/corridors"
+                  className="font-body text-[13.5px] text-[#f4efe6]/80 hover:text-white transition-colors text-left group block"
                 >
                   <span className="text-[#dfba77] mr-1.5 font-bold">1.</span>
                   <span>South East Asia</span>
                   <span className="block text-[11px] text-[#f4efe6]/50">Singapore, Bali, Bangkok, KL</span>
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onRequestQuote("Middle East")}
-                  className="font-body text-[13.5px] text-[#f4efe6]/80 hover:text-white transition-colors text-left group"
+                <Link
+                  href="/corridors"
+                  className="font-body text-[13.5px] text-[#f4efe6]/80 hover:text-white transition-colors text-left group block"
                 >
                   <span className="text-[#dfba77] mr-1.5 font-bold">2.</span>
                   <span>Middle East</span>
                   <span className="block text-[11px] text-[#f4efe6]/50">Dubai, Saudi Arabia, Qatar, Oman</span>
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onRequestQuote("Europe")}
-                  className="font-body text-[13.5px] text-[#f4efe6]/80 hover:text-white transition-colors text-left group"
+                <Link
+                  href="/corridors"
+                  className="font-body text-[13.5px] text-[#f4efe6]/80 hover:text-white transition-colors text-left group block"
                 >
                   <span className="text-[#dfba77] mr-1.5 font-bold">3.</span>
                   <span>Europe</span>
                   <span className="block text-[11px] text-[#f4efe6]/50">UK, Germany, France, Nordics</span>
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -74,12 +74,12 @@ export function Footer({ onRequestQuote }: FooterProps) {
               Export Collections
             </p>
             <ul className="space-y-2 text-[13px] text-[#f4efe6]/75">
-              <li><a href="#products" className="hover:text-white transition-colors">Bath Towels (500 - 700 GSM)</a></li>
-              <li><a href="#products" className="hover:text-white transition-colors">Resort Pool &amp; Cabana Sheets</a></li>
-              <li><a href="#products" className="hover:text-white transition-colors">Hotel Bedding (300 - 600 TC)</a></li>
-              <li><a href="#products" className="hover:text-white transition-colors">Shawl Collar &amp; Waffle Robes</a></li>
-              <li><a href="#products" className="hover:text-white transition-colors">Heavy Bath Mats (900 GSM)</a></li>
-              <li><a href="#private-label" className="hover:text-white transition-colors">Bespoke Private Label OEM</a></li>
+              <li><Link href="/collections" className="hover:text-white transition-colors">Bath Towels (500 - 700 GSM)</Link></li>
+              <li><Link href="/collections" className="hover:text-white transition-colors">Resort Pool &amp; Cabana Sheets</Link></li>
+              <li><Link href="/collections" className="hover:text-white transition-colors">Hotel Bedding (300 - 600 TC)</Link></li>
+              <li><Link href="/collections" className="hover:text-white transition-colors">Shawl Collar &amp; Waffle Robes</Link></li>
+              <li><Link href="/collections" className="hover:text-white transition-colors">Heavy Bath Mats (900 GSM)</Link></li>
+              <li><Link href="/collections" className="hover:text-white transition-colors">Bespoke Private Label OEM</Link></li>
             </ul>
           </div>
 
@@ -95,7 +95,7 @@ export function Footer({ onRequestQuote }: FooterProps) {
                 </a>
               </p>
               <p>
-                <a href="tel:917066148936" className="hover:text-white transition-colors block font-medium">
+                <a href="tel:+917066148936" className="hover:text-white transition-colors block font-medium">
                   +91 70661 48936
                 </a>
               </p>
@@ -105,13 +105,13 @@ export function Footer({ onRequestQuote }: FooterProps) {
             </address>
 
             <div className="mt-6">
-              <button
-                onClick={() => onRequestQuote()}
-                className="btn-gold w-full justify-center text-xs py-2.5"
+              <Link
+                href="/rfq"
+                className="btn-gold w-full justify-center text-xs py-2.5 inline-flex"
               >
                 <span>Request B2B Proforma Quote</span>
                 <ArrowRight className="h-3.5 w-3.5" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -120,10 +120,10 @@ export function Footer({ onRequestQuote }: FooterProps) {
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 md:flex-row md:items-center md:justify-between text-xs text-[#f4efe6]/50">
           <p>© 2026 Deepam Textile Mills. Direct Mill Manufacturing for Global Markets.</p>
           <div className="flex flex-wrap gap-4 md:gap-6">
-            <span>ISO 9001:2015</span>
-            <span>OEKO-TEX® Standard 100</span>
-            <span>BCI Partner</span>
-            <span>Sedex / SMETA Audited</span>
+            <Link href="/infrastructure" className="hover:text-white transition-colors">ISO 9001:2015</Link>
+            <Link href="/infrastructure" className="hover:text-white transition-colors">OEKO-TEX® Standard 100</Link>
+            <Link href="/logistics" className="hover:text-white transition-colors">JNPT Port Logistics</Link>
+            <Link href="/admin" className="hover:text-white transition-colors">Admin Portal</Link>
           </div>
         </div>
       </div>

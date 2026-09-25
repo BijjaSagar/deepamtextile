@@ -1,18 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getAdminEmailFromCookies } from "@/lib/auth";
+import { sanitizeString } from "@/lib/security";
 
 export async function GET(request: NextRequest) {
   try {
+    const adminEmail = await getAdminEmailFromCookies();
+    if (!adminEmail) {
+      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+    }
+
     const { searchParams } = new URL(request.url);
     const region = searchParams.get("region");
     const status = searchParams.get("status");
 
     const where: any = {};
     if (region && region !== "all") {
-      where.targetRegion = region;
+      where.targetRegion = sanitizeString(region, 50);
     }
     if (status && status !== "all") {
-      where.status = status;
+      where.status = sanitizeString(status, 30);
     }
 
     const inquiries = await prisma.inquiry.findMany({
@@ -21,16 +28,22 @@ export async function GET(request: NextRequest) {
     });
 
     return NextResponse.json({ success: true, inquiries });
-  } catch (error) {
-    console.error("Admin get inquiries error:", error);
+  } catch {
     return NextResponse.json({ error: "Failed to fetch inquiries" }, { status: 500 });
   }
 }
 
 export async function PATCH(request: NextRequest) {
   try {
+    const adminEmail = await getAdminEmailFromCookies();
+    if (!adminEmail) {
+      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+    }
+
     const body = await request.json();
-    const { id, status, notes } = body;
+    const id = sanitizeString(body?.id, 100);
+    const status = body?.status ? sanitizeString(body.status, 30) : undefined;
+    const notes = body?.notes !== undefined ? sanitizeString(body.notes, 2000) : undefined;
 
     if (!id) {
       return NextResponse.json({ error: "Inquiry ID is required" }, { status: 400 });
@@ -46,16 +59,20 @@ export async function PATCH(request: NextRequest) {
     });
 
     return NextResponse.json({ success: true, inquiry: updated });
-  } catch (error) {
-    console.error("Admin update inquiry error:", error);
+  } catch {
     return NextResponse.json({ error: "Failed to update inquiry" }, { status: 500 });
   }
 }
 
 export async function DELETE(request: NextRequest) {
   try {
+    const adminEmail = await getAdminEmailFromCookies();
+    if (!adminEmail) {
+      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+    }
+
     const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id");
+    const id = sanitizeString(searchParams.get("id"), 100);
 
     if (!id) {
       return NextResponse.json({ error: "Inquiry ID is required" }, { status: 400 });
@@ -65,9 +82,8 @@ export async function DELETE(request: NextRequest) {
       where: { id },
     });
 
-    return NextResponse.json({ success: true, message: "Inquiry deleted" });
-  } catch (error) {
-    console.error("Admin delete inquiry error:", error);
+    return NextResponse.json({ success: true, message: "Inquiry deleted successfully" });
+  } catch {
     return NextResponse.json({ error: "Failed to delete inquiry" }, { status: 500 });
   }
 }
