@@ -11,6 +11,7 @@ export interface ProductItem {
   description: string;
   features: string[];
   image: string;
+  images?: string[];
   sortOrder: number;
   published: boolean;
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { prisma } from "@/lib/prisma";
-import { ProductItem } from "@/lib/types";
+import { getAllProducts } from "@/lib/products-data";
 import { CollectionsClient } from "./CollectionsClient";
 
 export const metadata: Metadata = {
@@ -13,39 +12,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function CollectionsPage() {
-  let products: ProductItem[] = [];
-
-  try {
-    const dbProducts = await prisma.product.findMany({
-      where: { published: true },
-      orderBy: { sortOrder: "asc" },
-    });
-
-    products = dbProducts.map((p) => ({
-      id: p.id,
-      slug: p.slug,
-      title: p.title,
-      category: p.category,
-      gsmRange: p.gsmRange,
-      material: p.material,
-      dimensions: p.dimensions,
-      weaveType: p.weaveType,
-      minOrderQty: p.minOrderQty,
-      description: p.description,
-      features: (() => {
-        try {
-          return JSON.parse(p.features);
-        } catch {
-          return [];
-        }
-      })(),
-      image: p.image,
-      published: p.published,
-      sortOrder: p.sortOrder,
-    }));
-  } catch {
-    products = [];
-  }
+  const products = await getAllProducts();
 
   return <CollectionsClient initialProducts={products} />;
 }

@@ -90,7 +90,7 @@ export function CorridorCollectionsSection({
               className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-[#dfd6c6] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#c49a45] hover:shadow-xl"
             >
               {/* Product Image */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0d2818]">
+              <Link href={`/products/${product.slug}`} className="relative aspect-[4/3] w-full overflow-hidden bg-[#0d2818] block group/img">
                 <img
                   src={product.image}
                   alt={product.title}
@@ -127,11 +127,11 @@ export function CorridorCollectionsSection({
                   <span className="text-[10px] uppercase font-bold tracking-wider text-[#dfba77]">
                     {product.gsmRange}
                   </span>
-                  <h3 className="font-display text-lg font-semibold leading-tight text-white mt-0.5">
+                  <h3 className="font-display text-lg font-semibold leading-tight text-white mt-0.5 group-hover/img:text-[#dfba77] transition-colors">
                     {product.title}
                   </h3>
                 </div>
-              </div>
+              </Link>
 
               {/* Product Details */}
               <div className="p-5 flex-1 flex flex-col justify-between">
@@ -175,13 +175,14 @@ export function CorridorCollectionsSection({
                   >
                     <span>Request RFQ</span>
                   </button>
-                  <button
-                    onClick={() => setActiveModalProduct(product)}
-                    className="px-3 py-2 border border-[#dfd6c6] hover:border-[#c49a45] rounded-sm text-[#0d2818] hover:text-[#c49a45] transition-colors cursor-pointer"
-                    title="View Technical Specs"
+                  <Link
+                    href={`/products/${product.slug}`}
+                    className="px-3 py-2 border border-[#dfd6c6] hover:border-[#c49a45] rounded-sm text-[#0d2818] hover:text-[#c49a45] transition-colors inline-flex items-center gap-1 text-[11px] font-semibold cursor-pointer"
+                    title="View Technical Specs & Photos"
                   >
-                    <Eye className="h-4 w-4" />
-                  </button>
+                    <Eye className="h-3.5 w-3.5" />
+                    <span>Specs</span>
+                  </Link>
                 </div>
               </div>
             </div>

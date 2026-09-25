@@ -47,6 +47,7 @@ model Product {
   description String   @db.Text
   features    String   @db.Text
   image       String   @db.VarChar(500)
+  images      String?  @db.Text
   sortOrder   Int      @default(0)
   published   Boolean  @default(true)
   createdAt   DateTime @default(now())
