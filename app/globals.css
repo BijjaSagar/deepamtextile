@@ -84,6 +84,38 @@
   box-shadow: 0 6px 20px rgba(13, 40, 24, 0.28);
 }
 
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background-color: var(--deepam-emerald);
+  color: #ffffff;
+  padding: 0.85rem 1.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  border-radius: 2px;
+  border: 1px solid var(--deepam-emerald);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(13, 40, 24, 0.22);
+  cursor: pointer;
+}
+
+.btn-solid:hover {
+  background-color: #163824;
+  border-color: #163824;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(13, 40, 24, 0.32);
+}
+
+.btn-solid:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .btn-outline-gold {
   display: inline-flex;
   align-items: center;
