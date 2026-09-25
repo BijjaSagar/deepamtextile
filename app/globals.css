@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Deepam Bespoke Luxury Palette: Rich Forest Emerald & Antique Brass */
+    --deepam-emerald: #0d2818;
+    --deepam-emerald-light: #163824;
+    --deepam-navy: #0d2818;
+    --deepam-navy-light: #163824;
+    --deepam-gold: #c49a45;
+    --deepam-gold-light: #dfba77;
+    --deepam-gold-muted: rgba(196, 154, 69, 0.15);
+    --deepam-ivory: #f9f6f0;
+    --deepam-cream: #f2ece1;
+    --deepam-sand: #e2d9c9;
+    --deepam-charcoal: #19211c;
+    --deepam-muted: #5a665d;
+    --deepam-border: #dfd6c6;
+  }
+
+  body {
+    background-color: var(--deepam-ivory);
+    color: var(--deepam-charcoal);
+    font-family: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.font-display {
+  font-family: var(--font-playfair), "Cinzel", "Playfair Display", Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Luxury Antique Brass & Forest Emerald Buttons */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #c49a45 0%, #a87f2e 100%);
+  color: #ffffff;
+  padding: 0.85rem 1.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(196, 154, 69, 0.28);
+  border: 1px solid #c49a45;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #d6ad55 0%, #b88f39 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(196, 154, 69, 0.38);
+}
+
+.btn-navy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background-color: var(--deepam-emerald);
+  color: #ffffff;
+  padding: 0.85rem 1.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border-radius: 2px;
+  border: 1px solid var(--deepam-emerald);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-navy:hover {
+  background-color: #163824;
+  border-color: #163824;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(13, 40, 24, 0.28);
+}
+
+.btn-outline-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background-color: transparent;
+  color: var(--deepam-gold);
+  padding: 0.85rem 1.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border: 1px solid var(--deepam-gold);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-outline-gold:hover {
+  background-color: var(--deepam-gold);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background-color: transparent;
+  color: var(--deepam-charcoal);
+  padding: 0.85rem 1.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border: 1px solid var(--deepam-border);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-outline-dark:hover {
+  border-color: var(--deepam-charcoal);
+  background-color: var(--deepam-charcoal);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Gold Gradient Text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #c49a45 0%, #ecd49f 50%, #b38834 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass & Card Effects */
+.glass-panel {
+  background: rgba(249, 246, 240, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(223, 214, 198, 0.8);
+}
+
+.dark-glass-panel {
+  background: rgba(13, 40, 24, 0.90);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 154, 69, 0.25);
+}
+
+/* Luxury Ticker */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 40s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}

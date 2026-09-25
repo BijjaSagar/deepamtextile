@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteContent {
+  id                  String   @id @default("site")
+  brandName           String   @default("Deepam Textile")
+  tagline             String   @default("Luxury in Every Thread — Crafted for Global Hospitality")
+  heroTitle           String   @default("Premium Towels & Home Textiles, Made for Your Brand")
+  heroSubtitle        String   @default("We manufacture premium bath towels, hotel linen and custom home textiles for hospitality, retail and private label buyers across South East Asia, the Middle East, and Europe.")
+  experienceYears     Int      @default(40)
+  monthlyCapacityTons Int      @default(550)
+  loomsCount          Int      @default(200)
+  countriesServed     Int      @default(35)
+  primaryEmail        String   @default("export@deepamtextile.com")
+  salesEmail          String   @default("sales@deepamtextile.com")
+  phone               String   @default("+91 70661 48936")
+  whatsappNumber      String   @default("+917066148936")
+  addressCity         String   @default("Solapur, Maharashtra")
+  addressCountry      String   @default("India")
+  updatedAt           DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  category    String
+  gsmRange    String   @default("450 - 700 GSM")
+  material    String   @default("100% Combed Ring-Spun Cotton")
+  dimensions  String   @default("70 x 140 cm / 27 x 54 in")
+  weaveType   String   @default("Terry / Dobby Border / Zero Twist")
+  minOrderQty String   @default("1,000 pcs per color/size")
+  description String
+  features    String   @default("[]")
+  image       String
+  sortOrder   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Inquiry {
+  id                   String   @id @default(cuid())
+  refNumber            String   @unique
+  fullName             String
+  email                String
+  phone                String
+  companyName          String
+  targetRegion         String   // "South East Asia", "Middle East", "Europe", "Other"
+  destinationCountry   String
+  productCategory      String
+  estimatedQuantity    String
+  gsmSpecification     String?
+  isSampleRequested    Boolean  @default(false)
+  privateLabelInterest Boolean  @default(false)
+  message              String
+  status               String   @default("NEW") // NEW, CONTACTED, QUOTED, SAMPLE_SENT, WON, ARCHIVED
+  notes                String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
