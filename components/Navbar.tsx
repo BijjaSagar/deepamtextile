@@ -175,13 +175,6 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
             >
               RFQ Desk
             </Link>
-
-            <Link
-              href="/admin"
-              className="text-xs font-semibold uppercase tracking-[0.16em] text-white/50 hover:text-white transition-colors"
-            >
-              Buyer Portal
-            </Link>
           </nav>
 
           {/* Right Action Buttons */}
@@ -267,13 +260,6 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
                 className="block text-sm font-medium text-white/80 hover:text-[#dfba77]"
               >
                 Factory RFQ Desk &amp; Sample Swatches
-              </Link>
-              <Link
-                href="/admin"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm font-medium text-white/50"
-              >
-                Admin / Lead Management
               </Link>
             </div>
 

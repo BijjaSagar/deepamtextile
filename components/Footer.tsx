@@ -123,7 +123,7 @@ export function Footer({ onRequestQuote }: FooterProps) {
             <Link href="/infrastructure" className="hover:text-white transition-colors">ISO 9001:2015</Link>
             <Link href="/infrastructure" className="hover:text-white transition-colors">OEKO-TEX® Standard 100</Link>
             <Link href="/logistics" className="hover:text-white transition-colors">JNPT Port Logistics</Link>
-            <Link href="/admin" className="hover:text-white transition-colors">Admin Portal</Link>
+            <span className="text-[#f4efe6]/40">SEDEX SMETA Audited</span>
           </div>
         </div>
       </div>
