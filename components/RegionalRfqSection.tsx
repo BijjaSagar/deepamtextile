@@ -127,14 +127,14 @@ export function RegionalRfqSection() {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-[#dfd6c6] flex items-center gap-6 text-xs text-[#7d776d]">
+            <div className="mt-8 pt-6 border-t border-[#dfd6c6] flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 text-xs text-[#7d776d]">
               <div>
                 <span className="block text-[10px] uppercase font-bold text-[#0d2818]">Direct Export Phone / WhatsApp:</span>
                 <a href="tel:+917066148936" className="font-mono font-semibold text-[#c49a45] text-sm">+91 70661 48936</a>
               </div>
               <div>
                 <span className="block text-[10px] uppercase font-bold text-[#0d2818]">Export Documentation Email:</span>
-                <a href="mailto:export@deepamtextile.com" className="font-semibold text-[#0d2818] text-sm">export@deepamtextile.com</a>
+                <a href="mailto:export@deepamtextile.com" className="font-semibold text-[#0d2818] text-sm break-all">export@deepamtextile.com</a>
               </div>
             </div>
           </div>
