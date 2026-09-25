@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 
 interface DeepamLogoProps {
   className?: string;
@@ -15,15 +14,15 @@ export function DeepamLogoEmblem({ size = 44, className = "" }: { size?: number;
   return (
     <div
       style={{ width: size, height: size }}
-      className={`relative shrink-0 transition-transform duration-300 ${className}`}
+      className={`relative shrink-0 flex items-center justify-center transition-transform duration-300 ${className}`}
     >
-      <Image
-        src="/images/logo-circle-only.png"
+      {/* Pure Vector SVG Brand Emblem */}
+      <img
+        src="/icon.svg"
         alt="Deepam Textiles Official Brand Emblem"
-        width={size * 2}
-        height={size * 2}
+        width={size}
+        height={size}
         className="w-full h-full object-contain drop-shadow-[0_2px_8px_rgba(196,154,69,0.35)]"
-        priority
       />
     </div>
   );
@@ -41,15 +40,34 @@ export function DeepamLogo({
   if (variant === "badge") {
     return (
       <div className={`flex flex-col items-center text-center group ${className}`}>
-        <div className="relative mb-2 transition-transform duration-300 group-hover:scale-105">
-          <Image
-            src={dark ? "/images/logo-dark-mode.png" : "/images/logo-transparent.png"}
-            alt="Deepam Textiles - Experience The Luxury"
-            width={180}
-            height={180}
-            className="w-auto h-auto max-h-[160px] object-contain drop-shadow-md"
-            priority
-          />
+        <div className="relative mb-3 transition-transform duration-300 group-hover:scale-105">
+          <div className={`w-20 h-20 rounded-full border border-[#c49a45]/40 p-2.5 ${dark ? "bg-[#06140b]" : "bg-white"} shadow-[0_4px_20px_rgba(196,154,69,0.25)] flex items-center justify-center`}>
+            <img
+              src="/icon.svg"
+              alt="Deepam Textiles Official Brand Emblem"
+              width={64}
+              height={64}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col items-center leading-none">
+          <span
+            className={`font-display text-2xl font-bold tracking-[0.2em] ${dark ? "text-white" : "text-[#0d2818]"}`}
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            DEEPAM
+          </span>
+          <div className="flex items-center gap-2 mt-1.5">
+            <span className="h-[1px] w-4 bg-[#c49a45]" />
+            <span className="font-body text-[10px] uppercase tracking-[0.32em] font-semibold text-[#c49a45]">
+              TEXTILES
+            </span>
+            <span className="h-[1px] w-4 bg-[#c49a45]" />
+          </div>
+          <span className="font-body text-[8.5px] uppercase tracking-[0.24em] text-[#c49a45]/80 mt-1 font-medium">
+            Experience The Luxury · EST. 1998
+          </span>
         </div>
       </div>
     );

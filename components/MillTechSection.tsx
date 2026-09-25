@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Cpu, ShieldCheck, Factory, Microscope, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, Cpu, ShieldCheck, Factory, Microscope, Layers, Sparkles, Check } from "lucide-react";
 
 interface MillTechSectionProps {
   onRequestQuote: () => void;
@@ -147,21 +146,21 @@ export function MillTechSection({ onRequestQuote }: MillTechSectionProps) {
               </h4>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs font-bold font-body text-[#0d2818]">
-              <span className="px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
-                ✓ ISO 9001:2015
+            <div className="flex flex-wrap items-center gap-3 text-xs font-bold font-body text-[#0d2818]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
+                <Check className="h-3.5 w-3.5 text-[#c49a45]" /> ISO 9001:2015
               </span>
-              <span className="px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
-                ✓ OEKO-TEX Standard 100
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
+                <Check className="h-3.5 w-3.5 text-[#c49a45]" /> OEKO-TEX Standard 100
               </span>
-              <span className="px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
-                ✓ GOTS Organic Cotton
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
+                <Check className="h-3.5 w-3.5 text-[#c49a45]" /> GOTS Organic Cotton
               </span>
-              <span className="px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
-                ✓ Sedex SMETA Audited
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
+                <Check className="h-3.5 w-3.5 text-[#c49a45]" /> Sedex SMETA Audited
               </span>
-              <span className="px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
-                ✓ BCI Aligned
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#f4efe6] border border-[#dfd6c6]">
+                <Check className="h-3.5 w-3.5 text-[#c49a45]" /> BCI Aligned
               </span>
             </div>
           </div>

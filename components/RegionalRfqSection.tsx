@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, MessageCircle, ShieldCheck, Sparkles, Box, Clock } from "lucide-react";
+import { Send, CheckCircle2, MessageCircle, ShieldCheck, Sparkles, Box, Clock, Palmtree, Landmark } from "lucide-react";
 
 export function RegionalRfqSection() {
   const [selectedRegion, setSelectedRegion] = useState<string>("South East Asia");
@@ -183,21 +183,21 @@ export function RegionalRfqSection() {
                   </label>
                   <div className="grid grid-cols-3 gap-2">
                     {[
-                      { name: "South East Asia", icon: "🌏" },
-                      { name: "Middle East", icon: "🕌" },
-                      { name: "Europe", icon: "🇪🇺" },
+                      { name: "South East Asia", Icon: Palmtree },
+                      { name: "Middle East", Icon: Landmark },
+                      { name: "Europe", Icon: ShieldCheck },
                     ].map((corridor) => (
                       <button
                         key={corridor.name}
                         type="button"
                         onClick={() => setSelectedRegion(corridor.name)}
-                        className={`py-2.5 px-2 rounded-sm border text-[11.5px] font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                        className={`py-2.5 px-2 rounded-sm border text-[11.5px] font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                           selectedRegion === corridor.name
                             ? "bg-[#0d2818] text-white border-[#0d2818] shadow-sm ring-2 ring-[#c49a45]/40"
                             : "bg-[#faf8f5] text-[#0d2818] border-[#dfd6c6] hover:border-[#c49a45]"
                         }`}
                       >
-                        <span>{corridor.icon}</span>
+                        <corridor.Icon className={`h-4 w-4 shrink-0 ${selectedRegion === corridor.name ? "text-[#dfba77]" : "text-[#c49a45]"}`} />
                         <span className="truncate">{corridor.name}</span>
                       </button>
                     ))}

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowRight, ShieldCheck, Ship, ChevronDown, Sparkles } from "lucide-react";
+import { Menu, X, ArrowRight, ShieldCheck, Ship, ChevronDown, Sparkles, Palmtree, Landmark } from "lucide-react";
 import { DeepamLogo } from "@/components/DeepamLogo";
 
 interface NavbarProps {
@@ -26,7 +26,7 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
     {
       id: "sea",
       name: "South East Asia",
-      icon: "🌏",
+      Icon: Palmtree,
       sub: "Singapore · Bali · Phuket · Langkawi · Da Nang",
       highlight: "Tropical Quick-Dry 450-520 GSM",
       transit: "7-9 Days Sea Transit",
@@ -34,7 +34,7 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
     {
       id: "me",
       name: "Middle East",
-      icon: "🕌",
+      Icon: Landmark,
       sub: "UAE · Saudi Arabia · Qatar · Oman · Kuwait",
       highlight: "Ultra-Plush Royal 700-800 GSM",
       transit: "4-5 Days Direct Sea Transit",
@@ -42,7 +42,7 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
     {
       id: "eur",
       name: "Europe",
-      icon: "🇪🇺",
+      Icon: ShieldCheck,
       sub: "Germany · UK · France · Italy · Nordics",
       highlight: "OEKO-TEX & GOTS Organic 500-600 GSM",
       transit: "18-22 Days to Hamburg / Rotterdam",
@@ -57,7 +57,19 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
           <div className="flex items-center gap-2">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#dfba77] animate-pulse" />
             <span className="font-semibold text-white uppercase tracking-[0.2em]">Target Export Corridors:</span>
-            <span className="hidden md:inline text-white/80">🌏 South East Asia (7-9d) · 🕌 Middle East (4-5d) · 🇪🇺 Europe (18-22d)</span>
+            <span className="hidden md:inline-flex items-center gap-3 text-white/85">
+              <span className="inline-flex items-center gap-1.5">
+                <Palmtree className="h-3 w-3 text-[#dfba77]" /> South East Asia (7-9d)
+              </span>
+              <span className="text-white/30">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Landmark className="h-3 w-3 text-[#dfba77]" /> Middle East (4-5d)
+              </span>
+              <span className="text-white/30">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <ShieldCheck className="h-3 w-3 text-[#dfba77]" /> Europe (18-22d)
+              </span>
+            </span>
           </div>
 
           <div className="flex items-center gap-6 text-white/70 text-[10.5px]">
@@ -111,8 +123,9 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
                           className="w-full text-left p-2.5 rounded-sm hover:bg-white/5 border border-transparent hover:border-[#c49a45]/30 transition-all cursor-pointer group"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="font-display text-sm font-semibold text-white group-hover:text-[#dfba77]">
-                              {reg.icon} {reg.name}
+                            <span className="font-display text-sm font-semibold text-white group-hover:text-[#dfba77] flex items-center gap-2">
+                              <reg.Icon className="h-4 w-4 text-[#dfba77] shrink-0" />
+                              <span>{reg.name}</span>
                             </span>
                             <span className="text-[10px] text-[#dfba77] font-mono">{reg.transit}</span>
                           </div>
@@ -201,7 +214,10 @@ export function Navbar({ onRequestQuote }: NavbarProps) {
                   }}
                   className="flex items-center justify-between p-3 rounded-sm bg-white/5 border border-white/10 text-left text-xs font-semibold text-white"
                 >
-                  <span>{reg.icon} {reg.name}</span>
+                  <span className="flex items-center gap-2">
+                    <reg.Icon className="h-4 w-4 text-[#dfba77] shrink-0" />
+                    <span>{reg.name}</span>
+                  </span>
                   <span className="text-[10px] text-[#dfba77]">{reg.transit}</span>
                 </button>
               ))}

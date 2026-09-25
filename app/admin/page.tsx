@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { MessageCircle, Mail, Phone, Filter, CheckCircle2, Clock, Globe, Trash2, Edit3, X, ChevronRight } from "lucide-react";
+import { MessageCircle, Mail, Phone, Filter, CheckCircle2, Clock, Globe, Trash2, Edit3, X, ChevronRight, Palmtree, Landmark, ShieldCheck } from "lucide-react";
 import { InquiryItem } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 
@@ -120,19 +120,28 @@ export default function AdminInquiriesPage() {
         </div>
 
         <div className="border border-[#dfd6c6] bg-[#f9f6f0] p-5 rounded-sm shadow-sm">
-          <p className="font-body text-[11px] uppercase tracking-wider text-[#857b6c]">🌏 South East Asia</p>
+          <p className="font-body text-[11px] uppercase tracking-wider text-[#857b6c] flex items-center gap-1.5">
+            <Palmtree className="h-3.5 w-3.5 text-[#c49a45]" />
+            <span>South East Asia</span>
+          </p>
           <p className="font-display text-3xl font-bold text-[#c49a45] mt-1">{seaCount}</p>
           <p className="text-[10px] text-[#857b6c] mt-1">Resorts &amp; Island Hospitality</p>
         </div>
 
         <div className="border border-[#dfd6c6] bg-[#f9f6f0] p-5 rounded-sm shadow-sm">
-          <p className="font-body text-[11px] uppercase tracking-wider text-[#857b6c]">🕌 Middle East</p>
+          <p className="font-body text-[11px] uppercase tracking-wider text-[#857b6c] flex items-center gap-1.5">
+            <Landmark className="h-3.5 w-3.5 text-[#c49a45]" />
+            <span>Middle East</span>
+          </p>
           <p className="font-display text-3xl font-bold text-[#19211c] mt-1">{meCount}</p>
           <p className="text-[10px] text-[#857b6c] mt-1">Palaces &amp; Luxury 700 GSM</p>
         </div>
 
         <div className="border border-[#dfd6c6] bg-[#f9f6f0] p-5 rounded-sm shadow-sm">
-          <p className="font-body text-[11px] uppercase tracking-wider text-[#857b6c]">🇪🇺 Europe</p>
+          <p className="font-body text-[11px] uppercase tracking-wider text-[#857b6c] flex items-center gap-1.5">
+            <ShieldCheck className="h-3.5 w-3.5 text-[#c49a45]" />
+            <span>Europe</span>
+          </p>
           <p className="font-display text-3xl font-bold text-[#c49a45] mt-1">{eurCount}</p>
           <p className="text-[10px] text-[#857b6c] mt-1">OEKO-TEX &amp; Sustainable</p>
         </div>
@@ -219,11 +228,11 @@ export default function AdminInquiriesPage() {
                     </td>
 
                     <td className="py-3.5 px-4">
-                      <span className="inline-flex items-center gap-1 rounded bg-[#f2ece1] px-2 py-0.5 font-medium text-[#19211c]">
-                        {inq.targetRegion === "South East Asia" && "🌏 "}
-                        {inq.targetRegion === "Middle East" && "🕌 "}
-                        {inq.targetRegion === "Europe" && "🇪🇺 "}
-                        {inq.targetRegion}
+                      <span className="inline-flex items-center gap-1.5 rounded bg-[#f2ece1] px-2 py-0.5 font-medium text-[#19211c]">
+                        {inq.targetRegion === "South East Asia" && <Palmtree className="h-3 w-3 text-[#c49a45]" />}
+                        {inq.targetRegion === "Middle East" && <Landmark className="h-3 w-3 text-[#c49a45]" />}
+                        {inq.targetRegion === "Europe" && <ShieldCheck className="h-3 w-3 text-[#c49a45]" />}
+                        <span>{inq.targetRegion}</span>
                       </span>
                       <p className="text-[10px] text-[#857b6c] mt-0.5">{inq.destinationCountry}</p>
                     </td>

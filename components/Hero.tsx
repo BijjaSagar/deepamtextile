@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, Ship, Sparkles, ShieldCheck, CheckCircle2, Clock, Globe2, ChevronRight } from "lucide-react";
+import { ArrowRight, Ship, Sparkles, ShieldCheck, CheckCircle2, Clock, Globe2, ChevronRight, Palmtree, Landmark } from "lucide-react";
 
 interface HeroProps {
   onRequestQuote: (region?: string) => void;
@@ -16,7 +16,7 @@ export function Hero({ onRequestQuote }: HeroProps) {
       id: "sea",
       name: "South East Asia",
       tagline: "Tropical Resort & Island Villa Collection",
-      icon: "🌏",
+      Icon: Palmtree,
       heroImage: "/images/regions/southeast-asia.jpg",
       transitDays: "7 - 9 Days Sea Transit",
       dischargePorts: "Singapore · Port Klang · Bangkok · Manila · Da Nang",
@@ -35,7 +35,7 @@ export function Hero({ onRequestQuote }: HeroProps) {
       id: "me",
       name: "Middle East",
       tagline: "GCC Royal Palace & 7-Star Suite Collection",
-      icon: "🕌",
+      Icon: Landmark,
       heroImage: "/images/regions/middle-east.jpg",
       transitDays: "4 - 5 Days Direct Sea Transit",
       dischargePorts: "Jebel Ali (Dubai) · Dammam · Jeddah · Doha · Shuwaikh",
@@ -54,7 +54,7 @@ export function Hero({ onRequestQuote }: HeroProps) {
       id: "eur",
       name: "Europe",
       tagline: "Eco-Hospitality & Circular Sustainable Linen",
-      icon: "🇪🇺",
+      Icon: ShieldCheck,
       heroImage: "/images/regions/europe.jpg",
       transitDays: "18 - 22 Days Sea Transit",
       dischargePorts: "Hamburg · Rotterdam · Antwerp · Felixstowe · Genoa",
@@ -117,7 +117,7 @@ export function Hero({ onRequestQuote }: HeroProps) {
                     : "bg-[#0d2818] text-white/80 border-white/15 hover:border-[#c49a45] hover:text-white"
                 }`}
               >
-                <span className="text-base">{c.icon}</span>
+                <c.Icon className="h-4 w-4 text-[#dfba77] shrink-0" />
                 <span className="font-display tracking-normal text-sm font-semibold">{c.name}</span>
                 <span className="text-[10px] opacity-75 font-mono">({c.transitDays.split(" ")[0]}d)</span>
               </button>
@@ -134,7 +134,7 @@ export function Hero({ onRequestQuote }: HeroProps) {
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 mb-6">
                 <div>
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#dfba77]">
-                    <span>{current.icon}</span>
+                    <current.Icon className="h-4 w-4 text-[#dfba77] shrink-0" />
                     <span>Corridor #{activeCorridor + 1} Profile</span>
                   </div>
                   <h2 className="font-display text-2xl md:text-3xl font-semibold text-white mt-1">
@@ -218,8 +218,9 @@ export function Hero({ onRequestQuote }: HeroProps) {
                 className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0d2818] via-transparent to-transparent" />
-              <div className="absolute top-4 right-4 bg-[#06140b]/85 backdrop-blur-md border border-[#c49a45]/40 px-3 py-1.5 rounded-sm text-[11px] font-semibold text-[#dfba77]">
-                {current.icon} Tested for {current.name} Standards
+              <div className="absolute top-4 right-4 bg-[#06140b]/85 backdrop-blur-md border border-[#c49a45]/40 px-3 py-1.5 rounded-sm text-[11px] font-semibold text-[#dfba77] flex items-center gap-1.5">
+                <current.Icon className="h-3.5 w-3.5 text-[#dfba77]" />
+                <span>Tested for {current.name} Standards</span>
               </div>
             </div>
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, Sparkles, Filter, Check, Eye } from "lucide-react";
+import { ArrowRight, Sparkles, Filter, Check, Eye, Palmtree, Landmark, ShieldCheck, Globe, X } from "lucide-react";
 import { ProductItem } from "@/lib/types";
 
 interface CorridorCollectionsSectionProps {
@@ -19,10 +19,10 @@ export function CorridorCollectionsSection({
 
   // Group products specifically calibrated by the 3 target areas
   const corridorTabs = [
-    { id: "sea", name: "South East Asia", icon: "🌏", desc: "Tropical Quick-Dry, 450-520 GSM, Anti-Mildew Weaves" },
-    { id: "me", name: "Middle East", icon: "🕌", desc: "Ultra-Plush 700-800 GSM, Long-Staple, Woven Gold Dobby" },
-    { id: "eur", name: "Europe", icon: "🇪🇺", desc: "GOTS Organic, OEKO-TEX Standard 100, Plastic-Free FSC" },
-    { id: "all", name: "All 3 Corridors", icon: "🌐", desc: "Complete 12-Category Export Manufacturing Line" },
+    { id: "sea", name: "South East Asia", Icon: Palmtree, desc: "Tropical Quick-Dry, 450-520 GSM, Anti-Mildew Weaves" },
+    { id: "me", name: "Middle East", Icon: Landmark, desc: "Ultra-Plush 700-800 GSM, Long-Staple, Woven Gold Dobby" },
+    { id: "eur", name: "Europe", Icon: ShieldCheck, desc: "GOTS Organic, OEKO-TEX Standard 100, Plastic-Free FSC" },
+    { id: "all", name: "All 3 Corridors", Icon: Globe, desc: "Complete 12-Category Export Manufacturing Line" },
   ];
 
   // Specific products mapped to the 3 corridors
@@ -70,7 +70,7 @@ export function CorridorCollectionsSection({
                     : "bg-white text-[#0d2818] border-[#dfd6c6] hover:border-[#c49a45]"
                 }`}
               >
-                <span>{tab.icon}</span>
+                <tab.Icon className="h-4 w-4 shrink-0 text-[#c49a45]" />
                 <span>{tab.name}</span>
               </button>
             ))}
@@ -98,14 +98,28 @@ export function CorridorCollectionsSection({
                 <div className="absolute inset-0 bg-gradient-to-t from-[#06140b]/70 via-transparent to-transparent opacity-80" />
 
                 {/* Region Badge */}
-                <div className="absolute top-3 left-3 bg-[#0d2818]/90 backdrop-blur-sm border border-[#c49a45]/30 px-2.5 py-1 rounded-sm text-[10px] font-bold text-[#dfba77] uppercase tracking-wider">
-                  {selectedCorridor === "sea"
-                    ? "🌏 South East Asia"
-                    : selectedCorridor === "me"
-                    ? "🕌 Middle East"
-                    : selectedCorridor === "eur"
-                    ? "🇪🇺 Europe"
-                    : "Global Export"}
+                <div className="absolute top-3 left-3 bg-[#0d2818]/90 backdrop-blur-sm border border-[#c49a45]/30 px-2.5 py-1 rounded-sm text-[10px] font-bold text-[#dfba77] uppercase tracking-wider flex items-center gap-1.5">
+                  {selectedCorridor === "sea" ? (
+                    <>
+                      <Palmtree className="h-3 w-3 text-[#dfba77]" />
+                      <span>South East Asia</span>
+                    </>
+                  ) : selectedCorridor === "me" ? (
+                    <>
+                      <Landmark className="h-3 w-3 text-[#dfba77]" />
+                      <span>Middle East</span>
+                    </>
+                  ) : selectedCorridor === "eur" ? (
+                    <>
+                      <ShieldCheck className="h-3 w-3 text-[#dfba77]" />
+                      <span>Europe</span>
+                    </>
+                  ) : (
+                    <>
+                      <Globe className="h-3 w-3 text-[#dfba77]" />
+                      <span>Global Export</span>
+                    </>
+                  )}
                 </div>
 
                 <div className="absolute bottom-3 left-3 right-3 text-white">
@@ -218,9 +232,10 @@ export function CorridorCollectionsSection({
               </div>
               <button
                 onClick={() => setActiveModalProduct(null)}
-                className="text-gray-400 hover:text-black font-bold text-lg"
+                className="text-gray-400 hover:text-black p-1 transition-colors"
+                aria-label="Close modal"
               >
-                ✕
+                <X className="h-5 w-5" />
               </button>
             </div>
 

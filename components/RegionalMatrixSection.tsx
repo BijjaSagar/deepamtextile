@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Check, Sparkles, Ship, ShieldCheck, Download } from "lucide-react";
+import { ArrowRight, Check, Sparkles, Ship, ShieldCheck, Download, Palmtree, Landmark } from "lucide-react";
 
 interface RegionalMatrixSectionProps {
   onRequestQuote: (region?: string) => void;
@@ -11,7 +11,7 @@ export function RegionalMatrixSection({ onRequestQuote }: RegionalMatrixSectionP
   const regions = [
     {
       name: "South East Asia",
-      icon: "🌏",
+      Icon: Palmtree,
       tagline: "Tropical Quick-Dry & Anti-Mildew",
       countries: "Singapore · Malaysia · Indonesia (Bali) · Thailand · Vietnam · Philippines",
       gsm: "450 - 520 GSM",
@@ -28,7 +28,7 @@ export function RegionalMatrixSection({ onRequestQuote }: RegionalMatrixSectionP
     },
     {
       name: "Middle East",
-      icon: "🕌",
+      Icon: Landmark,
       tagline: "Ultra-Plush 750+ GSM Royal Suites",
       countries: "UAE (Dubai, Abu Dhabi) · Saudi Arabia (NEOM, Riyadh) · Qatar · Oman · Kuwait",
       gsm: "700 - 800 GSM Heavyweight",
@@ -45,7 +45,7 @@ export function RegionalMatrixSection({ onRequestQuote }: RegionalMatrixSectionP
     },
     {
       name: "Europe",
-      icon: "🇪🇺",
+      Icon: ShieldCheck,
       tagline: "GOTS Organic & Circular Eco-Linen",
       countries: "Germany · United Kingdom · France · Italy · Spain · Netherlands · Nordics",
       gsm: "500 - 600 GSM Balanced",
@@ -97,8 +97,10 @@ export function RegionalMatrixSection({ onRequestQuote }: RegionalMatrixSectionP
               {/* Card Top */}
               <div className="p-7 md:p-8">
                 <div className="flex items-center justify-between gap-2 border-b pb-4 mb-6 border-current/10">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl">{reg.icon}</span>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${idx === 1 ? "bg-[#dfba77]/20 text-[#dfba77]" : "bg-[#c49a45]/15 text-[#c49a45]"}`}>
+                      <reg.Icon className="h-5 w-5" />
+                    </div>
                     <div>
                       <h3 className="font-display text-xl font-bold tracking-tight">
                         {reg.name}

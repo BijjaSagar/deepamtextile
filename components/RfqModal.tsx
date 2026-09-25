@@ -220,10 +220,10 @@ export function RfqModal({ isOpen, onClose, defaultRegion, defaultProduct }: Rfq
                     onChange={(e) => setFormData({ ...formData, targetRegion: e.target.value })}
                     className="w-full border border-[#c49a45]/60 bg-white px-3.5 py-2.5 text-xs text-[#0d2818] focus:outline-none focus:border-[#c49a45] rounded-sm font-semibold"
                   >
-                    <option value="South East Asia">1. 🌏 South East Asia (Singapore, Malaysia, Bali, etc.)</option>
-                    <option value="Middle East">2. 🕌 Middle East (Dubai, KSA, Qatar, Oman, etc.)</option>
-                    <option value="Europe">3. 🇪🇺 Europe (UK, Germany, France, Nordics, etc.)</option>
-                    <option value="Other">🌐 Other International Destination</option>
+                    <option value="South East Asia">1. South East Asia (Singapore, Malaysia, Bali, etc.)</option>
+                    <option value="Middle East">2. Middle East (Dubai, KSA, Qatar, Oman, etc.)</option>
+                    <option value="Europe">3. Europe (UK, Germany, France, Nordics, etc.)</option>
+                    <option value="Other">Other Global International Destination</option>
                   </select>
                 </div>
 

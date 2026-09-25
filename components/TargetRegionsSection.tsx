@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Plane, Ship, Check, Award, Compass, ShieldCheck, MapPin, Anchor } from "lucide-react";
+import { ArrowRight, Plane, Ship, Check, Award, Compass, ShieldCheck, MapPin, Anchor, Palmtree, Landmark } from "lucide-react";
 
 interface TargetRegionsSectionProps {
   onRequestQuote: (region?: string) => void;
@@ -13,7 +13,7 @@ export function TargetRegionsSection({ onRequestQuote }: TargetRegionsSectionPro
   const regionData = {
     sea: {
       name: "South East Asia",
-      icon: "🌏",
+      Icon: Palmtree,
       heroImage: "/images/products/pool-towels.jpg",
       subTitle: "Tropical Resort, Beach Club & Hotel Terry Programs",
       ports: "Nhava Sheva (Mumbai) → Singapore (7-9 Days), Port Klang (Malaysia), Bangkok (Thailand), Manila (Philippines)",
@@ -39,7 +39,7 @@ export function TargetRegionsSection({ onRequestQuote }: TargetRegionsSectionPro
     },
     me: {
       name: "Middle East",
-      icon: "🕌",
+      Icon: Landmark,
       heroImage: "/images/hero/hero-towel.jpg",
       subTitle: "Ultra-Luxury Palace Suites, Mega-Resorts & Institutional Supply",
       ports: "Direct Express Sea Routes: Mumbai → Jebel Ali / Dubai (4-5 Days), Dammam (6 Days), Jeddah (7 Days), Doha / Hamad (5 Days)",
@@ -65,7 +65,7 @@ export function TargetRegionsSection({ onRequestQuote }: TargetRegionsSectionPro
     },
     eur: {
       name: "Europe",
-      icon: "🇪🇺",
+      Icon: ShieldCheck,
       heroImage: "/images/products/bath-robes.jpg",
       subTitle: "OEKO-TEX® Standard 100, REACH & Sustainable Retail Ready",
       ports: "Direct Container Routes: Mumbai → Rotterdam (18-20 Days), Hamburg (20-22 Days), Felixstowe (19 Days), Genoa (16 Days)",
@@ -123,7 +123,9 @@ export function TargetRegionsSection({ onRequestQuote }: TargetRegionsSectionPro
                   : "bg-white text-[#0d2818] border-[#dfd6c6] hover:border-[#c49a45]"
               }`}
             >
-              <span className="text-2xl">🌏</span>
+              <div className={`w-9 h-9 rounded-full flex items-center justify-center mb-2 ${activeTab === "sea" ? "bg-[#dfba77]/20 text-[#dfba77]" : "bg-[#c49a45]/10 text-[#c49a45]"}`}>
+                <Palmtree className="h-5 w-5" />
+              </div>
               <p className="font-display text-lg font-bold mt-1">1. South East Asia</p>
               <p className={`text-[11px] mt-0.5 ${activeTab === "sea" ? "text-[#dfba77]" : "text-[#7d776d]"}`}>
                 Singapore, Bali, Bangkok · Quick-Dry
@@ -138,7 +140,9 @@ export function TargetRegionsSection({ onRequestQuote }: TargetRegionsSectionPro
                   : "bg-white text-[#0d2818] border-[#dfd6c6] hover:border-[#c49a45]"
               }`}
             >
-              <span className="text-2xl">🕌</span>
+              <div className={`w-9 h-9 rounded-full flex items-center justify-center mb-2 ${activeTab === "me" ? "bg-[#dfba77]/20 text-[#dfba77]" : "bg-[#c49a45]/10 text-[#c49a45]"}`}>
+                <Landmark className="h-5 w-5" />
+              </div>
               <p className="font-display text-lg font-bold mt-1">2. Middle East</p>
               <p className={`text-[11px] mt-0.5 ${activeTab === "me" ? "text-[#dfba77]" : "text-[#7d776d]"}`}>
                 Dubai, Saudi Arabia, Qatar · 700+ GSM
@@ -153,7 +157,9 @@ export function TargetRegionsSection({ onRequestQuote }: TargetRegionsSectionPro
                   : "bg-white text-[#0d2818] border-[#dfd6c6] hover:border-[#c49a45]"
               }`}
             >
-              <span className="text-2xl">🇪🇺</span>
+              <div className={`w-9 h-9 rounded-full flex items-center justify-center mb-2 ${activeTab === "eur" ? "bg-[#dfba77]/20 text-[#dfba77]" : "bg-[#c49a45]/10 text-[#c49a45]"}`}>
+                <ShieldCheck className="h-5 w-5" />
+              </div>
               <p className="font-display text-lg font-bold mt-1">3. Europe</p>
               <p className={`text-[11px] mt-0.5 ${activeTab === "eur" ? "text-[#dfba77]" : "text-[#7d776d]"}`}>
                 UK, Germany, France · OEKO-TEX 100
@@ -168,7 +174,7 @@ export function TargetRegionsSection({ onRequestQuote }: TargetRegionsSectionPro
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-[#dfd6c6] pb-6 mb-8">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#c49a45] mb-1">
-                <span>{curr.icon}</span>
+                <curr.Icon className="h-4 w-4 text-[#c49a45] shrink-0" />
                 <span>Regional Export Brief</span>
               </div>
               <h3 className="font-display text-2xl md:text-3xl font-medium text-[#0d2818]">

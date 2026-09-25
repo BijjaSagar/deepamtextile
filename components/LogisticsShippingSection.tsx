@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Ship, Clock, Box, FileText, CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react";
+import { Ship, Clock, Box, FileText, CheckCircle2, ShieldCheck, ArrowRight, Palmtree, Landmark } from "lucide-react";
 
 interface LogisticsShippingSectionProps {
   onRequestQuote: (region?: string) => void;
@@ -15,7 +15,7 @@ export function LogisticsShippingSection({ onRequestQuote }: LogisticsShippingSe
     string,
     {
       name: string;
-      icon: string;
+      Icon: any;
       originPort: string;
       ports: { port: string; country: string; transit: string; frequency: string }[];
       incoterms: string[];
@@ -24,7 +24,7 @@ export function LogisticsShippingSection({ onRequestQuote }: LogisticsShippingSe
   > = {
     sea: {
       name: "South East Asia Corridor",
-      icon: "🌏",
+      Icon: Palmtree,
       originPort: "JNPT / Nhava Sheva (Mumbai) & Solapur Inland Dry Port",
       ports: [
         { port: "Port of Singapore", country: "Singapore", transit: "7 - 9 Days", frequency: "4 sailings / week" },
@@ -38,7 +38,7 @@ export function LogisticsShippingSection({ onRequestQuote }: LogisticsShippingSe
     },
     me: {
       name: "Middle East Corridor",
-      icon: "🕌",
+      Icon: Landmark,
       originPort: "JNPT / Nhava Sheva (Mumbai) & Mundra",
       ports: [
         { port: "Jebel Ali Port", country: "UAE (Dubai / Abu Dhabi)", transit: "4 - 5 Days", frequency: "Daily sailings" },
@@ -52,7 +52,7 @@ export function LogisticsShippingSection({ onRequestQuote }: LogisticsShippingSe
     },
     eur: {
       name: "Europe Corridor",
-      icon: "🇪🇺",
+      Icon: ShieldCheck,
       originPort: "JNPT / Nhava Sheva (Mumbai)",
       ports: [
         { port: "Port of Hamburg", country: "Germany", transit: "18 - 20 Days", frequency: "Weekly direct liner" },
@@ -118,7 +118,7 @@ export function LogisticsShippingSection({ onRequestQuote }: LogisticsShippingSe
                     : "bg-[#0d2818] text-white/80 border-white/15 hover:border-[#c49a45]"
                 }`}
               >
-                <span>{data.icon}</span>
+                <data.Icon className="h-4 w-4 shrink-0 text-[#dfba77]" />
                 <span>{data.name}</span>
               </button>
             ))}
