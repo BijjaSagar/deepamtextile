@@ -3,14 +3,14 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model AdminUser {
   id           String   @id @default(cuid())
   email        String   @unique
-  passwordHash String
+  passwordHash String   @db.VarChar(255)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -18,9 +18,9 @@ model AdminUser {
 model SiteContent {
   id                  String   @id @default("site")
   brandName           String   @default("Deepam Textile")
-  tagline             String   @default("Luxury in Every Thread — Crafted for Global Hospitality")
-  heroTitle           String   @default("Premium Towels & Home Textiles, Made for Your Brand")
-  heroSubtitle        String   @default("We manufacture premium bath towels, hotel linen and custom home textiles for hospitality, retail and private label buyers across South East Asia, the Middle East, and Europe.")
+  tagline             String   @db.Text
+  heroTitle           String   @db.Text
+  heroSubtitle        String   @db.Text
   experienceYears     Int      @default(40)
   monthlyCapacityTons Int      @default(550)
   loomsCount          Int      @default(200)
@@ -44,13 +44,16 @@ model Product {
   dimensions  String   @default("70 x 140 cm / 27 x 54 in")
   weaveType   String   @default("Terry / Dobby Border / Zero Twist")
   minOrderQty String   @default("1,000 pcs per color/size")
-  description String
-  features    String   @default("[]")
-  image       String
+  description String   @db.Text
+  features    String   @db.Text
+  image       String   @db.VarChar(500)
   sortOrder   Int      @default(0)
   published   Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([sortOrder])
 }
 
 model Inquiry {
@@ -67,9 +70,12 @@ model Inquiry {
   gsmSpecification     String?
   isSampleRequested    Boolean  @default(false)
   privateLabelInterest Boolean  @default(false)
-  message              String
+  message              String   @db.Text
   status               String   @default("NEW") // NEW, CONTACTED, QUOTED, SAMPLE_SENT, WON, ARCHIVED
-  notes                String?
+  notes                String?  @db.Text
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
+
+  @@index([status])
+  @@index([targetRegion])
 }
