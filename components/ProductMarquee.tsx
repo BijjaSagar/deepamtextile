@@ -1,31 +1,31 @@
-import React from "react";
+import type { ProductCategoryData } from "@/lib/types/cms";
 
-export function ProductMarquee() {
-  const items = [
-    "Bath Towels",
-    "Hand Towels",
-    "Face Towels & Wash Cloths",
-    "Bath Mats",
-    "Hotel Linen Programs",
-    "Bath Robes",
-    "Kitchen Towels",
-    "Beach Towels",
-    "Pool Towels",
-    "Spa Towels",
-    "Private Label Manufacturing",
-    "Promotional Towels",
-  ];
+type ProductMarqueeProps = {
+  categories: ProductCategoryData[];
+  className?: string;
+};
+
+export function ProductMarquee({ categories, className }: ProductMarqueeProps) {
+  if (categories.length === 0) {
+    return null;
+  }
+
+  const names = categories.map((c) => c.name);
+  const track = [...names, ...names];
 
   return (
-    <div className="relative overflow-hidden border-y border-[#dfd6c6] bg-[#f2ece1]/60 py-4.5" aria-hidden="true">
-      <div className="animate-marquee flex gap-8 whitespace-nowrap">
-        {[...items, ...items, ...items].map((name, idx) => (
+    <div
+      className={`marquee-wrap relative mb-10 overflow-hidden border-y border-hairline py-4 md:mb-14 ${className ?? ""}`}
+      aria-hidden="true"
+    >
+      <div className="marquee-track flex w-max gap-10 whitespace-nowrap">
+        {track.map((name, i) => (
           <span
-            key={idx}
-            className="flex items-center font-body text-[11px] uppercase tracking-[0.28em] text-[#857b6c] font-medium"
+            key={`${name}-${i}`}
+            className="font-body text-[11px] uppercase tracking-[0.28em] text-muted"
           >
             {name}
-            <span className="mx-8 text-[#c49a45] text-base font-bold">·</span>
+            <span className="mx-10 text-sage">·</span>
           </span>
         ))}
       </div>

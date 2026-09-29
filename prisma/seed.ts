@@ -1,300 +1,247 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import fs from "node:fs";
-import path from "node:path";
-
-const dataDir = path.join(process.cwd(), "data");
-fs.mkdirSync(dataDir, { recursive: true });
+import {
+  productCategories,
+  companyStats,
+  certifications,
+} from "../data/products";
+import {
+  STATIC_HEADER,
+  STATIC_FOOTER_COMPANY,
+  STATIC_FOOTER_EXPORT,
+} from "../lib/data/navigation";
+import {
+  DEFAULT_HOME_SECTIONS,
+  DEFAULT_ABOUT_SECTIONS,
+  DEFAULT_MANUFACTURING_SECTIONS,
+  DEFAULT_PRIVATE_LABEL_SECTIONS,
+  DEFAULT_FAQ_SECTIONS,
+  DEFAULT_CONTACT_SECTIONS,
+  DEFAULT_PRODUCTS_SECTIONS,
+} from "../lib/data/pages";
+import { siteConfig } from "../lib/utils";
+import { DEFAULT_COLORS } from "../lib/data/site-settings";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("Seeding Deepam Textile database...");
+  console.log("Seeding database for Deepam Textile...");
 
-  // 1. Seed Admin User
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@deepamtextile.com";
-  const rawPassword = process.env.ADMIN_PASSWORD || "DeepamAdmin2026!";
-  const passwordHash = await bcrypt.hash(rawPassword, 10);
-
-  await prisma.adminUser.upsert({
-    where: { email: adminEmail },
-    update: { passwordHash },
-    create: {
-      email: adminEmail,
-      passwordHash,
-    },
-  });
-  console.log(`✓ Admin user created/updated (${adminEmail})`);
-
-  // 2. Seed Site Content
-  await prisma.siteContent.upsert({
-    where: { id: "site" },
+  await prisma.siteSettings.upsert({
+    where: { id: "default" },
     update: {},
     create: {
-      id: "site",
-      brandName: "Deepam Textile",
-      tagline: "Luxury in Every Thread — Crafted for Global Hospitality",
-      heroTitle: "Premium Towels & Home Textiles, Made for Your Brand",
-      heroSubtitle:
-        "We manufacture premium bath towels, hotel linen and custom home textiles for hospitality, retail and private label buyers across South East Asia, the Middle East, and Europe.",
-      experienceYears: 40,
-      monthlyCapacityTons: 550,
-      loomsCount: 200,
-      countriesServed: 35,
-      primaryEmail: "export@deepamtextile.com",
-      salesEmail: "sales@deepamtextile.com",
-      phone: "+91 70661 48936",
-      whatsappNumber: "+917066148936",
-      addressCity: "Solapur, Maharashtra",
-      addressCountry: "India",
+      id: "default",
+      siteName: siteConfig.name,
+      legalName: siteConfig.legalName,
+      tagline: siteConfig.tagline,
+      description: siteConfig.description,
+      logoUrl: "/images/logo-transparent.png",
+      logoLightUrl: "/images/logo-dark-mode.png",
+      colorPearl: DEFAULT_COLORS.pearl,
+      colorOat: DEFAULT_COLORS.oat,
+      colorTaupe: DEFAULT_COLORS.taupe,
+      colorMuted: DEFAULT_COLORS.muted,
+      colorSage: DEFAULT_COLORS.sage,
+      colorSageDeep: DEFAULT_COLORS.sageDeep,
+      colorHairline: DEFAULT_COLORS.hairline,
+      contactEmail: siteConfig.email,
+      contactEmailSecondary: siteConfig.emailSecondary,
+      contactPhone: siteConfig.phone,
+      leadsToEmail: process.env.LEADS_TO_EMAIL ?? siteConfig.leadsEmail,
+      resendFromEmail: process.env.RESEND_FROM_EMAIL ?? null,
+      inquiryEnabled: true,
+      whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "+917066148936",
+      calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL ?? null,
+      footerBlurb:
+        "Premier Indian manufacturer and global exporter of luxury terry towels, hotel bath linen, and private label collections from Solapur, Maharashtra.",
+      exportMarkets: "USA · Canada · Europe · Middle East · Australia",
+      addressStreet: siteConfig.address.street,
+      addressCity: siteConfig.address.city,
+      addressRegion: siteConfig.address.region,
+      addressCountry: siteConfig.address.country,
+      addressPostalCode: siteConfig.address.postalCode,
     },
   });
-  console.log("✓ Site content initialized");
 
-  // 3. Seed Products
-  const products = [
+  await prisma.navigationItem.deleteMany({});
+  const navItems = [
+    ...STATIC_HEADER,
+    ...STATIC_FOOTER_COMPANY,
+    ...STATIC_FOOTER_EXPORT,
+  ];
+  for (const item of navItems) {
+    await prisma.navigationItem.create({
+      data: {
+        label: item.label,
+        href: item.href,
+        type: item.type,
+        sortOrder: item.sortOrder,
+        visible: item.visible,
+        location: item.location,
+      },
+    });
+  }
+
+  await prisma.productCategory.deleteMany({});
+  for (const [index, product] of productCategories.entries()) {
+    await prisma.productCategory.create({
+      data: {
+        slug: product.slug,
+        name: product.name,
+        shortDescription: product.shortDescription,
+        description: product.description,
+        eyebrow: product.eyebrow,
+        heroImage: product.heroImage,
+        cardImage: product.cardImage,
+        galleryImages: [],
+        features: product.features,
+        variants: product.variants ?? [],
+        materials: product.materials,
+        sizes: product.sizes,
+        gsmRange: product.gsmRange,
+        customization: product.customization,
+        packaging: product.packaging,
+        idealFor: product.idealFor,
+        leadTime: product.leadTime,
+        moq: product.moq,
+        sortOrder: index,
+        visible: true,
+      },
+    });
+  }
+
+  await prisma.stat.deleteMany({});
+  for (const [index, stat] of companyStats.entries()) {
+    await prisma.stat.create({
+      data: {
+        value: stat.value,
+        label: stat.label,
+        sortOrder: index,
+        visible: true,
+      },
+    });
+  }
+
+  await prisma.certification.deleteMany({});
+  for (const [index, cert] of certifications.entries()) {
+    await prisma.certification.create({
+      data: {
+        name: cert.name,
+        code: cert.certificateNumber ?? null,
+        description: cert.description,
+        pdfUrl: cert.pdfUrl ?? null,
+        sortOrder: index,
+        visible: true,
+      },
+    });
+  }
+
+  const pages = [
     {
-      slug: "bath-towels",
-      title: "Bath Towels",
-      category: "bath-towels",
-      gsmRange: "500 - 700 GSM",
-      material: "100% Combed Ring-Spun Cotton",
-      dimensions: "70 x 140 cm / 80 x 160 cm",
-      weaveType: "Plush Terry, Zero-Twist, Dobby Border",
-      minOrderQty: "1,000 pcs per color/size",
-      description:
-        "Engineered for five-star hotels and luxury retail brands, our bath towels offer supreme absorbency, ultra-soft hand feel, and industrial wash resilience.",
-      features: JSON.stringify([
-        "100% long-staple Indian combed cotton",
-        "Reinforced double-needle side hems to prevent fraying",
-        "Zero-twist yarn for cloud-like softness and rapid drying",
-        "OEKO-TEX® Standard 100 certified non-toxic dyes",
-      ]),
-      image: "/images/products/bath-towels.jpg",
-      sortOrder: 1,
+      slug: "home",
+      metaTitle: siteConfig.name,
+      metaDescription: siteConfig.description,
+      sections: DEFAULT_HOME_SECTIONS,
     },
     {
-      slug: "hand-towels",
-      title: "Hand Towels",
-      category: "hand-towels",
-      gsmRange: "500 - 600 GSM",
-      material: "100% Ring-Spun Combed Cotton",
-      dimensions: "50 x 90 cm / 50 x 100 cm",
-      weaveType: "Terry with elegant ribbed or plain cam border",
-      minOrderQty: "1,500 pcs per color",
-      description:
-        "Refined, durable hand towels crafted for executive washrooms, boutique guest rooms, and upscale department store collections.",
-      features: JSON.stringify([
-        "High absorbency with fast-drying capillary action",
-        "Vat dyed for exceptional colorfastness against frequent laundering",
-        "Custom dobby border and logo embroidery available",
-      ]),
-      image: "/images/products/hand-towels.jpg",
-      sortOrder: 2,
+      slug: "about",
+      metaTitle: "About Us",
+      metaDescription:
+        "Learn about Deepam Textile—four decades of premium textile manufacturing in Solapur, India, exporting to USA, Canada, Europe, and the Middle East.",
+      sections: DEFAULT_ABOUT_SECTIONS,
     },
     {
-      slug: "face-towels",
-      title: "Face Towels & Wash Cloths",
-      category: "face-towels",
-      gsmRange: "450 - 550 GSM",
-      material: "100% Natural Combed Cotton",
-      dimensions: "30 x 30 cm / 33 x 33 cm",
-      weaveType: "Fine Terry with lock-stitched edges",
-      minOrderQty: "3,000 pcs",
-      description:
-        "Ultra-gentle face cloths designed for luxury spa treatments and daily hospitality comfort.",
-      features: JSON.stringify([
-        "Hypoallergenic and delicate on sensitive skin",
-        "Dense pile structure minimizes lint shedding",
-        "Withstands 100+ commercial wash cycles at 60°C",
-      ]),
-      image: "/images/products/face-towels.jpg",
-      sortOrder: 3,
+      slug: "manufacturing",
+      metaTitle: "Manufacturing",
+      metaDescription:
+        "Vertical textile manufacturing from yarn selection to export packaging. ISO-certified facility in Solapur, India serving international buyers.",
+      sections: DEFAULT_MANUFACTURING_SECTIONS,
     },
     {
-      slug: "bath-mats",
-      title: "Bath Mats & Tub Mats",
-      category: "bath-mats",
-      gsmRange: "800 - 1000 GSM",
-      material: "Heavyweight 100% Cotton",
-      dimensions: "50 x 80 cm / 60 x 90 cm",
-      weaveType: "Heavy ribbed terry with Greek key or solid border",
-      minOrderQty: "1,000 pcs",
-      description:
-        "Substantial, non-slip hotel tub mats with high pile density that instantly absorb excess water and step into sheer luxury.",
-      features: JSON.stringify([
-        "Ultra-heavyweight 900 GSM construction for firm floor adherence",
-        "Quick drying without rubberized backing for commercial laundry ease",
-        "Embossed border and custom hotel jacquard crest available",
-      ]),
-      image: "/images/products/bath-mats.jpg",
-      sortOrder: 4,
+      slug: "certifications",
+      metaTitle: "Certifications",
+      metaDescription:
+        "ISO 9001:2015, OEKO-TEX Standard 100, BCI, GOTS, BSCI, and SEDEX/SMETA compliance for export textile manufacturing from India.",
+      sections: {},
     },
     {
-      slug: "hotel-linen",
-      title: "Hotel Linen Programs",
-      category: "hotel-linen",
-      gsmRange: "300 - 600 Thread Count",
-      material: "100% Combed Cotton Percale & Sateen",
-      dimensions: "Single, Double, Queen, King, Super King",
-      weaveType: "Silky Sateen Stripe (1cm/2cm) & Crisp Percale",
-      minOrderQty: "500 sets / 2,000 meters",
-      description:
-        "Comprehensive bedroom and bathroom linen turnkey programs for multinational hotel chains, serviced apartments, and cruise lines.",
-      features: JSON.stringify([
-        "Breathable high-thread-count Egyptian-grade yarns",
-        "Color-coded size identification hem threads for fast housekeeping",
-        "Sanforized anti-shrinkage pre-treatment",
-      ]),
-      image: "/images/products/hotel-linen.jpg",
-      sortOrder: 5,
+      slug: "private-label",
+      metaTitle: "Private Label",
+      metaDescription:
+        "Launch or scale your towel and linen brand with full private label manufacturing—from custom weaving to retail-ready packaging. Export worldwide.",
+      sections: DEFAULT_PRIVATE_LABEL_SECTIONS,
     },
     {
-      slug: "bath-robes",
-      title: "Luxury Bath Robes",
-      category: "bath-robes",
-      gsmRange: "380 - 450 GSM",
-      material: "100% Cotton Terry / Waffle / Velour",
-      dimensions: "S, M, L, XL, XXL (Unisex Kimono & Shawl Collar)",
-      weaveType: "Plush Shawl Collar or Lightweight Honeycomb Waffle",
-      minOrderQty: "500 pcs",
-      description:
-        "Opulent bathrobes tailored with generous patch pockets, double belt loops, and luxurious drape for resorts and spas.",
-      features: JSON.stringify([
-        "Dual-texture: soft sheared velour outer with absorbent terry inside",
-        "Generous wrap-around cut with sturdy hanger loop",
-        "Bespoke embroidery on chest and back",
-      ]),
-      image: "/images/products/bath-robes.jpg",
-      sortOrder: 6,
+      slug: "contact",
+      metaTitle: "Contact",
+      metaDescription:
+        "Contact Deepam Textile export team for B2B textile inquiries and RFQs. Global buyers welcome. Response within one business day.",
+      sections: DEFAULT_CONTACT_SECTIONS,
     },
     {
-      slug: "kitchen-towels",
-      title: "Kitchen & Dining Towels",
-      category: "kitchen-towels",
-      gsmRange: "250 - 350 GSM",
-      material: "100% Combed Cotton or Cotton-Linen Blend",
-      dimensions: "45 x 70 cm / 50 x 70 cm",
-      weaveType: "Herringbone, Jacquard, and Glass Cloth Weave",
-      minOrderQty: "2,000 pcs",
-      description:
-        "Lint-free, streak-free drying towels for professional culinary environments, luxury restaurants, and homeware brands.",
-      features: JSON.stringify([
-        "Zero-lint finish ideal for wine glass and crystal polishing",
-        "Reinforced hanging loop with woven brand label",
-        "High grease and water absorption capacity",
-      ]),
-      image: "/images/products/kitchen-towels.jpg",
-      sortOrder: 7,
+      slug: "faq",
+      metaTitle: "FAQ",
+      metaDescription:
+        "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textile export buyers.",
+      sections: DEFAULT_FAQ_SECTIONS,
     },
     {
-      slug: "beach-towels",
-      title: "Cabana & Beach Towels",
-      category: "beach-towels",
-      gsmRange: "450 - 600 GSM",
-      material: "100% Cotton Velour / Terry",
-      dimensions: "90 x 180 cm / 100 x 200 cm",
-      weaveType: "Yarn-dyed Cabana Stripe & Jacquard Woven",
-      minOrderQty: "1,000 pcs",
-      description:
-        "Oversized resort towels engineered to resist direct sunlight, saltwater, and frequent beach club rotation.",
-      features: JSON.stringify([
-        "Vat-dyed fibers maintain vibrant coloration under intense UV",
-        "Velour front for sand resistance, loop terry back for drying",
-        "Classic European cabana stripe & custom resort jacquard weaving",
-      ]),
-      image: "/images/products/beach-towels.jpg",
-      sortOrder: 8,
-    },
-    {
-      slug: "pool-towels",
-      title: "Pool & Lounger Towels",
-      category: "pool-towels",
-      gsmRange: "500 - 650 GSM",
-      material: "100% Chlorine-Resistant Cotton",
-      dimensions: "85 x 165 cm / 90 x 180 cm",
-      weaveType: "Double Loop Terry with woven center identifier stripe",
-      minOrderQty: "1,000 pcs",
-      description:
-        "Heavy-duty pool towels treated for chlorine resistance, making them ideal for high-traffic hotel pool decks and waterparks.",
-      features: JSON.stringify([
-        "Indanthrene / Vat dyed to resist chemical fading from chlorine",
-        "Heavy double-looped pile cushions against teak loungers",
-        "Quick-dry yarn structure prevents musty damp odors",
-      ]),
-      image: "/images/products/pool-towels.jpg",
-      sortOrder: 9,
-    },
-    {
-      slug: "spa-towels",
-      title: "Spa & Wellness Towels",
-      category: "spa-towels",
-      gsmRange: "550 - 650 GSM",
-      material: "100% Super-Fine Micro-Cotton",
-      dimensions: "70 x 140 cm / 100 x 150 cm",
-      weaveType: "Velvet touch terry with oil-release finish",
-      minOrderQty: "1,000 pcs",
-      description:
-        "Calming earth-toned wellness towels infused with stain-resistant release chemistry to withstand massage oils and mud wraps.",
-      features: JSON.stringify([
-        "Special oil-release chemical treatment aids oil removal during wash",
-        "Sophisticated natural palette: Sage, Oat, Taupe, Slate, Pearl",
-        "Luxuriously deep pile for indulgent treatment bed draping",
-      ]),
-      image: "/images/products/spa-towels.jpg",
-      sortOrder: 10,
-    },
-    {
-      slug: "private-labeling",
-      title: "Private Label Manufacturing",
-      category: "private-labeling",
-      gsmRange: "Custom (350 - 900 GSM)",
-      material: "Organic GOTS, BCI, Egyptian or Indian Cotton",
-      dimensions: "Custom Specifications as per Buyer Tech Pack",
-      weaveType: "Bespoke Dobby, Jacquard, Terry, Waffle, Velour",
-      minOrderQty: "2,000 pcs per specification",
-      description:
-        "End-to-end private labeling services: custom GSM, Pantone yarn dyeing, woven damask labels, custom barcode tags, and sustainable export packaging.",
-      features: JSON.stringify([
-        "Full brand customization: woven jacquard borders & crests",
-        "Retail ready packaging: FSC certified cartons, hangtags, polybags",
-        "Comprehensive lab testing reports provided with every shipment",
-      ]),
-      image: "/images/products/private-label.jpg",
-      sortOrder: 11,
-    },
-    {
-      slug: "promotional-towels",
-      title: "Promotional & Corporate Towels",
-      category: "promotional-towels",
-      gsmRange: "380 - 500 GSM",
-      material: "100% Cotton",
-      dimensions: "40 x 80 cm / 70 x 140 cm",
-      weaveType: "Border Jacquard or Precision Embroidery",
-      minOrderQty: "1,500 pcs",
-      description:
-        "High-impact branded textiles for corporate gifting, golf tournaments, brand activations, and promotional merchandise campaigns.",
-      features: JSON.stringify([
-        "High-definition border weaving reproduces complex company logos",
-        "Fast turnaround times for scheduled brand marketing events",
-        "Competitive bulk price points with uncompromising terry quality",
-      ]),
-      image: "/images/products/promotional-towels.jpg",
-      sortOrder: 12,
+      slug: "products",
+      metaTitle: "Products",
+      metaDescription:
+        "Explore our full range of premium B2B textile products—bath towels, hotel linen, spa towels, private label, and more for global export.",
+      sections: DEFAULT_PRODUCTS_SECTIONS,
     },
   ];
 
-  for (const prod of products) {
-    await prisma.product.upsert({
-      where: { slug: prod.slug },
-      update: prod,
-      create: prod,
+  for (const page of pages) {
+    await prisma.pageContent.upsert({
+      where: { slug: page.slug },
+      update: {
+        metaTitle: page.metaTitle,
+        metaDescription: page.metaDescription,
+      },
+      create: {
+        ...page,
+        sections: page.sections as Prisma.InputJsonValue,
+      },
     });
   }
-  console.log(`✓ Seeded ${products.length} products`);
 
-  // 4. Inquiries table starts clean with 0 test data for production
-  console.log("Deepam Textile initial database seeding completed successfully!");
+  // Default admin: admin@deepamtextile.com / changeme123 — see DEPLOYMENT.md
+  const adminEmail = (
+    process.env.ADMIN_EMAIL ?? "admin@deepamtextile.com"
+  ).toLowerCase();
+  const adminPassword = process.env.ADMIN_PASSWORD ?? "changeme123";
+  const existingAdmin = await prisma.adminUser.findUnique({
+    where: { email: adminEmail },
+  });
+
+  if (!existingAdmin) {
+    const hashedPassword = await bcrypt.hash(adminPassword, 12);
+    await prisma.adminUser.create({
+      data: {
+        email: adminEmail,
+        password: hashedPassword,
+        name: "Deepam Admin",
+        role: "admin",
+        active: true,
+      },
+    });
+    console.log(`Created default admin user: ${adminEmail}`);
+  } else if (process.env.ADMIN_PASSWORD) {
+    const hashedPassword = await bcrypt.hash(adminPassword, 12);
+    await prisma.adminUser.update({
+      where: { email: adminEmail },
+      data: { password: hashedPassword, active: true },
+    });
+    console.log(`Updated admin password for: ${adminEmail}`);
+  } else {
+    console.log(`Admin user already exists: ${adminEmail}`);
+  }
+
+  console.log("Seed completed successfully.");
 }
 
 main()

@@ -1,65 +1,58 @@
-import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import type { Metadata } from "next";
+import { Cormorant_Garamond, Inter } from "next/font/google";
+import { getThemeStyle } from "@/components/layout/HeaderWrapper";
+import { createMetadata, organizationJsonLd } from "@/lib/seo";
+import { getPageContent } from "@/lib/data/pages";
+import { getSiteSettings } from "@/lib/data/site-settings";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  display: "swap",
+  style: ["normal", "italic"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-playfair",
-  display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-jakarta",
   display: "swap",
 });
 
-export const viewport: Viewport = {
-  themeColor: "#0d2818",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, settings] = await Promise.all([
+    getPageContent("home"),
+    getSiteSettings(),
+  ]);
+  return createMetadata({
+    title: page?.metaTitle ?? settings.siteName,
+    description: page?.metaDescription ?? settings.description,
+    path: "/",
+  });
+}
 
-export const metadata: Metadata = {
-  title: "Deepam Textile | Premium Towels & Home Textiles Manufacturer | Solapur, India",
-  description:
-    "Deepam Textile is an Indian manufacturer of luxury bath towels, hotel linen and home textiles for hospitality, retail and private label buyers across South East Asia, Middle East, and Europe.",
-  keywords: [
-    "Deepam Textile",
-    "Solapur towels manufacturer",
-    "luxury bath towels export",
-    "hotel linen manufacturer India",
-    "towels export to South East Asia",
-    "towels export to Middle East Dubai",
-    "towels export to Europe OEKO-TEX",
-    "private label towel manufacturer",
-  ],
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
-  },
-  openGraph: {
-    title: "Deepam Textile | Premium Towels & Home Textiles Manufacturer",
-    description:
-      "Direct B2B textile manufacturing from Solapur, India for hospitality, retail, and private label buyers across South East Asia, Middle East, and Europe.",
-    siteName: "Deepam Textile",
-    locale: "en_US",
-    type: "website",
-  },
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeStyle = await getThemeStyle();
+
   return (
-    <html lang="en" className={`${cormorant.variable} ${jakarta.variable} scroll-smooth`}>
-      <body className="min-h-screen antialiased bg-[#f9f6f0] text-[#19211c]">
+    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd()),
+          }}
+        />
+      </head>
+      <body
+        className="min-h-screen antialiased bg-paper-texture"
+        style={themeStyle}
+      >
         {children}
       </body>
     </html>

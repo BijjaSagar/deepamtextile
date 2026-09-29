@@ -7,76 +7,135 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model SiteSettings {
+  id                    String   @id @default("default")
+  siteName              String   @default("Deepam Textile")
+  legalName             String   @default("Deepam Textiles")
+  tagline               String   @default("Luxury in Every Thread. Crafting Excellence Since 1982.")
+  description           String   @db.Text
+  logoUrl               String   @default("/images/logo-transparent.png")
+  logoLightUrl          String   @default("/images/logo-dark-mode.png")
+  faviconUrl            String?  @default("/favicon.ico")
+  colorPearl            String   @default("#fbfaf6")
+  colorOat              String   @default("#f1ece2")
+  colorTaupe            String   @default("#5e5547")
+  colorMuted            String   @default("#857b6c")
+  colorSage             String   @default("#c8c7ac")
+  colorSageDeep         String   @default("#9a9a7d")
+  colorHairline         String   @default("#e7e0d3")
+  contactEmail          String   @default("export@deepamtextile.com")
+  contactEmailSecondary String?  @default("sales@deepamtextile.com")
+  contactPhone          String   @default("+91 70661 48936")
+  leadsToEmail          String?  @default("export@deepamtextile.com")
+  resendFromEmail       String?
+  inquiryEnabled        Boolean  @default(true)
+  whatsappNumber        String?  @default("+917066148936")
+  calendlyUrl           String?
+  footerBlurb           String   @db.Text
+  copyrightText         String?
+  exportMarkets         String   @default("USA · Canada · Europe · Middle East · Australia")
+  addressStreet         String   @default("MIDC Industrial Area, Akkalkot Road")
+  addressCity           String   @default("Solapur")
+  addressRegion         String   @default("Maharashtra")
+  addressCountry        String   @default("India")
+  addressPostalCode     String   @default("413006")
+  updatedAt             DateTime @updatedAt
+}
+
+model NavigationItem {
+  id        String  @id @default(cuid())
+  label     String
+  href      String
+  type      String  @default("link")
+  sortOrder Int     @default(0)
+  visible   Boolean @default(true)
+  location  String
+
+  @@index([location, sortOrder])
+}
+
+model ProductCategory {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  shortDescription String   @db.Text
+  description      String   @db.Text
+  eyebrow          String
+  heroImage        String
+  cardImage        String
+  galleryImages    Json     @default("[]")
+  features         Json
+  variants         Json     @default("[]")
+  materials        Json
+  sizes            Json
+  gsmRange         String
+  customization    Json
+  packaging        Json
+  idealFor         Json
+  leadTime         String
+  moq              String
+  metaTitle        String?
+  metaDescription  String?  @db.Text
+  sortOrder        Int      @default(0)
+  visible          Boolean  @default(true)
+  updatedAt        DateTime @updatedAt
+}
+
+model PageContent {
+  slug            String   @id
+  metaTitle       String?
+  metaDescription String?  @db.Text
+  sections        Json
+  updatedAt       DateTime @updatedAt
+}
+
+model Stat {
+  id        String  @id @default(cuid())
+  value     String
+  label     String
+  sortOrder Int     @default(0)
+  visible   Boolean @default(true)
+}
+
+model Certification {
+  id          String  @id @default(cuid())
+  name        String
+  code        String?
+  description String  @db.Text
+  pdfUrl      String?
+  sortOrder   Int     @default(0)
+  visible     Boolean @default(true)
+}
+
 model AdminUser {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  passwordHash String   @db.VarChar(255)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-}
-
-model SiteContent {
-  id                  String   @id @default("site")
-  brandName           String   @default("Deepam Textile")
-  tagline             String   @db.Text
-  heroTitle           String   @db.Text
-  heroSubtitle        String   @db.Text
-  experienceYears     Int      @default(40)
-  monthlyCapacityTons Int      @default(550)
-  loomsCount          Int      @default(200)
-  countriesServed     Int      @default(35)
-  primaryEmail        String   @default("export@deepamtextile.com")
-  salesEmail          String   @default("sales@deepamtextile.com")
-  phone               String   @default("+91 70661 48936")
-  whatsappNumber      String   @default("+917066148936")
-  addressCity         String   @default("Solapur, Maharashtra")
-  addressCountry      String   @default("India")
-  updatedAt           DateTime @updatedAt
-}
-
-model Product {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  category    String
-  gsmRange    String   @default("450 - 700 GSM")
-  material    String   @default("100% Combed Ring-Spun Cotton")
-  dimensions  String   @default("70 x 140 cm / 27 x 54 in")
-  weaveType   String   @default("Terry / Dobby Border / Zero Twist")
-  minOrderQty String   @default("1,000 pcs per color/size")
-  description String   @db.Text
-  features    String   @db.Text
-  image       String   @db.VarChar(500)
-  images      String?  @db.Text
-  sortOrder   Int      @default(0)
-  published   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([category])
-  @@index([sortOrder])
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("admin")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Inquiry {
-  id                   String   @id @default(cuid())
-  refNumber            String   @unique
-  fullName             String
-  email                String
-  phone                String
-  companyName          String
-  targetRegion         String   // "South East Asia", "Middle East", "Europe", "Other"
-  destinationCountry   String
-  productCategory      String
-  estimatedQuantity    String
-  gsmSpecification     String?
-  isSampleRequested    Boolean  @default(false)
-  privateLabelInterest Boolean  @default(false)
-  message              String   @db.Text
-  status               String   @default("NEW") // NEW, CONTACTED, QUOTED, SAMPLE_SENT, WON, ARCHIVED
-  notes                String?  @db.Text
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  id              String    @id @default(cuid())
+  name            String
+  company         String
+  country         String
+  email           String
+  phone           String
+  productInterest String
+  message         String    @db.Text
+  buyerType       String
+  estimatedVolume String?
+  targetMarket    String?
+  source          String    @default("web")
+  emailSent       Boolean   @default(false)
+  emailError      String?   @db.Text
+  readAt          DateTime?
+  createdAt       DateTime  @default(now())
 
-  @@index([status])
-  @@index([targetRegion])
+  @@index([createdAt])
+  @@index([readAt])
 }
