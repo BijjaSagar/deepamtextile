@@ -5,7 +5,13 @@ import { getAllInquiriesAdmin } from "@/lib/data/inquiries";
 
 export default async function AdminInquiriesPage() {
   await requireAdminPage();
-  const inquiries = await getAllInquiriesAdmin();
+  let inquiries: Awaited<ReturnType<typeof getAllInquiriesAdmin>> = [];
+  try {
+    inquiries = await getAllInquiriesAdmin();
+  } catch (err) {
+    console.error("[AdminInquiriesPage] Error loading inquiries:", err);
+    inquiries = [];
+  }
 
   return (
     <>
@@ -17,3 +23,4 @@ export default async function AdminInquiriesPage() {
     </>
   );
 }
+

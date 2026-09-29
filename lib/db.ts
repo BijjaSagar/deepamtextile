@@ -1,23 +1,44 @@
 import { PrismaClient } from "@prisma/client";
 
-// Ensure DATABASE_URL is populated for Hostinger MySQL production target if unset
 const defaultMysqlUrl =
   "mysql://u618910819_deepamtextile:RIYA%40lovesdad143@127.0.0.1:3306/u618910819_deepamtextile";
 
-if (
-  !process.env.DATABASE_URL ||
-  process.env.DATABASE_URL.trim() === "" ||
-  process.env.DATABASE_URL.startsWith("file:")
-) {
-  process.env.DATABASE_URL = defaultMysqlUrl;
-} else if (process.env.DATABASE_URL.includes("@localhost:")) {
-  // On Hostinger Linux / cPanel, Node.js resolves localhost to IPv6 (::1).
-  // Connecting to 127.0.0.1 forces IPv4 loopback to MySQL.
-  process.env.DATABASE_URL = process.env.DATABASE_URL.replace(
-    "@localhost:",
-    "@127.0.0.1:",
-  );
+export function normalizeDatabaseUrl(rawUrl?: string): string {
+  if (!rawUrl || rawUrl.trim() === "" || rawUrl.startsWith("file:")) {
+    return defaultMysqlUrl;
+  }
+  let url = rawUrl.trim();
+  const protocolEnd = url.indexOf("://");
+  if (protocolEnd !== -1) {
+    const protocol = url.substring(0, protocolEnd + 3);
+    const rest = url.substring(protocolEnd + 3);
+    const lastAt = rest.lastIndexOf("@");
+    if (lastAt !== -1) {
+      const auth = rest.substring(0, lastAt);
+      const hostAndPath = rest.substring(lastAt + 1);
+      const firstColon = auth.indexOf(":");
+      if (firstColon !== -1) {
+        const user = auth.substring(0, firstColon);
+        let password = auth.substring(firstColon + 1);
+        try {
+          password = decodeURIComponent(password);
+        } catch {}
+        const encodedPassword = encodeURIComponent(password);
+        let normalizedHostAndPath = hostAndPath;
+        if (
+          normalizedHostAndPath.startsWith("localhost:") ||
+          normalizedHostAndPath.startsWith("localhost/")
+        ) {
+          normalizedHostAndPath = normalizedHostAndPath.replace("localhost", "127.0.0.1");
+        }
+        return `${protocol}${user}:${encodedPassword}@${normalizedHostAndPath}`;
+      }
+    }
+  }
+  return url;
 }
+
+process.env.DATABASE_URL = normalizeDatabaseUrl(process.env.DATABASE_URL);
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
@@ -34,3 +55,4 @@ if (process.env.NODE_ENV !== "production") {
 export function isDbConfigured(): boolean {
   return Boolean(process.env.DATABASE_URL);
 }
+
