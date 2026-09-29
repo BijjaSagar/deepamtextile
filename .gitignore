@@ -16,6 +16,7 @@
 # Misc
 .DS_Store
 *.pem
+*.zip
 
 # Local and production env files (hide keys and credentials)
 .env*.local
