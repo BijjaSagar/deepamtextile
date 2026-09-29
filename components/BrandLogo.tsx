@@ -48,12 +48,12 @@ export function BrandLogo({
         revealed && "in",
         className,
       )}
-      aria-label="Deepam Textile — Home"
+      aria-label="Deepam Textiles — Home"
     >
       <div className="relative h-9 w-9 sm:h-10 sm:w-10 shrink-0">
         <Image
-          src="/images/logo-emblem-vector.svg"
-          alt="Deepam Emblem"
+          src="/images/logo-circle-only.png"
+          alt="Deepam Textiles Emblem"
           fill
           className="object-contain"
         />
@@ -67,14 +67,18 @@ export function BrandLogo({
         >
           DEEPAM
         </span>
-        <span
-          className={cn(
-            "lv mt-0.5 font-body text-[8.5px] uppercase tracking-[0.32em]",
-            isFooter ? "text-pearl/80" : "text-muted",
-          )}
-        >
-          TEXTILE · SOLAPUR
-        </span>
+        <div className="lv mt-1 flex items-center gap-1.5 font-body text-[8.5px] uppercase tracking-[0.3em]">
+          <span className="h-px w-2.5 bg-[#c2a156]" aria-hidden="true" />
+          <span
+            className={cn(
+              "font-medium",
+              isFooter ? "text-pearl/80" : "text-taupe/80",
+            )}
+          >
+            TEXTILES
+          </span>
+          <span className="h-px w-2.5 bg-[#c2a156]" aria-hidden="true" />
+        </div>
       </div>
     </Link>
   );

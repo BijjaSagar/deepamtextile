@@ -165,7 +165,7 @@ export default async function PrivateLabelPage() {
             </h1>
             <p className="mt-6 font-body text-lg leading-relaxed text-muted">
               {hero.description ??
-                "Partner with Deepam Textile to launch, scale, or refresh your towel and linen brand. End-to-end private label execution—from first sample to retail-ready cartons shipped worldwide."}
+                "Partner with Deepam Textiles to launch, scale, or refresh your towel and linen brand. End-to-end private label execution—from first sample to retail-ready cartons shipped worldwide."}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button asChild size="lg">

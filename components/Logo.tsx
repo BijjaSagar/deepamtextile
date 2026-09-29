@@ -3,8 +3,8 @@ import Link from "next/link";
 import { resolveCmsImage, type CacheVersion } from "@/lib/image-props";
 import { cn } from "@/lib/utils";
 
-const LOGO_WIDTH = 1024;
-const LOGO_HEIGHT = 682;
+const LOGO_WIDTH = 410;
+const LOGO_HEIGHT = 416;
 
 type LogoProps = {
   className?: string;
@@ -26,11 +26,11 @@ export function Logo({
   onNavigate,
   logoUrl = "/images/logo-transparent.png",
   logoLightUrl = "/images/logo-dark-mode.png",
-  siteName = "Deepam Textile",
+  siteName = "Deepam Textiles",
   logoCacheVersion,
 }: LogoProps) {
   const src = variant === "light" ? logoLightUrl : logoUrl;
-  const alt = `${siteName} — Luxury in Every Thread`;
+  const alt = `${siteName} — Experience the Luxury`;
   const imageProps = resolveCmsImage(src, logoCacheVersion);
 
   return (

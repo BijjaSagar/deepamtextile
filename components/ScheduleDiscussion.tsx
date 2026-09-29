@@ -43,7 +43,7 @@ export function ScheduleDiscussion({ calendlyUrl }: ScheduleDiscussionProps) {
       </div>
       <iframe
         src={`${url}?hide_gdpr_banner=1`}
-        title="Schedule a discussion with Deepam Textile"
+        title="Schedule a discussion with Deepam Textiles"
         className="h-[520px] w-full border border-hairline bg-white"
         loading="lazy"
       />

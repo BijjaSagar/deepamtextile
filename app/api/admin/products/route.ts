@@ -36,6 +36,7 @@ export const POST = withApiHandler(async (request: NextRequest) => {
         eyebrow: body.eyebrow ?? "",
         heroImage: body.heroImage ?? "",
         cardImage: body.cardImage ?? "",
+        galleryImages: body.galleryImages ?? [],
         features: body.features ?? [],
         variants: body.variants ?? [],
         materials: body.materials ?? [],

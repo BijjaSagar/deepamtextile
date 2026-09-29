@@ -1,6 +1,6 @@
 import { getSiteSettings } from "@/lib/data/site-settings";
 
-const DEFAULT_FROM = "Deepam Textile Inquiries <onboarding@resend.dev>";
+const DEFAULT_FROM = "Deepam Textiles Inquiries <onboarding@resend.dev>";
 
 export type InquiryEmailConfig = {
   leadsEmail: string | null;

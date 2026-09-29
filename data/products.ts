@@ -437,7 +437,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Full private label programs—from product development to packaging and export logistics.",
     description:
-      "Partner with Deepam Textile to launch or scale your towel and linen brand. We offer end-to-end private label services: product development, sampling, custom weaving, branding, packaging, and FOB/CIF export to USA and Canada.",
+      "Partner with Deepam Textiles to launch or scale your towel and linen brand. We offer end-to-end private label services: product development, sampling, custom weaving, branding, packaging, and FOB/CIF export to USA and Canada.",
     heroImage: "/images/products/private-label.jpg",
     cardImage: "/images/products/private-label.jpg",
     features: [
@@ -564,9 +564,9 @@ export const whyChooseUsFeatures = [
       "End-to-end brand development from sampling to retail-ready packaging for emerging and established labels.",
   },
   {
-    title: "40+ Years Manufacturing",
+    title: "Crafting Since 1998",
     description:
-      "Deepam Textile heritage in Solapur—India's premier terry towel manufacturing hub since 1982.",
+      "Deepam Textiles heritage in Solapur—India's premier terry towel manufacturing hub since 1998.",
   },
 ];
 
@@ -786,7 +786,7 @@ export const tradeShows = [
 export const caseStudySnippet = {
   title: "North American Resort Group",
   summary:
-    "An anonymised five-property resort group replaced their bath linen program with Deepam Textile 550 GSM towels—achieving ±3% GSM consistency across 24,000 units and reducing replenishment lead time by 18 days.",
+    "An anonymised five-property resort group replaced their bath linen program with Deepam Textiles 550 GSM towels—achieving ±3% GSM consistency across 24,000 units and reducing replenishment lead time by 18 days.",
 };
 
 export const fabricTextures = [

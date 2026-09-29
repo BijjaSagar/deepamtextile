@@ -306,7 +306,7 @@ export function SettingsForm({ initial }: { initial: SiteSettingsData }) {
                 })
               }
               className="mt-1"
-              placeholder="Deepam Textile <noreply@deepamtextile.com>"
+              placeholder="Deepam Textiles <noreply@deepamtextile.com>"
             />
             <p className="mt-1 font-body text-xs text-muted">
               Must use a domain verified in Resend. Defaults to onboarding address

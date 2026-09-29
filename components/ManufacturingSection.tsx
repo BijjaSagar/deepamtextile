@@ -34,7 +34,7 @@ export function ManufacturingSection({
         <FadeUp>
           <div className="relative aspect-[5/4] overflow-hidden border border-hairline bg-oat">
             <Image
-              alt="Deepam Textile manufacturing facility in Solapur"
+              alt="Deepam Textiles manufacturing facility in Solapur"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"

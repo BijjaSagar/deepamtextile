@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,10 +41,20 @@ export function LoginForm() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-oat px-4">
       <AdminCard className="w-full max-w-md">
-        <h1 className="font-display text-2xl text-taupe">Admin Login</h1>
-        <p className="mt-2 font-body text-sm text-muted">
-          Deepam Textile CMS
-        </p>
+        <div className="flex flex-col items-center text-center">
+          <div className="relative mb-3 h-14 w-14">
+            <Image
+              src="/images/logo-circle-only.png"
+              alt="Deepam Textiles Emblem"
+              fill
+              className="object-contain"
+            />
+          </div>
+          <h1 className="font-display text-2xl text-taupe">Admin Login</h1>
+          <p className="mt-1 font-body text-sm text-muted">
+            Deepam Textiles CMS
+          </p>
+        </div>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
             <Label htmlFor="email">Email</Label>

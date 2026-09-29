@@ -18,7 +18,7 @@ export async function generateMetadata() {
     title: page?.metaTitle ?? "Contact",
     description:
       page?.metaDescription ??
-      "Contact Deepam Textile export team for B2B textile inquiries and RFQs. Global buyers welcome. Response within one business day.",
+      "Contact Deepam Textiles export team for B2B textile inquiries and RFQs. Global buyers welcome. Response within one business day.",
     path: "/contact",
   });
 }
@@ -139,7 +139,7 @@ export default async function ContactPage() {
 
               <div className="mt-10 overflow-hidden border border-hairline">
                 <iframe
-                  title="Deepam Textile location — Solapur, India"
+                  title="Deepam Textiles location — Solapur, India"
                   src="https://maps.google.com/maps?q=Solapur+Maharashtra+India&t=&z=11&ie=UTF8&iwloc=&output=embed"
                   className="h-64 w-full grayscale-[30%]"
                   loading="lazy"

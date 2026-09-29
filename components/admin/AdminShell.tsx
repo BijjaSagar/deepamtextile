@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -49,9 +50,26 @@ export function AdminShell({ children, email }: AdminShellProps) {
     <div className="flex min-h-screen bg-oat">
       <aside className="fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-hairline bg-pearl">
         <div className="border-b border-hairline px-6 py-5">
-          <p className="font-display text-xl text-taupe">Deepam CMS</p>
+          <Link href="/admin" className="flex items-center gap-3">
+            <div className="relative h-8 w-8 shrink-0">
+              <Image
+                src="/images/logo-circle-only.png"
+                alt="Deepam Textiles Emblem"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <p className="font-display text-lg font-semibold leading-tight text-taupe">
+                Deepam Textiles
+              </p>
+              <p className="font-body text-[10px] uppercase tracking-wider text-muted">
+                Admin CMS
+              </p>
+            </div>
+          </Link>
           {email && (
-            <p className="mt-1 truncate font-body text-xs text-muted">{email}</p>
+            <p className="mt-2 truncate font-body text-xs text-muted">{email}</p>
           )}
         </div>
         <nav className="flex-1 space-y-1 px-3 py-4">

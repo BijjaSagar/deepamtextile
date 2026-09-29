@@ -18,7 +18,7 @@ export async function generateMetadata() {
     title: page?.metaTitle ?? "About Us",
     description:
       page?.metaDescription ??
-      "Learn about Deepam Textile—four decades of premium textile manufacturing in Solapur, India, exporting to USA, Canada, Europe, and the Middle East.",
+      "Learn about Deepam Textiles—premium textile manufacturing in Solapur, India since 1998, exporting to USA, Canada, Europe, and the Middle East.",
     path: "/about",
   });
 }
@@ -103,7 +103,7 @@ export default async function AboutPage() {
               <div className="relative aspect-[3/4] overflow-hidden bg-oat">
                 {introImageUrl ? (
                   <Image
-                    alt="Deepam Textile facility in Solapur"
+                    alt="Deepam Textiles facility in Solapur"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 40vw"
@@ -114,15 +114,15 @@ export default async function AboutPage() {
             </FadeUp>
             <FadeUp delay={0.1} className="lg:col-span-7 lg:pl-8">
               <SectionHeading
-                title={intro.title ?? "Deepam Textile — Est. 1982, Solapur"}
+                title={intro.title ?? "Deepam Textiles — Est. 1998, Solapur"}
                 description={
                   intro.body ??
-                  "Solapur has been India's terry towel capital for over a century. Deepam Textile was founded here in 1982 with a singular focus: produce textiles that meet the exacting standards of international hospitality, retail, and institutional buyers."
+                  "Solapur has been India's terry towel capital for over a century. Deepam Textiles was founded here in 1998 with a singular focus: produce textiles that meet the exacting standards of international hospitality, retail, and institutional buyers."
                 }
               />
               <div className="mt-8 space-y-4 font-body text-base leading-relaxed text-muted">
                 <p>
-                  Deepam Textile is our flagship manufacturing and export brand—engineered specifically for
+                  Deepam Textiles is our flagship manufacturing and export brand—engineered specifically for
                   B2B buyers across the United States, Canada, Europe, the Middle East, and Australia who require consistent
                   GSM, reliable lead times, and complete export documentation.
                 </p>

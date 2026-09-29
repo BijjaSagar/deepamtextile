@@ -1,6 +1,6 @@
 # Hostinger Node.js Deployment
 
-This guide covers deploying **Deepam Textile** on [Hostinger Business/Cloud](https://www.hostinger.com) Node.js hosting. The app uses Next.js standalone output for efficient self-hosting on a persistent Node.js server.
+This guide covers deploying **Deepam Textiles** on [Hostinger Business/Cloud](https://www.hostinger.com) Node.js hosting. The app uses Next.js standalone output for efficient self-hosting on a persistent Node.js server.
 
 ## Prerequisites
 

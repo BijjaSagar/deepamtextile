@@ -19,7 +19,7 @@ export async function generateMetadata() {
     title: page?.metaTitle ?? "FAQ",
     description:
       page?.metaDescription ??
-      "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textile export buyers.",
+      "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textiles export buyers.",
     path: "/faq",
   });
 }

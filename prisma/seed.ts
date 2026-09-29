@@ -25,7 +25,7 @@ import { DEFAULT_COLORS } from "../lib/data/site-settings";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("Seeding database for Deepam Textile...");
+  console.log("Seeding database for Deepam Textiles...");
 
   await prisma.siteSettings.upsert({
     where: { id: "default" },
@@ -148,7 +148,7 @@ async function main() {
       slug: "about",
       metaTitle: "About Us",
       metaDescription:
-        "Learn about Deepam Textile—four decades of premium textile manufacturing in Solapur, India, exporting to USA, Canada, Europe, and the Middle East.",
+        "Learn about Deepam Textiles—premium textile manufacturing in Solapur, India since 1998, exporting to USA, Canada, Europe, and the Middle East.",
       sections: DEFAULT_ABOUT_SECTIONS,
     },
     {
@@ -176,14 +176,14 @@ async function main() {
       slug: "contact",
       metaTitle: "Contact",
       metaDescription:
-        "Contact Deepam Textile export team for B2B textile inquiries and RFQs. Global buyers welcome. Response within one business day.",
+        "Contact Deepam Textiles export team for B2B textile inquiries and RFQs. Global buyers welcome. Response within one business day.",
       sections: DEFAULT_CONTACT_SECTIONS,
     },
     {
       slug: "faq",
       metaTitle: "FAQ",
       metaDescription:
-        "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textile export buyers.",
+        "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textiles export buyers.",
       sections: DEFAULT_FAQ_SECTIONS,
     },
     {

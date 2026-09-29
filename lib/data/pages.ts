@@ -24,17 +24,17 @@ const DEFAULT_HERO_SLIDES: HeroSlide[] = [
 
 export const DEFAULT_HOME_SECTIONS = {
   hero: {
-    eyebrow: "Deepam Textile · Solapur, Maharashtra, India",
+    eyebrow: "Deepam Textiles · Solapur, Maharashtra, India",
     title: "Luxury in Every Thread.",
     subtitle:
-      "Premier Indian manufacturer and global exporter of luxury terry towels, hotel linen, and private label programs — crafting excellence in Solapur since 1982.",
+      "Premier Indian manufacturer and global exporter of luxury terry towels, hotel linen, and private label programs — crafting excellence in Solapur since 1998.",
     slides: DEFAULT_HERO_SLIDES,
   },
   heritage: {
     eyebrow: "Our Heritage",
-    title: "Crafted in Solapur, India Since 1982",
+    title: "Crafted in Solapur, India Since 1998",
     description:
-      "For over four decades, Deepam Textile has been at the forefront of India's celebrated terry towel manufacturing region—combining institutional-grade durability with ultra-luxurious finishing for global hospitality, department store, and private label buyers.",
+      "Since 1998, Deepam Textiles has been at the forefront of India's celebrated terry towel manufacturing region—combining institutional-grade durability with ultra-luxurious finishing for global hospitality, department store, and private label buyers.",
     imageUrl: "/images/factory/mill-facility.jpg",
   },
   manufacturing: {
@@ -49,8 +49,8 @@ export const DEFAULT_ABOUT_SECTIONS = {
     imageUrl: "/images/factory/mill-facility.jpg",
   },
   intro: {
-    title: "Four decades of textile excellence",
-    body: "Founded in 1982 in Solapur, Maharashtra—the renowned towel weaving capital of India—Deepam Textile has grown from a master weaver into an integrated export enterprise. Delivering 550+ MT monthly capacity, 200+ looms, and export-grade reliability across North America, Europe, the Middle East, and beyond.",
+    title: "Crafting textile excellence since 1998",
+    body: "Founded in 1998 in Solapur, Maharashtra—the renowned towel weaving capital of India—Deepam Textiles has grown from a master weaver into an integrated export enterprise. Delivering 550+ MT monthly capacity, 200+ looms, and export-grade reliability across North America, Europe, the Middle East, and beyond.",
     imageUrl: "/images/factory/airjet-looms.jpg",
   },
 };
@@ -73,7 +73,7 @@ export const DEFAULT_PRIVATE_LABEL_SECTIONS = {
     eyebrow: "Private Label · High Priority",
     title: "Your brand. Our manufacturing excellence.",
     description:
-      "Partner with Deepam Textile to launch, scale, or refresh your towel and linen collections. End-to-end private label execution—from initial yarn selection and dobby border design to barcode packaging and international container shipments.",
+      "Partner with Deepam Textiles to launch, scale, or refresh your towel and linen collections. End-to-end private label execution—from initial yarn selection and dobby border design to barcode packaging and international container shipments.",
     imageUrl: "/images/products/private-label.jpg",
   },
   packaging: {
@@ -145,7 +145,7 @@ const STATIC_PAGES: Record<string, PageContentData> = {
     slug: "about",
     metaTitle: "About Us",
     metaDescription:
-      "Learn about Deepam Textile—four decades of premium textile manufacturing in Solapur, India, exporting to USA, Canada, Europe, and the Middle East.",
+      "Learn about Deepam Textiles—premium textile manufacturing in Solapur, India since 1998, exporting to USA, Canada, Europe, and the Middle East.",
     sections: DEFAULT_ABOUT_SECTIONS,
   },
   manufacturing: {
@@ -173,14 +173,14 @@ const STATIC_PAGES: Record<string, PageContentData> = {
     slug: "contact",
     metaTitle: "Contact",
     metaDescription:
-      "Contact Deepam Textile export team for B2B textile inquiries and RFQs. Global buyers welcome. Response within one business day.",
+      "Contact Deepam Textiles export team for B2B textile inquiries and RFQs. Global buyers welcome. Response within one business day.",
     sections: DEFAULT_CONTACT_SECTIONS,
   },
   faq: {
     slug: "faq",
     metaTitle: "FAQ",
     metaDescription:
-      "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textile export buyers.",
+      "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textiles export buyers.",
     sections: DEFAULT_FAQ_SECTIONS,
   },
   products: {

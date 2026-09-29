@@ -62,11 +62,11 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection
-        eyebrow={hero.eyebrow ?? "Deepam Textile · Solapur, Maharashtra, India"}
+        eyebrow={hero.eyebrow ?? "Deepam Textiles · Solapur, Maharashtra, India"}
         title={hero.title ?? "Luxury in Every Thread."}
         subtitle={
           hero.subtitle ??
-          "Premier Indian manufacturer & global exporter of luxury terry towels, hotel linen & private-label manufacturing — crafted in Solapur, India since 1982."
+          "Premier Indian manufacturer & global exporter of luxury terry towels, hotel linen & private-label manufacturing — crafted in Solapur, India since 1998."
         }
         slides={hero.slides}
         imageCacheVersion={homePage?.updatedAt}
@@ -94,8 +94,8 @@ export default async function HomePage() {
                   <Image
                     alt={
                       heritage.title
-                        ? `${heritage.title} — Deepam Textile`
-                        : "Deepam Textile heritage in Solapur, India"
+                        ? `${heritage.title} — Deepam Textiles`
+                        : "Deepam Textiles heritage in Solapur, India"
                     }
                     fill
                     className="object-cover"
@@ -120,7 +120,7 @@ export default async function HomePage() {
                 <div className="mt-6 font-body text-base leading-relaxed text-muted md:text-[16.5px]">
                   <p>
                     {heritage.description ??
-                      "For over four decades, Deepam Textile has been at the heart of India's premier terry towel manufacturing region—bringing institutional-grade quality and boutique-level finishing to global B2B buyers."}
+                      "Since 1998, Deepam Textiles has been at the heart of India's premier terry towel manufacturing region—bringing institutional-grade quality and boutique-level finishing to global B2B buyers."}
                   </p>
                   <Link
                     href="/about"
@@ -145,7 +145,7 @@ export default async function HomePage() {
                 <FadeUp delay={0.1}>
                   <div className="font-body text-base leading-relaxed text-muted md:text-[16.5px]">
                     <p>
-                      Deepam Textile is a premier textile manufacturing and
+                      Deepam Textiles is a premier textile manufacturing and
                       export company headquartered in Solapur, Maharashtra — one
                       of the world&apos;s renowned towel-manufacturing hubs.
                     </p>

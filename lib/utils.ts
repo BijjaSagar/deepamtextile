@@ -6,9 +6,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const siteConfig = {
-  name: "Deepam Textile",
+  name: "Deepam Textiles",
   legalName: "Deepam Textiles",
-  tagline: "Luxury in Every Thread. Crafting Excellence Since 1982.",
+  tagline: "Experience the Luxury. Crafting Excellence Since 1998.",
   description:
     "Premier Indian manufacturer and global exporter of luxury terry towels, hotel bath linen, and private label collections from Solapur, Maharashtra.",
   url: "https://deepamtextile.com",

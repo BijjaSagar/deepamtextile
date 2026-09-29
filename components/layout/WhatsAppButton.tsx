@@ -7,7 +7,7 @@ export function WhatsAppButton({ number }: { number?: string | null }) {
 
   const cleanNumber = number.replace(/\D/g, "");
   const href = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(
-    "Hello, I am interested in Deepam Textile products for wholesale export.",
+    "Hello, I am interested in Deepam Textiles products for wholesale export.",
   )}`;
 
   return (
