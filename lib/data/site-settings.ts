@@ -38,6 +38,22 @@ const STATIC_SETTINGS: SiteSettingsData = {
   address: { ...siteConfig.address },
 };
 
+const LEGACY_HEX_MAP: Record<string, string> = {
+  "#fbfaf6": "#ffffff",
+  "#f1ece2": "#f0f7fc",
+  "#5e5547": "#0f2942",
+  "#857b6c": "#5b6e82",
+  "#c8c7ac": "#38bdf8",
+  "#9a9a7d": "#0284c7",
+  "#e7e0d3": "#e0e9f1",
+};
+
+function sanitizeColor(val: string | null | undefined, fallback: string): string {
+  if (!val) return fallback;
+  const normalized = val.trim().toLowerCase();
+  return LEGACY_HEX_MAP[normalized] ?? val;
+}
+
 function mapSettings(row: SiteSettings): SiteSettingsData {
   return {
     siteName: mergeStringField(STATIC_SETTINGS.siteName, row.siteName) as string,
@@ -51,13 +67,13 @@ function mapSettings(row: SiteSettings): SiteSettingsData {
     logoLightUrl: row.logoLightUrl,
     faviconUrl: row.faviconUrl,
     colors: {
-      pearl: row.colorPearl,
-      oat: row.colorOat,
-      taupe: row.colorTaupe,
-      muted: row.colorMuted,
-      sage: row.colorSage,
-      sageDeep: row.colorSageDeep,
-      hairline: row.colorHairline,
+      pearl: sanitizeColor(row.colorPearl, DEFAULT_COLORS.pearl),
+      oat: sanitizeColor(row.colorOat, DEFAULT_COLORS.oat),
+      taupe: sanitizeColor(row.colorTaupe, DEFAULT_COLORS.taupe),
+      muted: sanitizeColor(row.colorMuted, DEFAULT_COLORS.muted),
+      sage: sanitizeColor(row.colorSage, DEFAULT_COLORS.sage),
+      sageDeep: sanitizeColor(row.colorSageDeep, DEFAULT_COLORS.sageDeep),
+      hairline: sanitizeColor(row.colorHairline, DEFAULT_COLORS.hairline),
     },
     contactEmail: row.contactEmail,
     contactEmailSecondary: row.contactEmailSecondary,
@@ -99,6 +115,35 @@ export async function getSiteSettings(): Promise<SiteSettingsData> {
       where: { id: "default" },
     });
     if (!row) return STATIC_SETTINGS;
+
+    // Auto-migrate legacy earthy colors in DB to White & Sky Blue if found
+    const hasLegacy = [
+      row.colorPearl,
+      row.colorOat,
+      row.colorTaupe,
+      row.colorMuted,
+      row.colorSage,
+      row.colorSageDeep,
+      row.colorHairline,
+    ].some((c) => c && LEGACY_HEX_MAP[c.trim().toLowerCase()]);
+
+    if (hasLegacy) {
+      prisma.siteSettings
+        .update({
+          where: { id: "default" },
+          data: {
+            colorPearl: sanitizeColor(row.colorPearl, DEFAULT_COLORS.pearl),
+            colorOat: sanitizeColor(row.colorOat, DEFAULT_COLORS.oat),
+            colorTaupe: sanitizeColor(row.colorTaupe, DEFAULT_COLORS.taupe),
+            colorMuted: sanitizeColor(row.colorMuted, DEFAULT_COLORS.muted),
+            colorSage: sanitizeColor(row.colorSage, DEFAULT_COLORS.sage),
+            colorSageDeep: sanitizeColor(row.colorSageDeep, DEFAULT_COLORS.sageDeep),
+            colorHairline: sanitizeColor(row.colorHairline, DEFAULT_COLORS.hairline),
+          },
+        })
+        .catch(() => {});
+    }
+
     return mapSettings(row);
   } catch {
     return STATIC_SETTINGS;
