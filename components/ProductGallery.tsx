@@ -32,6 +32,44 @@ function dedupeImages(images: string[]): string[] {
   return result;
 }
 
+function GalleryImage({
+  src,
+  alt,
+  unoptimized,
+  className,
+  priority,
+  sizes,
+}: {
+  src: string;
+  alt: string;
+  unoptimized?: boolean;
+  className?: string;
+  priority?: boolean;
+  sizes?: string;
+}) {
+  const [imgSrc, setImgSrc] = useState(src);
+  useEffect(() => {
+    setImgSrc(src);
+  }, [src]);
+
+  return (
+    <Image
+      src={imgSrc}
+      unoptimized={unoptimized}
+      alt={alt}
+      fill
+      priority={priority}
+      sizes={sizes}
+      className={className}
+      onError={() => {
+        if (imgSrc !== "/images/placeholder.jpg") {
+          setImgSrc("/images/placeholder.jpg");
+        }
+      }}
+    />
+  );
+}
+
 export function ProductGallery({
   images,
   heroImage,
@@ -118,11 +156,10 @@ export function ProductGallery({
               className="group relative aspect-[4/3] overflow-hidden bg-pearl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2"
               onClick={() => openLightbox(index)}
             >
-              <Image
+              <GalleryImage
                 src={resolved.src}
                 unoptimized={resolved.unoptimized}
                 alt={`${productName} ${index + 1}`}
-                fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
@@ -158,12 +195,11 @@ export function ProductGallery({
           </DialogTitle>
 
           <div className="relative aspect-[4/3] w-full bg-oat sm:aspect-[16/10]">
-            <Image
+            <GalleryImage
               key={activeSrc}
               src={activeResolved.src}
               unoptimized={activeResolved.unoptimized}
               alt={`${productName} ${activeIndex + 1}`}
-              fill
               sizes="(max-width: 1024px) 100vw, 960px"
               className="object-contain"
               priority
@@ -213,11 +249,10 @@ export function ProductGallery({
                       )}
                       onClick={() => setActiveIndex(index)}
                     >
-                      <Image
+                      <GalleryImage
                         src={thumb.src}
                         unoptimized={thumb.unoptimized}
                         alt=""
-                        fill
                         sizes="64px"
                         className="object-cover"
                       />

@@ -21,6 +21,10 @@ const nextConfig: NextConfig = {
     root: projectRoot,
   },
   images: {
+    unoptimized: true,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: "https",

@@ -9,8 +9,19 @@ const regionsDir = path.join(process.cwd(), "public/images/regions");
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
+function escapeXml(unsafe) {
+  return String(unsafe)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 // Helper to generate a luxury textile SVG
 function createTextileSvg(title, sub, color1, color2, accent, patternType) {
+  const safeTitle = escapeXml(title);
+  const safeSub = escapeXml(sub);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -85,8 +96,8 @@ function createTextileSvg(title, sub, color1, color2, accent, patternType) {
   <!-- Elegant Product Card Caption Plaque -->
   <g transform="translate(60, 640)">
     <rect width="680" height="100" rx="6" fill="#ffffff" opacity="0.96" stroke="#e0e9f1" stroke-width="1" />
-    <text x="40" y="44" font-family="Georgia, serif" font-size="24" font-weight="500" fill="#0f2942">${title}</text>
-    <text x="40" y="74" font-family="-apple-system, sans-serif" font-size="13" font-weight="500" fill="#5b6e82" letter-spacing="1">${sub}</text>
+    <text x="40" y="44" font-family="Georgia, serif" font-size="24" font-weight="500" fill="#0f2942">${safeTitle}</text>
+    <text x="40" y="74" font-family="-apple-system, sans-serif" font-size="13" font-weight="500" fill="#5b6e82" letter-spacing="1">${safeSub}</text>
     
     <g transform="translate(560, 36)">
       <circle cx="16" cy="16" r="18" fill="#f0f7fc" stroke="#bae6fd" stroke-width="1" />
@@ -111,15 +122,20 @@ const productConfigs = [
   { name: "promotional-towels.jpg", title: "Promotional Corporate Towels", sub: "Custom Woven Headers & Logo Embroidery", c1: "#f8fafc", c2: "#f0f9ff", acc: "#0284c7", p: "stripe" },
 ];
 
-productConfigs.forEach((cfg) => {
-  const content = createTextileSvg(cfg.title, cfg.sub, cfg.c1, cfg.c2, cfg.acc, cfg.p);
-  fs.writeFileSync(path.join(productsDir, cfg.name), content);
-});
+import sharp from "sharp";
 
-console.log("✓ Generated 12 luxury product images in public/images/products");
+async function main() {
+  for (const cfg of productConfigs) {
+    const svg = createTextileSvg(cfg.title, cfg.sub, cfg.c1, cfg.c2, cfg.acc, cfg.p);
+    const jpegBuffer = await sharp(Buffer.from(svg))
+      .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
+      .toBuffer();
+    fs.writeFileSync(path.join(productsDir, cfg.name), jpegBuffer);
+  }
+  console.log("✓ Generated 12 real binary JPEG product images in public/images/products");
 
-// Generate Hero Image
-const heroSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="100%" height="100%">
+  // Generate Hero Image as real JPEG
+  const heroSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="100%" height="100%">
   <defs>
     <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
@@ -180,5 +196,49 @@ const heroSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200"
   </g>
 </svg>`;
 
-fs.writeFileSync(path.join(heroDir, "hero-towel.jpg"), heroSvg);
-console.log("✓ Generated hero image in public/images/hero/hero-towel.jpg");
+  const heroJpeg = await sharp(Buffer.from(heroSvg))
+    .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
+    .toBuffer();
+  fs.writeFileSync(path.join(heroDir, "hero-towel.jpg"), heroJpeg);
+  console.log("✓ Generated real binary hero image in public/images/hero/hero-towel.jpg");
+
+  // Create a placeholder image for any missing product / CMS image fallback
+  const placeholderSvg = createTextileSvg(
+    "Deepam Luxury Textiles",
+    "Solapur, Maharashtra, India · Export Grade Quality",
+    "#ffffff",
+    "#f0f7fc",
+    "#0284c7",
+    "terry",
+  );
+  const placeholderJpeg = await sharp(Buffer.from(placeholderSvg))
+    .jpeg({ quality: 90 })
+    .toBuffer();
+  fs.writeFileSync(path.join(process.cwd(), "public/images/placeholder.jpg"), placeholderJpeg);
+  console.log("✓ Generated fallback placeholder in public/images/placeholder.jpg");
+
+  // Generate missing favicon and apple-touch-icon sizes from icon.png
+  const iconSrc = path.join(process.cwd(), "public/icon.png");
+  if (fs.existsSync(iconSrc)) {
+    await sharp(iconSrc).resize(16, 16).png().toFile(path.join(process.cwd(), "public/favicon-16.png"));
+    await sharp(iconSrc).resize(32, 32).png().toFile(path.join(process.cwd(), "public/favicon-32.png"));
+    await sharp(iconSrc).resize(180, 180).png().toFile(path.join(process.cwd(), "public/apple-touch-icon.png"));
+    console.log("✓ Generated favicon-16.png, favicon-32.png, apple-touch-icon.png");
+  }
+
+  // Ensure logo.png and logo-light.png exist in public/
+  const logoTransparent = path.join(process.cwd(), "public/images/logo-transparent.png");
+  const logoDarkMode = path.join(process.cwd(), "public/images/logo-dark-mode.png");
+  if (fs.existsSync(logoTransparent)) {
+    fs.copyFileSync(logoTransparent, path.join(process.cwd(), "public/logo.png"));
+  }
+  if (fs.existsSync(logoDarkMode)) {
+    fs.copyFileSync(logoDarkMode, path.join(process.cwd(), "public/logo-light.png"));
+  }
+  console.log("✓ Ensured public/logo.png and public/logo-light.png exist");
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

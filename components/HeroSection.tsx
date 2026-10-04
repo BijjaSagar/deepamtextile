@@ -21,6 +21,50 @@ type HeroSectionProps = {
 
 const SLIDE_INTERVAL_MS = 5500;
 
+function HeroSlideItem({
+  slide,
+  index,
+  activeSlide,
+  imageCacheVersion,
+}: {
+  slide: HeroSlide;
+  index: number;
+  activeSlide: number;
+  imageCacheVersion?: CacheVersion;
+}) {
+  const resolved = resolveCmsImage(slide.imageUrl, imageCacheVersion);
+  const [src, setSrc] = useState(resolved.src);
+
+  useEffect(() => {
+    setSrc(resolved.src);
+  }, [resolved.src]);
+
+  return (
+    <div
+      className={cn(
+        "absolute inset-0 transition-opacity duration-700 ease-in-out motion-reduce:transition-none",
+        index === activeSlide ? "opacity-100" : "opacity-0",
+      )}
+      aria-hidden={index !== activeSlide}
+    >
+      <Image
+        alt={slide.caption}
+        fill
+        {...resolved}
+        src={src}
+        onError={() => {
+          if (src !== "/images/hero/hero-towels.jpg") {
+            setSrc("/images/hero/hero-towels.jpg");
+          }
+        }}
+        className="object-cover"
+        priority={index === 0}
+        sizes="(max-width: 1024px) 90vw, 45vw"
+      />
+    </div>
+  );
+}
+
 export function HeroSection({
   eyebrow = "Home Textile Manufacturing · USA & Canada",
   title = "Luxury in Every Thread.",
@@ -116,25 +160,17 @@ export function HeroSection({
               aria-hidden="true"
             />
             <div className="relative aspect-[4/5] overflow-hidden border border-hairline bg-oat">
-              {carouselSlides.length === 0 ? null : carouselSlides.map((slide, index) => (
-                <div
-                  key={`${slide.imageUrl}-${index}`}
-                  className={cn(
-                    "absolute inset-0 transition-opacity duration-700 ease-in-out motion-reduce:transition-none",
-                    index === activeSlide ? "opacity-100" : "opacity-0",
-                  )}
-                  aria-hidden={index !== activeSlide}
-                >
-                  <Image
-                    alt={slide.caption}
-                    fill
-                    {...resolveCmsImage(slide.imageUrl, imageCacheVersion)}
-                    className="object-cover"
-                    priority={index === 0}
-                    sizes="(max-width: 1024px) 90vw, 45vw"
-                  />
-                </div>
-              ))}
+              {carouselSlides.length === 0
+                ? null
+                : carouselSlides.map((slide, index) => (
+                    <HeroSlideItem
+                      key={`${slide.imageUrl}-${index}`}
+                      slide={slide}
+                      index={index}
+                      activeSlide={activeSlide}
+                      imageCacheVersion={imageCacheVersion}
+                    />
+                  ))}
               {carouselSlides.length > 0 ? (
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-taupe/55 to-transparent px-5 pb-5 pt-16">
                   <p className="font-body text-[11px] uppercase tracking-[0.22em] text-pearl">
