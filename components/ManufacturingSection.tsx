@@ -1,8 +1,8 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/CmsImage";
 import Link from "next/link";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { SectionHeading } from "@/components/SectionHeading";
-import { resolveCmsImage, type CacheVersion } from "@/lib/image-props";
+import type { CacheVersion } from "@/lib/image-props";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 
@@ -33,12 +33,13 @@ export function ManufacturingSection({
       {imageUrl ? (
         <FadeUp>
           <div className="relative aspect-[5/4] overflow-hidden border border-hairline bg-oat">
-            <Image
+            <CmsImage
+              src={imageUrl}
+              cacheVersion={imageCacheVersion}
               alt="Deepam Textiles manufacturing facility in Solapur"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
-              {...resolveCmsImage(imageUrl, imageCacheVersion)}
             />
           </div>
         </FadeUp>

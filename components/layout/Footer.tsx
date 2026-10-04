@@ -42,7 +42,12 @@ export function Footer({
                 logoCacheVersion={settings.updatedAt}
               />
             ) : (
-              <BrandLogo variant="footer" />
+              <BrandLogo
+                variant="footer"
+                logoUrl={logoLightUrl}
+                siteName={siteName}
+                logoCacheVersion={settings.updatedAt}
+              />
             )}
             <p className="mt-1 font-body text-xs uppercase tracking-[0.22em] text-pearl/50">
               by {settings.legalName}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { CmsImage } from "@/components/CmsImage";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -52,7 +52,7 @@ export function AdminShell({ children, email }: AdminShellProps) {
         <div className="border-b border-hairline px-6 py-5">
           <Link href="/admin" className="flex items-center gap-3">
             <div className="relative h-8 w-8 shrink-0">
-              <Image
+              <CmsImage
                 src="/images/logo-circle-only.png"
                 alt="Deepam Textiles Emblem"
                 fill

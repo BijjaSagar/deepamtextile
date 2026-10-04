@@ -79,7 +79,12 @@ export function Header({
             logoCacheVersion={logoCacheVersion}
           />
         ) : (
-          <BrandLogo variant="header" />
+          <BrandLogo
+            variant="header"
+            logoUrl={logoUrl}
+            siteName={siteName}
+            logoCacheVersion={logoCacheVersion}
+          />
         )}
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Main">
@@ -176,6 +181,9 @@ export function Header({
               ) : (
                 <BrandLogo
                   variant="header"
+                  logoUrl={logoUrl}
+                  siteName={siteName}
+                  logoCacheVersion={logoCacheVersion}
                   onNavigate={() => setMobileOpen(false)}
                 />
               )}

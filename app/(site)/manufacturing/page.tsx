@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/CmsImage";
 import { createMetadata, serviceJsonLd } from "@/lib/seo";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ProcessSteps } from "@/components/ProcessSteps";
@@ -55,13 +55,14 @@ export default async function ManufacturingPage() {
       {hero.imageUrl ? (
         <section className="relative min-h-[50vh] overflow-hidden pt-28">
           <div className="absolute inset-0">
-            <Image
+            <CmsImage
+              src={hero.imageUrl}
+              cacheVersion={page?.updatedAt}
               alt=""
               fill
               className="object-cover"
               priority
               sizes="100vw"
-              {...resolveCmsImage(hero.imageUrl, page?.updatedAt)}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-pearl/90 via-pearl/75 to-pearl" />
           </div>
@@ -103,12 +104,13 @@ export default async function ManufacturingPage() {
         <section className="pb-section-mobile md:pb-section-desktop">
           <div className="mx-auto max-w-container px-6 md:px-8">
             <div className="relative aspect-[21/9] overflow-hidden bg-oat">
-              <Image
+              <CmsImage
+                src={facility.imageUrl}
+                cacheVersion={page?.updatedAt}
                 alt="Manufacturing floor"
                 fill
                 className="object-cover"
                 sizes="100vw"
-                {...resolveCmsImage(facility.imageUrl, page?.updatedAt)}
               />
             </div>
           </div>

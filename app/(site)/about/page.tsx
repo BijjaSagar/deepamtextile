@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/CmsImage";
 import Link from "next/link";
 import { createMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -60,13 +60,14 @@ export default async function AboutPage() {
       {heroImageUrl ? (
         <section className="relative min-h-[50vh] overflow-hidden pt-28">
           <div className="absolute inset-0">
-            <Image
+            <CmsImage
+              src={heroImageUrl}
+              cacheVersion={aboutPage?.updatedAt}
               alt=""
               fill
               className="object-cover"
               priority
               sizes="100vw"
-              {...resolveCmsImage(heroImageUrl, aboutPage?.updatedAt)}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-pearl/90 via-pearl/75 to-pearl" />
           </div>
@@ -102,12 +103,13 @@ export default async function AboutPage() {
             <FadeUp className="lg:col-span-5">
               <div className="relative aspect-[3/4] overflow-hidden bg-oat">
                 {introImageUrl ? (
-                  <Image
+                  <CmsImage
+                    src={introImageUrl}
+                    cacheVersion={aboutPage?.updatedAt}
                     alt="Deepam Textiles facility in Solapur"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 40vw"
-                    {...resolveCmsImage(introImageUrl, aboutPage?.updatedAt)}
                   />
                 ) : null}
               </div>

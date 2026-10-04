@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { resolveCmsImage, type CacheVersion } from "@/lib/image-props";
@@ -29,9 +32,23 @@ export function Logo({
   siteName = "Deepam Textiles",
   logoCacheVersion,
 }: LogoProps) {
-  const src = variant === "light" ? logoLightUrl : logoUrl;
+  const defaultFallback =
+    variant === "light"
+      ? "/images/logo-dark-mode.png"
+      : "/images/logo-transparent.png";
+  const targetSrc =
+    variant === "light"
+      ? logoLightUrl || defaultFallback
+      : logoUrl || defaultFallback;
+  const resolved = resolveCmsImage(targetSrc, logoCacheVersion);
+  const [currentSrc, setCurrentSrc] = useState(resolved.src);
+
+  useEffect(() => {
+    const next = resolveCmsImage(targetSrc, logoCacheVersion);
+    setCurrentSrc(next.src);
+  }, [targetSrc, logoCacheVersion]);
+
   const alt = `${siteName} — Experience the Luxury`;
-  const imageProps = resolveCmsImage(src, logoCacheVersion);
 
   return (
     <Link
@@ -44,11 +61,16 @@ export function Logo({
     >
       <Image
         alt={alt}
+        src={currentSrc}
         width={LOGO_WIDTH}
         height={LOGO_HEIGHT}
         priority={priority}
-        {...imageProps}
         className="h-10 sm:h-12 w-auto object-contain"
+        onError={() => {
+          if (currentSrc !== defaultFallback) {
+            setCurrentSrc(defaultFallback);
+          }
+        }}
       />
     </Link>
   );

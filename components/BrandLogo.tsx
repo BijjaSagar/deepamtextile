@@ -3,22 +3,44 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { resolveCmsImage, type CacheVersion } from "@/lib/image-props";
 import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
   variant?: "header" | "footer";
   className?: string;
   onNavigate?: () => void;
+  logoUrl?: string;
+  siteName?: string;
+  logoCacheVersion?: CacheVersion;
 };
+
+const DEFAULT_EMBLEM = "/images/logo-circle-only.png";
 
 export function BrandLogo({
   variant = "header",
   className,
   onNavigate,
+  logoUrl = DEFAULT_EMBLEM,
+  siteName = "Deepam Textiles",
+  logoCacheVersion,
 }: BrandLogoProps) {
   const ref = useRef<HTMLAnchorElement>(null);
   const [revealed, setRevealed] = useState(false);
   const isFooter = variant === "footer";
+
+  const resolved = resolveCmsImage(logoUrl || DEFAULT_EMBLEM, logoCacheVersion);
+  const [currentLogoSrc, setCurrentLogoSrc] = useState(resolved.src);
+
+  useEffect(() => {
+    const res = resolveCmsImage(logoUrl || DEFAULT_EMBLEM, logoCacheVersion);
+    setCurrentLogoSrc(res.src);
+  }, [logoUrl, logoCacheVersion]);
+
+  // Dynamically derive brand name parts from CMS siteName
+  const words = (siteName || "Deepam Textiles").trim().split(/\s+/);
+  const brandPrimary = (words[0] || "DEEPAM").toUpperCase();
+  const brandSecondary = (words.slice(1).join(" ") || "TEXTILES").toUpperCase();
 
   useEffect(() => {
     const el = ref.current;
@@ -48,14 +70,20 @@ export function BrandLogo({
         revealed && "in",
         className,
       )}
-      aria-label="Deepam Textiles — Home"
+      aria-label={`${siteName} — Home`}
     >
       <div className="relative h-9 w-9 sm:h-10 sm:w-10 shrink-0">
         <Image
-          src="/images/logo-circle-only.png"
-          alt="Deepam Textiles Emblem"
+          src={currentLogoSrc}
+          alt={`${siteName} Emblem`}
           fill
+          sizes="40px"
           className="object-contain"
+          onError={() => {
+            if (currentLogoSrc !== DEFAULT_EMBLEM) {
+              setCurrentLogoSrc(DEFAULT_EMBLEM);
+            }
+          }}
         />
       </div>
       <div className="flex flex-col items-start leading-none">
@@ -65,7 +93,7 @@ export function BrandLogo({
             isFooter ? "text-pearl" : "text-taupe",
           )}
         >
-          DEEPAM
+          {brandPrimary}
         </span>
         <div className="lv mt-1 flex items-center gap-1.5 font-body text-[8.5px] uppercase tracking-[0.3em]">
           <span className="h-px w-2.5 bg-sage-deep" aria-hidden="true" />
@@ -75,7 +103,7 @@ export function BrandLogo({
               isFooter ? "text-pearl/80" : "text-taupe/80",
             )}
           >
-            TEXTILES
+            {brandSecondary}
           </span>
           <span className="h-px w-2.5 bg-sage-deep" aria-hidden="true" />
         </div>

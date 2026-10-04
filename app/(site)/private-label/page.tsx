@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/CmsImage";
 import Link from "next/link";
 import { Download } from "lucide-react";
 import { createMetadata, serviceJsonLd } from "@/lib/seo";
@@ -138,13 +138,14 @@ export default async function PrivateLabelPage() {
       >
         {hero.imageUrl ? (
           <div className="absolute inset-0">
-            <Image
+            <CmsImage
+              src={hero.imageUrl}
+              cacheVersion={page?.updatedAt}
               alt="Private label textile manufacturing"
               fill
               className="object-cover"
               priority
               sizes="100vw"
-              {...resolveCmsImage(hero.imageUrl, page?.updatedAt)}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-pearl/95 via-pearl/85 to-pearl/50" />
           </div>
@@ -216,12 +217,13 @@ export default async function PrivateLabelPage() {
             <FadeUp>
               <div className="relative aspect-square overflow-hidden bg-oat">
                 {packaging.imageUrl ? (
-                  <Image
+                  <CmsImage
+                    src={packaging.imageUrl}
+                    cacheVersion={page?.updatedAt}
                     alt="Private label packaging"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    {...resolveCmsImage(packaging.imageUrl, page?.updatedAt)}
                   />
                 ) : null}
               </div>

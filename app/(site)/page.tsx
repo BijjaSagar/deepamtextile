@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/CmsImage";
 import Link from "next/link";
 import { HeroSection } from "@/components/HeroSection";
 import { TrustStrip } from "@/components/TrustStrip";
@@ -91,7 +91,9 @@ export default async function HomePage() {
             {heritageImageUrl ? (
               <FadeUp>
                 <div className="relative aspect-[4/3] overflow-hidden border border-hairline bg-oat">
-                  <Image
+                  <CmsImage
+                    src={heritageImageUrl}
+                    cacheVersion={homePage?.updatedAt}
                     alt={
                       heritage.title
                         ? `${heritage.title} — Deepam Textiles`
@@ -100,10 +102,6 @@ export default async function HomePage() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    {...resolveCmsImage(
-                      heritageImageUrl,
-                      homePage?.updatedAt,
-                    )}
                   />
                 </div>
               </FadeUp>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { CmsImage } from "@/components/CmsImage";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -43,7 +43,7 @@ export function LoginForm() {
       <AdminCard className="w-full max-w-md">
         <div className="flex flex-col items-center text-center">
           <div className="relative mb-3 h-14 w-14">
-            <Image
+            <CmsImage
               src="/images/logo-circle-only.png"
               alt="Deepam Textiles Emblem"
               fill
