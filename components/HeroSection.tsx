@@ -70,8 +70,8 @@ export function HeroSection({
         aria-hidden="true"
         style={{
           background: `
-            radial-gradient(1200px 600px at 88% -5%, rgba(200,199,172,0.32), transparent 60%),
-            radial-gradient(900px 500px at -5% 30%, rgba(231,221,205,0.6), transparent 55%),
+            radial-gradient(1200px 600px at 88% -5%, rgba(56, 189, 248, 0.16), transparent 60%),
+            radial-gradient(900px 500px at -5% 30%, rgba(2, 132, 199, 0.08), transparent 55%),
             var(--pearl)
           `,
         }}
@@ -143,7 +143,7 @@ export function HeroSection({
                 </div>
               ) : null}
             </div>
-            <div className="absolute -bottom-2 left-0 max-w-[230px] border border-hairline bg-white p-5 shadow-[0_30px_60px_-34px_rgba(74,67,57,0.55)] md:-left-8 md:bottom-10 md:p-6">
+            <div className="absolute -bottom-2 left-0 max-w-[230px] border border-hairline bg-white p-5 shadow-[0_30px_60px_-34px_rgba(15,41,66,0.18)] md:-left-8 md:bottom-10 md:p-6">
               <p className="font-display text-[2.125rem] leading-none text-taupe">
                 100% Cotton
               </p>

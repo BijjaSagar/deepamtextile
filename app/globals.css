@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --pearl: #fbfaf6;
-  --oat: #f1ece2;
-  --sand: #e7ddcd;
-  --taupe: #5e5547;
-  --taupe-dark: #4a4339;
-  --muted: #857b6c;
-  --sage: #c8c7ac;
-  --sage-deep: #9a9a7d;
-  --hairline: #e7e0d3;
-  --ink: #2e2a24;
+  --pearl: #ffffff;
+  --oat: #f0f7fc;
+  --sand: #e0f0fa;
+  --taupe: #0f2942;
+  --taupe-dark: #081a2e;
+  --muted: #5b6e82;
+  --sage: #38bdf8;
+  --sage-deep: #0284c7;
+  --hairline: #e0e9f1;
+  --ink: #061524;
   --white: #ffffff;
 }
 
@@ -112,9 +112,9 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.9375rem 1.625rem;
-  border: 1px solid var(--taupe);
-  background: var(--taupe);
-  color: var(--pearl);
+  border: 1px solid var(--sage-deep);
+  background: var(--sage-deep);
+  color: #ffffff;
   transition: all 0.35s ease;
   white-space: nowrap;
   cursor: pointer;
@@ -130,7 +130,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.9375rem 1.625rem;
-  border: 1px solid var(--taupe);
+  border: 1px solid var(--hairline);
   background: transparent;
   color: var(--taupe);
   transition: all 0.35s ease;
@@ -178,13 +178,15 @@ h4 {
 }
 
 .btn-solid:hover {
-  background: var(--taupe-dark);
-  border-color: var(--taupe-dark);
+  background: var(--taupe);
+  border-color: var(--taupe);
+  color: #ffffff;
 }
 
 .btn-ghost:hover {
-  background: var(--taupe);
-  color: var(--pearl);
+  background: var(--oat);
+  border-color: var(--sage-deep);
+  color: var(--sage-deep);
 }
 
 .nav-link-underline::after {

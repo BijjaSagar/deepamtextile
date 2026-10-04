@@ -68,7 +68,7 @@ export function BrandLogo({
           DEEPAM
         </span>
         <div className="lv mt-1 flex items-center gap-1.5 font-body text-[8.5px] uppercase tracking-[0.3em]">
-          <span className="h-px w-2.5 bg-[#c2a156]" aria-hidden="true" />
+          <span className="h-px w-2.5 bg-sage-deep" aria-hidden="true" />
           <span
             className={cn(
               "font-medium",
@@ -77,7 +77,7 @@ export function BrandLogo({
           >
             TEXTILES
           </span>
-          <span className="h-px w-2.5 bg-[#c2a156]" aria-hidden="true" />
+          <span className="h-px w-2.5 bg-sage-deep" aria-hidden="true" />
         </div>
       </div>
     </Link>

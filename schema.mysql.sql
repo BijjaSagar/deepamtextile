@@ -234,13 +234,13 @@ CREATE TABLE `SiteSettings` (
   `logoUrl` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/images/logo-transparent.png',
   `logoLightUrl` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/images/logo-dark-mode.png',
   `faviconUrl` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT '/favicon.ico',
-  `colorPearl` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#fbfaf6',
-  `colorOat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#f1ece2',
-  `colorTaupe` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#5e5547',
-  `colorMuted` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#857b6c',
-  `colorSage` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#c8c7ac',
-  `colorSageDeep` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#9a9a7d',
-  `colorHairline` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#e7e0d3',
+  `colorPearl` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#ffffff',
+  `colorOat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#f0f7fc',
+  `colorTaupe` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#0f2942',
+  `colorMuted` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#5b6e82',
+  `colorSage` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#38bdf8',
+  `colorSageDeep` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#0284c7',
+  `colorHairline` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#e0e9f1',
   `contactEmail` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'export@deepamtextile.com',
   `contactEmailSecondary` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT 'sales@deepamtextile.com',
   `contactPhone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '+91 70661 48936',
@@ -268,7 +268,7 @@ CREATE TABLE `SiteSettings` (
 
 LOCK TABLES `SiteSettings` WRITE;
 /*!40000 ALTER TABLE `SiteSettings` DISABLE KEYS */;
-INSERT INTO `SiteSettings` VALUES ('default','Deepam Textiles','Deepam Textiles','Experience the Luxury. Crafting Excellence Since 1998.','Premier Indian manufacturer and global exporter of luxury terry towels, hotel bath linen, and private label collections from Solapur, Maharashtra.','/images/logo-transparent.png','/images/logo-dark-mode.png','/favicon.ico','#fbfaf6','#f1ece2','#5e5547','#857b6c','#c8c7ac','#9a9a7d','#e7e0d3','export@deepamtextile.com','sales@deepamtextile.com','+91 70661 48936','export@deepamtextile.com',NULL,1,'+917066148936',NULL,'Premier Indian manufacturer and global exporter of luxury terry towels, hotel bath linen, and private label collections from Solapur, Maharashtra.',NULL,'USA · Canada · Europe · Middle East · Australia','MIDC Industrial Area, Akkalkot Road','Solapur','Maharashtra','India','413006','2026-09-29 05:32:07.430');
+INSERT INTO `SiteSettings` VALUES ('default','Deepam Textiles','Deepam Textiles','Experience the Luxury. Crafting Excellence Since 1998.','Premier Indian manufacturer and global exporter of luxury terry towels, hotel bath linen, and private label collections from Solapur, Maharashtra.','/images/logo-transparent.png','/images/logo-dark-mode.png','/favicon.ico','#ffffff','#f0f7fc','#0f2942','#5b6e82','#38bdf8','#0284c7','#e0e9f1','export@deepamtextile.com','sales@deepamtextile.com','+91 70661 48936','export@deepamtextile.com',NULL,1,'+917066148936',NULL,'Premier Indian manufacturer and global exporter of luxury terry towels, hotel bath linen, and private label collections from Solapur, Maharashtra.',NULL,'USA · Canada · Europe · Middle East · Australia','MIDC Industrial Area, Akkalkot Road','Solapur','Maharashtra','India','413006','2026-09-29 05:32:07.430');
 /*!40000 ALTER TABLE `SiteSettings` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -33,8 +33,8 @@ export function ProductCard({
       className={cn(
         "group relative flex flex-col overflow-hidden border border-hairline bg-pearl transition-all duration-400",
         isCompact
-          ? "hover:-translate-y-1 hover:shadow-[0_28px_50px_-34px_rgba(74,67,57,0.55)] motion-reduce:hover:translate-y-0"
-          : "hover:shadow-[0_20px_60px_-20px_rgba(30,27,22,0.15)]",
+          ? "hover:-translate-y-1 hover:shadow-[0_28px_50px_-34px_rgba(15,41,66,0.16)] motion-reduce:hover:translate-y-0"
+          : "hover:shadow-[0_20px_60px_-20px_rgba(15,41,66,0.12)]",
         className,
       )}
     >

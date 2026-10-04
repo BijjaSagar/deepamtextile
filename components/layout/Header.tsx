@@ -65,7 +65,7 @@ export function Header({
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-hairline bg-pearl/95 py-3 shadow-[0_8px_30px_-22px_rgba(74,67,57,0.5)] backdrop-blur-md"
+          ? "border-b border-hairline bg-pearl/95 py-3 shadow-[0_8px_30px_-22px_rgba(15,41,66,0.12)] backdrop-blur-md"
           : "bg-transparent py-5",
       )}
     >

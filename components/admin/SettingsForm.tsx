@@ -54,13 +54,13 @@ export function SettingsForm({ initial }: { initial: SiteSettingsData }) {
   }
 
   const colorFields = [
-    { key: "pearl" as const, label: "Pearl" },
-    { key: "oat" as const, label: "Oat" },
-    { key: "taupe" as const, label: "Taupe" },
-    { key: "muted" as const, label: "Muted" },
-    { key: "sage" as const, label: "Sage" },
-    { key: "sageDeep" as const, label: "Sage Deep" },
-    { key: "hairline" as const, label: "Hairline" },
+    { key: "pearl" as const, label: "Base Background (White)" },
+    { key: "oat" as const, label: "Secondary Surface (Sky Tint)" },
+    { key: "taupe" as const, label: "Headings & Primary Text (Navy)" },
+    { key: "muted" as const, label: "Body Text & Subtitles (Slate)" },
+    { key: "sage" as const, label: "Accent Glow & Badges (Sky Blue)" },
+    { key: "sageDeep" as const, label: "Buttons & Highlights (Deep Sky)" },
+    { key: "hairline" as const, label: "Borders & Lines (Hairline)" },
   ];
 
   return (

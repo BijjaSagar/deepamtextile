@@ -5,13 +5,13 @@ import { siteConfig } from "@/lib/utils";
 import type { SiteColors, SiteSettingsData } from "@/lib/types/cms";
 
 const DEFAULT_COLORS: SiteColors = {
-  pearl: "#fbfaf6",
-  oat: "#f1ece2",
-  taupe: "#5e5547",
-  muted: "#857b6c",
-  sage: "#c8c7ac",
-  sageDeep: "#9a9a7d",
-  hairline: "#e7e0d3",
+  pearl: "#ffffff",
+  oat: "#f0f7fc",
+  taupe: "#0f2942",
+  muted: "#5b6e82",
+  sage: "#38bdf8",
+  sageDeep: "#0284c7",
+  hairline: "#e0e9f1",
 };
 
 const STATIC_SETTINGS: SiteSettingsData = {
@@ -114,6 +114,9 @@ export function colorsToCssVars(colors: SiteColors): Record<string, string> {
     "--sage": colors.sage,
     "--sage-deep": colors.sageDeep,
     "--hairline": colors.hairline,
+    "--sand": "#e0f0fa",
+    "--taupe-dark": "#081a2e",
+    "--ink": "#061524",
   };
 }
 

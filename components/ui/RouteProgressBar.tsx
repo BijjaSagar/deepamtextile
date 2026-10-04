@@ -71,7 +71,7 @@ export function RouteProgressBar() {
       aria-valuenow={state === "done" ? 100 : 70}
     >
       <div
-        className={`h-full bg-sage-deep shadow-[0_0_8px_rgba(107,124,106,0.45)] transition-[width] duration-500 ease-out ${
+        className={`h-full bg-sage-deep shadow-[0_0_8px_rgba(2,132,199,0.5)] transition-[width] duration-500 ease-out ${
           state === "loading" ? "w-[72%]" : "w-full"
         }`}
       />
