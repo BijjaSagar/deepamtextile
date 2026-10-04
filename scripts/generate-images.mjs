@@ -126,16 +126,21 @@ import sharp from "sharp";
 
 async function main() {
   for (const cfg of productConfigs) {
-    const svg = createTextileSvg(cfg.title, cfg.sub, cfg.c1, cfg.c2, cfg.acc, cfg.p);
-    const jpegBuffer = await sharp(Buffer.from(svg))
-      .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
-      .toBuffer();
-    fs.writeFileSync(path.join(productsDir, cfg.name), jpegBuffer);
+    const dest = path.join(productsDir, cfg.name);
+    if (!fs.existsSync(dest)) {
+      const svg = createTextileSvg(cfg.title, cfg.sub, cfg.c1, cfg.c2, cfg.acc, cfg.p);
+      const jpegBuffer = await sharp(Buffer.from(svg))
+        .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
+        .toBuffer();
+      fs.writeFileSync(dest, jpegBuffer);
+    }
   }
-  console.log("✓ Generated 12 real binary JPEG product images in public/images/products");
+  console.log("✓ Verified product images in public/images/products");
 
-  // Generate Hero Image as real JPEG
-  const heroSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="100%" height="100%">
+  // Generate Hero Image only if missing
+  const heroTowelPath = path.join(heroDir, "hero-towel.jpg");
+  if (!fs.existsSync(heroTowelPath)) {
+    const heroSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" width="100%" height="100%">
   <defs>
     <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
@@ -196,11 +201,12 @@ async function main() {
   </g>
 </svg>`;
 
-  const heroJpeg = await sharp(Buffer.from(heroSvg))
-    .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
-    .toBuffer();
-  fs.writeFileSync(path.join(heroDir, "hero-towel.jpg"), heroJpeg);
-  console.log("✓ Generated real binary hero image in public/images/hero/hero-towel.jpg");
+    const heroJpeg = await sharp(Buffer.from(heroSvg))
+      .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
+      .toBuffer();
+    fs.writeFileSync(heroTowelPath, heroJpeg);
+    console.log("✓ Generated real binary hero image in public/images/hero/hero-towel.jpg");
+  }
 
   // Create a placeholder image for any missing product / CMS image fallback
   const placeholderSvg = createTextileSvg(
