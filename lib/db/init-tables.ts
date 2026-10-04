@@ -4,6 +4,7 @@ import {
   productCategories,
   companyStats,
   certifications,
+  DEFAULT_CATEGORY_GALLERIES,
 } from "@/data/products";
 import {
   STATIC_HEADER,
@@ -381,7 +382,7 @@ export async function seedInitialDataIfEmpty(): Promise<{
             eyebrow: product.eyebrow,
             heroImage: product.heroImage,
             cardImage: product.cardImage,
-            galleryImages: [],
+            galleryImages: product.galleryImages ?? (DEFAULT_CATEGORY_GALLERIES[product.slug] || []),
             features: product.features,
             variants: product.variants ?? [],
             materials: product.materials,

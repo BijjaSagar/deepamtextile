@@ -28,57 +28,78 @@ export const POST = withApiHandler(async (request: NextRequest) => {
   if (isUnauthorized(auth)) return auth;
 
   const formData = await request.formData();
-  const file = formData.get("file") as File | null;
-  if (!file) {
+  
+  // Collect all files from "files" or "file" form keys
+  const files: File[] = [];
+  const fromFiles = formData.getAll("files");
+  for (const item of fromFiles) {
+    if (item instanceof File && item.size > 0) files.push(item);
+  }
+  const fromFile = formData.getAll("file");
+  for (const item of fromFile) {
+    if (item instanceof File && item.size > 0) files.push(item);
+  }
+
+  if (files.length === 0) {
     return apiError("No file provided", 400, "VALIDATION_ERROR");
   }
 
   const kind = (formData.get("kind") as string | null)?.toLowerCase() ?? "image";
   const folder = (formData.get("folder") as string | null)?.trim() || undefined;
 
-  const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
-  const isIco = ext === "ico";
-  const isPdf = ext === "pdf" || PDF_TYPES.includes(file.type);
+  const urls: string[] = [];
 
-  if (kind === "pdf" || isPdf) {
-    if (!PDF_TYPES.includes(file.type) && ext !== "pdf") {
-      return apiError("Invalid file type", 400, "VALIDATION_ERROR");
+  for (const file of files) {
+    const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
+    const isIco = ext === "ico";
+    const isPdf = ext === "pdf" || PDF_TYPES.includes(file.type);
+
+    if (kind === "pdf" || isPdf) {
+      if (!PDF_TYPES.includes(file.type) && ext !== "pdf") {
+        return apiError(`Invalid file type for ${file.name}`, 400, "VALIDATION_ERROR");
+      }
+      if (file.size > 15 * 1024 * 1024) {
+        return apiError(`File too large: ${file.name} (max 15MB)`, 400, "VALIDATION_ERROR");
+      }
+      const pdfFolder =
+        folder ?? `pdfs/${sanitizeUploadSegment((formData.get("label") as string) ?? "documents")}`;
+      const { diskPath, publicPrefix } = resolveUploadDir(pdfFolder);
+      await mkdir(diskPath, { recursive: true });
+      const filename = safeFilename(file.name, "pdf");
+      const buffer = Buffer.from(await file.arrayBuffer());
+      await writeFile(path.join(diskPath, filename), buffer);
+      const url = `${publicPrefix}/${filename}`;
+      console.log("[admin/upload] wrote PDF", { url, size: file.size });
+      urls.push(url);
+      continue;
     }
+
+    if (
+      !IMAGE_TYPES.includes(file.type) &&
+      !(isIco && file.type === "application/octet-stream")
+    ) {
+      return apiError(`Invalid image type for ${file.name}`, 400, "VALIDATION_ERROR");
+    }
+
     if (file.size > 15 * 1024 * 1024) {
-      return apiError("File too large (max 15MB)", 400, "VALIDATION_ERROR");
+      return apiError(`File too large: ${file.name} (max 15MB)`, 400, "VALIDATION_ERROR");
     }
-    const pdfFolder =
-      folder ?? `pdfs/${sanitizeUploadSegment(formData.get("label") as string ?? "documents")}`;
-    const { diskPath, publicPrefix } = resolveUploadDir(pdfFolder);
+
+    const { diskPath, publicPrefix } = resolveUploadDir(folder);
     await mkdir(diskPath, { recursive: true });
-    const filename = safeFilename(file.name, "pdf");
+
+    const filename = safeFilename(file.name, "png");
     const buffer = Buffer.from(await file.arrayBuffer());
     await writeFile(path.join(diskPath, filename), buffer);
+
     const url = `${publicPrefix}/${filename}`;
-    console.log("[admin/upload] wrote PDF", { url, size: file.size });
-    return apiSuccess({ url });
+    console.log("[admin/upload] wrote file", {
+      url,
+      diskPath: path.join(diskPath, filename),
+      size: file.size,
+    });
+    urls.push(url);
   }
 
-  if (
-    !IMAGE_TYPES.includes(file.type) &&
-    !(isIco && file.type === "application/octet-stream")
-  ) {
-    return apiError("Invalid file type", 400, "VALIDATION_ERROR");
-  }
-
-  if (file.size > 5 * 1024 * 1024) {
-    return apiError("File too large (max 5MB)", 400, "VALIDATION_ERROR");
-  }
-
-  const { diskPath, publicPrefix } = resolveUploadDir(folder);
-  await mkdir(diskPath, { recursive: true });
-
-  const filename = safeFilename(file.name, "png");
-  const buffer = Buffer.from(await file.arrayBuffer());
-  await writeFile(path.join(diskPath, filename), buffer);
-
-  const url = `${publicPrefix}/${filename}`;
-  console.log("[admin/upload] wrote file", { url, diskPath: path.join(diskPath, filename), size: file.size });
-
-  return apiSuccess({ url });
+  return apiSuccess({ url: urls[0], urls });
 });

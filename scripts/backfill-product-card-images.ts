@@ -4,6 +4,7 @@
  */
 import { prisma } from "@/lib/db";
 import { staleCardImageUpgrade } from "@/lib/image-props";
+import { DEFAULT_CATEGORY_GALLERIES } from "@/data/products";
 
 function normalizeGalleryImages(value: unknown): string[] {
   if (Array.isArray(value)) {
@@ -30,7 +31,21 @@ async function main() {
 
   let upgraded = 0;
   for (const row of rows) {
-    const galleryImages = normalizeGalleryImages(row.galleryImages);
+    let galleryImages = normalizeGalleryImages(row.galleryImages);
+    const defaultGallery = DEFAULT_CATEGORY_GALLERIES[row.slug];
+
+    if (galleryImages.length === 0 && defaultGallery && defaultGallery.length > 0) {
+      await prisma.productCategory.update({
+        where: { slug: row.slug },
+        data: { galleryImages: defaultGallery },
+      });
+      galleryImages = defaultGallery;
+      console.log("[backfill-product-card-images] populated default gallery", {
+        slug: row.slug,
+        count: defaultGallery.length,
+      });
+    }
+
     const nextCard = staleCardImageUpgrade({
       cardImage: row.cardImage,
       heroImage: row.heroImage,

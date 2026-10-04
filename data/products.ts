@@ -5,6 +5,7 @@ export type ProductCategory = {
   description: string;
   heroImage: string;
   cardImage: string;
+  galleryImages?: string[];
   eyebrow: string;
   features: string[];
   variants?: string[];
@@ -17,6 +18,111 @@ export type ProductCategory = {
   leadTime: string;
   moq: string;
 };
+
+export const DEFAULT_CATEGORY_GALLERIES: Record<string, string[]> = {
+  "beach-towels": [
+    "/images/products/beach-towels.jpg",
+    "/images/products/pool-towels.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/spa-towels.jpg",
+    "/images/products/promotional-towels.jpg",
+    "/images/products/face-towels.jpg",
+  ],
+  "bath-towels": [
+    "/images/products/bath-towels.jpg",
+    "/images/products/hand-towels.jpg",
+    "/images/products/face-towels.jpg",
+    "/images/products/bath-mats.jpg",
+    "/images/products/bath-robes.jpg",
+    "/images/products/hotel-linen.jpg",
+  ],
+  "hand-towels": [
+    "/images/products/hand-towels.jpg",
+    "/images/products/face-towels.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/kitchen-towels.jpg",
+    "/images/products/spa-towels.jpg",
+  ],
+  "face-towels": [
+    "/images/products/face-towels.jpg",
+    "/images/products/hand-towels.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/spa-towels.jpg",
+    "/images/products/promotional-towels.jpg",
+  ],
+  "pool-towels": [
+    "/images/products/pool-towels.jpg",
+    "/images/products/beach-towels.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/spa-towels.jpg",
+  ],
+  "bath-mats": [
+    "/images/products/bath-mats.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/hotel-linen.jpg",
+    "/images/products/spa-towels.jpg",
+  ],
+  "bath-robes": [
+    "/images/products/bath-robes.jpg",
+    "/images/products/hotel-linen.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/spa-towels.jpg",
+  ],
+  "hotel-linen": [
+    "/images/products/hotel-linen.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/bath-mats.jpg",
+    "/images/products/bath-robes.jpg",
+  ],
+  "kitchen-towels": [
+    "/images/products/kitchen-towels.jpg",
+    "/images/products/hand-towels.jpg",
+    "/images/products/face-towels.jpg",
+    "/images/products/bath-towels.jpg",
+  ],
+  "spa-towels": [
+    "/images/products/spa-towels.jpg",
+    "/images/products/bath-robes.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/pool-towels.jpg",
+  ],
+  "promotional-towels": [
+    "/images/products/promotional-towels.jpg",
+    "/images/products/beach-towels.jpg",
+    "/images/products/hand-towels.jpg",
+    "/images/products/face-towels.jpg",
+  ],
+  "private-labeling": [
+    "/images/products/private-label.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/hotel-linen.jpg",
+    "/images/products/promotional-towels.jpg",
+  ],
+  "private-label": [
+    "/images/products/private-label.jpg",
+    "/images/products/bath-towels.jpg",
+    "/images/products/hotel-linen.jpg",
+    "/images/products/promotional-towels.jpg",
+  ],
+};
+
+export function getDefaultCategoryGallery(
+  slug: string,
+  heroImage?: string,
+  cardImage?: string,
+): string[] {
+  const curated = DEFAULT_CATEGORY_GALLERIES[slug];
+  if (curated && curated.length > 0) {
+    return curated;
+  }
+  const fallback = [heroImage, cardImage].filter(
+    (img): img is string => typeof img === "string" && img.trim().length > 0,
+  );
+  if (fallback.length > 0) {
+    return Array.from(new Set(fallback));
+  }
+  return ["/images/products/bath-towels.jpg"];
+}
 
 export const productCategories: ProductCategory[] = [
   {

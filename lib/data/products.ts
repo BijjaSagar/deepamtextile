@@ -5,6 +5,7 @@ import {
   productCategories as staticCategories,
   getCategoryBySlug as staticGetBySlug,
   getAllCategorySlugs as staticGetAllSlugs,
+  getDefaultCategoryGallery,
 } from "@/data/products";
 import {
   resolveProductCardImage,
@@ -53,7 +54,14 @@ function withSeoFields(
     variants?: string[];
   },
 ): ProductCategoryData {
-  const galleryImages = normalizeGalleryImages(category.galleryImages);
+  let galleryImages = normalizeGalleryImages(category.galleryImages);
+  if (galleryImages.length === 0) {
+    galleryImages = getDefaultCategoryGallery(
+      category.slug,
+      category.heroImage,
+      category.cardImage,
+    );
+  }
   const cardImage = resolveProductCardImage({
     cardImage: category.cardImage,
     heroImage: category.heroImage,
@@ -111,7 +119,14 @@ async function upgradeStaleCardImageRow(
 }
 
 function mapProduct(row: ProductCategory): ProductCategoryData {
-  const galleryImages = normalizeGalleryImages(row.galleryImages);
+  let galleryImages = normalizeGalleryImages(row.galleryImages);
+  if (galleryImages.length === 0) {
+    galleryImages = getDefaultCategoryGallery(
+      row.slug,
+      row.heroImage,
+      row.cardImage,
+    );
+  }
   const cardImage = resolveProductCardImage({
     cardImage: row.cardImage,
     heroImage: row.heroImage,

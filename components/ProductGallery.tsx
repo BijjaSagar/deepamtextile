@@ -77,7 +77,13 @@ export function ProductGallery({
   cacheVersion,
   className,
 }: ProductGalleryProps) {
-  const gridImages = useMemo(() => dedupeImages(images), [images]);
+  const gridImages = useMemo(() => {
+    const list = dedupeImages(images);
+    if (list.length === 0 && heroImage?.trim()) {
+      return [heroImage.trim()];
+    }
+    return list;
+  }, [images, heroImage]);
 
   const lightboxSlides = useMemo(() => {
     const hero = heroImage?.trim();

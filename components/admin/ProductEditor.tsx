@@ -180,6 +180,9 @@ export function ProductEditor({ product }: { product: ProductCategoryData }) {
             images={data.galleryImages}
             onChange={(galleryImages) => setData({ ...data, galleryImages })}
             productSlug={product.slug}
+            productName={data.name}
+            onSaveQuick={handleSave}
+            saving={saving}
           />
         </div>
         <div className="mt-4">
