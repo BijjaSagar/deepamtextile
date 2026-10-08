@@ -184,7 +184,7 @@ export function HeroSection({
                 100% Cotton
               </p>
               <p className="mt-2 font-body text-[11px] uppercase tracking-[0.16em] text-muted">
-                OEKO-TEX® certified quality
+                Export-Grade Quality
               </p>
             </div>
           </div>

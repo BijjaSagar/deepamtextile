@@ -27,7 +27,6 @@ const navItems = [
   { href: "/admin/pages", label: "Pages", icon: FileText },
   { href: "/admin/stats", label: "Stats", icon: BarChart3 },
   { href: "/admin/inquiries", label: "Inquiries", icon: Inbox },
-  { href: "/admin/certifications", label: "Certifications", icon: Award },
   { href: "/admin/users", label: "Users", icon: Users },
 ];
 

@@ -16,7 +16,7 @@ export async function generateMetadata() {
     title: page?.metaTitle ?? "Manufacturing",
     description:
       page?.metaDescription ??
-      "Vertical textile manufacturing from yarn selection to export packaging. ISO-certified facility in Solapur, India serving USA and Canada buyers.",
+      "Vertical textile manufacturing from yarn selection to export packaging. Premier manufacturing facility in Solapur, India serving USA and Canada buyers.",
     path: "/manufacturing",
   });
 }
@@ -163,7 +163,7 @@ export default async function ManufacturingPage() {
         </div>
       </section>
 
-      <section className="bg-taupe py-section-mobile md:py-section-desktop">
+      <section className="border-y border-sky-100 bg-gradient-to-r from-[#0284c7] to-[#0369a1] py-section-mobile text-white md:py-section-desktop shadow-inner">
         <div className="mx-auto max-w-container px-6 md:px-8">
           <StatStrip stats={companyStats} dark />
         </div>

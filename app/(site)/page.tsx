@@ -1,7 +1,6 @@
 import { CmsImage } from "@/components/CmsImage";
 import Link from "next/link";
 import { HeroSection } from "@/components/HeroSection";
-import { TrustStrip } from "@/components/TrustStrip";
 import { SectionHeading } from "@/components/SectionHeading";
 import { FeatureGrid } from "@/components/FeatureGrid";
 import { CategoryGrid } from "@/components/CategoryGrid";
@@ -20,7 +19,6 @@ import {
 } from "@/data/products";
 import { getProductCategories } from "@/lib/data/products";
 import { getStats } from "@/lib/data/stats";
-import { getCertifications } from "@/lib/data/certifications";
 import { getPageContent } from "@/lib/data/pages";
 import { resolveCmsImage } from "@/lib/image-props";
 import { cn } from "@/lib/utils";
@@ -29,11 +27,10 @@ import { cn } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [productCategories, companyStats, certifications, homePage] =
+  const [productCategories, companyStats, homePage] =
     await Promise.all([
       getProductCategories(),
       getStats(),
-      getCertifications(),
       getPageContent("home"),
     ]);
 
@@ -71,8 +68,6 @@ export default async function HomePage() {
         slides={hero.slides}
         imageCacheVersion={homePage?.updatedAt}
       />
-
-      <TrustStrip certifications={certifications} />
 
       {/* About / Heritage */}
       <section
@@ -167,7 +162,7 @@ export default async function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="bg-taupe py-16 md:py-20">
+      <section className="bg-gradient-to-r from-[#0284c7] to-[#0369a1] py-16 text-white md:py-20 shadow-inner">
         <div className="mx-auto max-w-container px-6 md:px-8">
           <StatStrip stats={companyStats} limit={4} />
         </div>

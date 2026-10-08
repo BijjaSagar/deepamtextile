@@ -19,19 +19,17 @@ export default async function AdminDashboardPage() {
     nav: 0,
     pages: 0,
     stats: 0,
-    certs: 0,
   };
 
   if (isDbConfigured()) {
     try {
-      const [products, nav, pages, stats, certs] = await Promise.all([
+      const [products, nav, pages, stats] = await Promise.all([
         prisma.productCategory.count(),
         prisma.navigationItem.count(),
         prisma.pageContent.count(),
         prisma.stat.count(),
-        prisma.certification.count(),
       ]);
-      counts = { products, nav, pages, stats, certs };
+      counts = { products, nav, pages, stats };
     } catch {
       // use zeros if DB unavailable
     }
@@ -67,12 +65,6 @@ export default async function AdminDashboardPage() {
       label: "Stats",
       count: `${counts.stats} items`,
       icon: BarChart3,
-    },
-    {
-      href: "/admin/certifications",
-      label: "Certifications",
-      count: `${counts.certs} badges`,
-      icon: Award,
     },
   ];
 

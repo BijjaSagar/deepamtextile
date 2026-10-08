@@ -32,7 +32,6 @@ const SITE_PAGE_PATHS = [
   "/about",
   "/products",
   "/manufacturing",
-  "/certifications",
   "/private-label",
   "/faq",
   "/contact",

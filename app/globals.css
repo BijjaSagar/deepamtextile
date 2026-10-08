@@ -2,15 +2,15 @@
 
 :root {
   --pearl: #ffffff;
-  --oat: #f0f7fc;
-  --sand: #e0f0fa;
-  --taupe: #0f2942;
-  --taupe-dark: #081a2e;
-  --muted: #5b6e82;
+  --oat: #f0f9ff;
+  --sand: #e0f2fe;
+  --taupe: #0284c7;
+  --taupe-dark: #0284c7;
+  --muted: #475569;
   --sage: #38bdf8;
   --sage-deep: #0284c7;
-  --hairline: #e0e9f1;
-  --ink: #061524;
+  --hairline: #bae6fd;
+  --ink: #0c4a6e;
   --white: #ffffff;
 }
 
@@ -160,7 +160,7 @@ html {
 
 body {
   background: var(--pearl);
-  color: var(--taupe);
+  color: #0c4a6e;
   font-family: var(--font-body);
   font-size: 17px;
   line-height: 1.6;
@@ -178,15 +178,15 @@ h4 {
 }
 
 .btn-solid:hover {
-  background: var(--taupe);
-  border-color: var(--taupe);
+  background: #0369a1;
+  border-color: #0369a1;
   color: #ffffff;
 }
 
 .btn-ghost:hover {
   background: var(--oat);
   border-color: var(--sage-deep);
-  color: var(--sage-deep);
+  color: #0369a1;
 }
 
 .nav-link-underline::after {
@@ -195,7 +195,7 @@ h4 {
   left: 0;
   bottom: 0;
   width: 0;
-  height: 1px;
+  height: 2px;
   background: var(--sage-deep);
   transition: width 0.3s ease;
 }

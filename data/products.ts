@@ -144,7 +144,7 @@ export const productCategories: ProductCategory[] = [
     materials: [
       "100% long-staple combed cotton",
       "Premium cotton-poly blends (70/30, 80/20)",
-      "Organic cotton (GOTS certified upon request)",
+      "Organic cotton programs upon request",
       "Zero-twist construction for ultra-plush hand-feel",
     ],
     sizes: [
@@ -514,7 +514,7 @@ export const productCategories: ProductCategory[] = [
     materials: [
       "100% combed cotton (spa white)",
       "Bamboo-cotton blend",
-      "Organic cotton (certified)",
+      "100% Organic cotton",
     ],
     sizes: [
       { label: "Spa Hand", cm: "40 × 70 cm", inches: '16" × 28"' },
@@ -662,7 +662,7 @@ export const whyChooseUsFeatures = [
   {
     title: "Sustainable Options",
     description:
-      "Organic cotton, recycled blends, and eco-packaging available with third-party certification support.",
+      "Organic cotton, recycled blends, and eco-friendly packaging options available.",
   },
   {
     title: "Private Label Expertise",
@@ -683,49 +683,7 @@ export type Certification = {
   pdfUrl?: string;
 };
 
-export const certifications: Certification[] = [
-  {
-    name: "ISO 9001:2015",
-    description:
-      "Quality management systems certification for consistent production standards.",
-    certificateNumber: "QMS-DT-ISO9001-2015-IN-2847",
-    pdfUrl: "/certificates/iso-9001-2015.pdf",
-  },
-  {
-    name: "OEKO-TEX Standard 100",
-    description: "Tested for harmful substances—safe for direct skin contact.",
-    certificateNumber: "22.HIN.38492",
-    pdfUrl: "/certificates/oeko-tex-standard-100.pdf",
-  },
-  {
-    name: "BCI",
-    description:
-      "Better Cotton Initiative membership supporting sustainable cotton sourcing.",
-    certificateNumber: "BCI-MEM-2024-DT-1183",
-    pdfUrl: "/certificates/bci-membership.pdf",
-  },
-  {
-    name: "GOTS",
-    description:
-      "Global Organic Textile Standard for certified organic cotton programs.",
-    certificateNumber: "GOTS-IN-ORG-009284",
-    pdfUrl: "/certificates/gots-certificate.pdf",
-  },
-  {
-    name: "BSCI",
-    description:
-      "Business Social Compliance Initiative for ethical manufacturing practices.",
-    certificateNumber: "BSCI-AUD-2024-DT-4421",
-    pdfUrl: "/certificates/bsci-audit-summary.pdf",
-  },
-  {
-    name: "SEDEX / SMETA",
-    description:
-      "Supplier Ethical Data Exchange membership with SMETA audit readiness.",
-    certificateNumber: "SEDEX-ZS-8847291",
-    pdfUrl: "/certificates/sedex-membership.pdf",
-  },
-];
+export const certifications: Certification[] = [];
 
 export const manufacturingHighlights = [
   {
@@ -940,10 +898,5 @@ export const faqItems = [
     question: "Can you customize sizes, GSM, colours, and branding?",
     answer:
       "Yes. We offer custom sizes (inch and cm), GSM ranges, Pantone colour matching, dobby borders, embroidery, woven labels, and retail-ready packaging.",
-  },
-  {
-    question: "Which certifications do you hold?",
-    answer:
-      "We maintain ISO 9001:2015, OEKO-TEX Standard 100, BCI membership, GOTS (organic programs), BSCI, and SEDEX/SMETA readiness. Certificate copies are available on request.",
   },
 ];

@@ -93,7 +93,7 @@ export const DEFAULT_FAQ_SECTIONS = {
     eyebrow: "FAQ",
     title: "Export buyer questions, answered",
     description:
-      "MOQs, sampling, lead times, shipping (FOB Nhava Sheva / CIF destination ports), payment terms, customization, and certifications—everything procurement teams ask before their first order.",
+      "MOQs, sampling, lead times, shipping (FOB Nhava Sheva / CIF destination ports), payment terms, and customization—everything procurement teams ask before their first order.",
     imageUrl: "/images/hero/hero-towels.jpg",
   },
   faqItems: defaultFaqItems as FaqItem[],
@@ -127,7 +127,6 @@ export const ALL_PAGE_SLUGS = [
   "home",
   "about",
   "manufacturing",
-  "certifications",
   "private-label",
   "contact",
   "faq",
@@ -152,15 +151,8 @@ const STATIC_PAGES: Record<string, PageContentData> = {
     slug: "manufacturing",
     metaTitle: "Manufacturing",
     metaDescription:
-      "Vertical textile manufacturing from yarn selection to export packaging. ISO-certified facility in Solapur, India serving international buyers.",
+      "Vertical textile manufacturing from yarn selection to export packaging. Premier manufacturing facility in Solapur, India serving international buyers.",
     sections: DEFAULT_MANUFACTURING_SECTIONS,
-  },
-  certifications: {
-    slug: "certifications",
-    metaTitle: "Certifications",
-    metaDescription:
-      "ISO 9001:2015, OEKO-TEX Standard 100, BCI, GOTS, BSCI, and SEDEX/SMETA compliance for export textile manufacturing from India.",
-    sections: {},
   },
   "private-label": {
     slug: "private-label",
@@ -180,7 +172,7 @@ const STATIC_PAGES: Record<string, PageContentData> = {
     slug: "faq",
     metaTitle: "FAQ",
     metaDescription:
-      "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textiles export buyers.",
+      "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, and customization for Deepam Textiles export buyers.",
     sections: DEFAULT_FAQ_SECTIONS,
   },
   products: {

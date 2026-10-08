@@ -26,11 +26,13 @@ export function Footer({
   logoLightUrl,
   siteName,
 }: FooterProps) {
-  const certLabels = ["ISO 9001:2015", "OEKO-TEX®", "BCI-Aligned"];
+  const filteredCompanyLinks = companyLinks.filter(
+    (l) => !l.href.includes("certif") && !l.label.toLowerCase().includes("certif"),
+  );
   const useImageLogo = hasCustomLogo(undefined, logoLightUrl, "footer");
 
   return (
-    <footer className="relative bg-taupe-dark text-pearl">
+    <footer className="relative bg-gradient-to-b from-[#0284c7] to-[#0369a1] text-white">
       <div className="mx-auto max-w-container px-6 py-section-mobile md:px-8 md:py-20">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] lg:gap-10">
           <div>
@@ -49,24 +51,24 @@ export function Footer({
                 logoCacheVersion={settings.updatedAt}
               />
             )}
-            <p className="mt-1 font-body text-xs uppercase tracking-[0.22em] text-pearl/50">
+            <p className="mt-1 font-body text-xs uppercase tracking-[0.22em] text-white/80">
               by {settings.legalName}
             </p>
-            <p className="mt-4 max-w-xs font-body text-[13.5px] leading-relaxed text-pearl/60">
+            <p className="mt-4 max-w-xs font-body text-[13.5px] leading-relaxed text-white/90">
               {settings.footerBlurb}
             </p>
           </div>
 
           <div>
-            <p className="mb-4 font-body text-[11px] font-medium uppercase tracking-[0.2em] text-sage">
+            <p className="mb-4 font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
               Explore
             </p>
             <ul className="space-y-3">
-              {companyLinks.map((link) => (
+              {filteredCompanyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-body text-[13.5px] text-pearl/70 transition-colors hover:text-pearl"
+                    className="font-body text-[13.5px] text-white/85 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -76,7 +78,7 @@ export function Footer({
           </div>
 
           <div>
-            <p className="mb-4 font-body text-[11px] font-medium uppercase tracking-[0.2em] text-sage">
+            <p className="mb-4 font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
               Products
             </p>
             <ul className="space-y-3">
@@ -84,7 +86,7 @@ export function Footer({
                 <li key={cat.slug}>
                   <Link
                     href={`/products/${cat.slug}`}
-                    className="font-body text-[13.5px] text-pearl/70 transition-colors hover:text-pearl"
+                    className="font-body text-[13.5px] text-white/85 transition-colors hover:text-white"
                   >
                     {cat.name}
                   </Link>
@@ -94,24 +96,24 @@ export function Footer({
           </div>
 
           <div>
-            <p className="mb-4 font-body text-[11px] font-medium uppercase tracking-[0.2em] text-sage">
+            <p className="mb-4 font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
               Contact
             </p>
             <address className="not-italic">
               <ContactEmails
                 primary={settings.contactEmail}
                 secondary={settings.contactEmailSecondary}
-                linkClassName="font-body text-[13.5px] text-pearl/70 transition-colors hover:text-pearl"
+                linkClassName="font-body text-[13.5px] text-white/85 transition-colors hover:text-white"
               />
-              <p className="mt-3 font-body text-[13.5px] text-pearl/70">
+              <p className="mt-3 font-body text-[13.5px] text-white/85">
                 <a
                   href={`tel:${settings.contactPhone.replace(/\D/g, "")}`}
-                  className="transition-colors hover:text-pearl"
+                  className="transition-colors hover:text-white"
                 >
                   {settings.contactPhone}
                 </a>
               </p>
-              <p className="mt-3 font-body text-[13.5px] text-pearl/70">
+              <p className="mt-3 font-body text-[13.5px] text-white/85">
                 {settings.address.city}, {settings.address.region},{" "}
                 {settings.address.country}
               </p>
@@ -121,7 +123,7 @@ export function Footer({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-body text-[13.5px] font-medium text-sage transition-colors hover:text-pearl"
+                    className="font-body text-[13.5px] font-medium text-white transition-colors hover:underline"
                   >
                     {link.label}
                   </Link>
@@ -131,17 +133,12 @@ export function Footer({
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-pearl/15 pt-6 md:flex-row md:items-center md:justify-between">
-          <p className="font-body text-xs text-pearl/50">
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/20 pt-6 md:flex-row md:items-center md:justify-between">
+          <p className="font-body text-xs text-white/80">
             © {new Date().getFullYear()}{" "}
             {settings.copyrightText ??
               `${settings.siteName}. Luxury in Every Thread.`}
           </p>
-          <div className="flex flex-wrap gap-4 font-body text-xs text-pearl/50 md:gap-5">
-            {certLabels.map((cert) => (
-              <span key={cert}>{cert}</span>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

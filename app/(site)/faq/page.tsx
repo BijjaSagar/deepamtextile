@@ -19,7 +19,7 @@ export async function generateMetadata() {
     title: page?.metaTitle ?? "FAQ",
     description:
       page?.metaDescription ??
-      "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textiles export buyers.",
+      "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, and customization for Deepam Textiles export buyers.",
     path: "/faq",
   });
 }
@@ -34,7 +34,14 @@ export default async function FaqPage() {
     description?: string;
     imageUrl?: string;
   };
-  const faqItems = (page?.sections.faqItems ?? []) as FaqItem[];
+  const rawFaqItems = (page?.sections.faqItems ?? []) as FaqItem[];
+  const faqItems = rawFaqItems.filter(
+    (item) =>
+      !item.question.toLowerCase().includes("certif") &&
+      !item.answer.toLowerCase().includes("certif") &&
+      !item.question.includes("ISO") &&
+      !item.answer.includes("ISO"),
+  );
   const jsonLd = faqJsonLd(faqItems);
 
   return (
@@ -68,7 +75,7 @@ export default async function FaqPage() {
               </h1>
               <p className="mt-6 max-w-2xl font-body text-lg leading-relaxed text-muted">
                 {hero.description ??
-                  "MOQs, sampling, lead times, shipping, payment, customization, and certifications—everything procurement teams ask before their first order."}
+                  "MOQs, sampling, lead times, shipping, payment, and customization—everything procurement teams ask before their first order."}
               </p>
             </FadeUp>
           </div>
@@ -85,7 +92,7 @@ export default async function FaqPage() {
               </h1>
               <p className="mt-6 max-w-2xl font-body text-lg leading-relaxed text-muted">
                 {hero.description ??
-                  "MOQs, sampling, lead times, shipping, payment, customization, and certifications—everything procurement teams ask before their first order."}
+                  "MOQs, sampling, lead times, shipping, payment, and customization—everything procurement teams ask before their first order."}
               </p>
             </FadeUp>
           </div>

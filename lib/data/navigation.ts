@@ -4,18 +4,16 @@ import type { NavigationItemData } from "@/lib/types/cms";
 const STATIC_HEADER: NavigationItemData[] = [
   { id: "h1", label: "About", href: "/about", type: "link", sortOrder: 1, visible: true, location: "header" },
   { id: "h2", label: "Manufacturing", href: "/manufacturing", type: "link", sortOrder: 2, visible: true, location: "header" },
-  { id: "h3", label: "Certifications", href: "/certifications", type: "link", sortOrder: 3, visible: true, location: "header" },
-  { id: "h4", label: "Private Label", href: "/private-label", type: "link", sortOrder: 4, visible: true, location: "header" },
-  { id: "h5", label: "FAQ", href: "/faq", type: "link", sortOrder: 5, visible: true, location: "header" },
-  { id: "h6", label: "Contact", href: "/contact", type: "link", sortOrder: 6, visible: true, location: "header" },
+  { id: "h4", label: "Private Label", href: "/private-label", type: "link", sortOrder: 3, visible: true, location: "header" },
+  { id: "h5", label: "FAQ", href: "/faq", type: "link", sortOrder: 4, visible: true, location: "header" },
+  { id: "h6", label: "Contact", href: "/contact", type: "link", sortOrder: 5, visible: true, location: "header" },
 ];
 
 const STATIC_FOOTER_COMPANY: NavigationItemData[] = [
   { id: "fc1", label: "About Us", href: "/about", type: "link", sortOrder: 1, visible: true, location: "footer_company" },
   { id: "fc2", label: "Manufacturing", href: "/manufacturing", type: "link", sortOrder: 2, visible: true, location: "footer_company" },
-  { id: "fc3", label: "Certifications", href: "/certifications", type: "link", sortOrder: 3, visible: true, location: "footer_company" },
-  { id: "fc4", label: "Private Label", href: "/private-label", type: "link", sortOrder: 4, visible: true, location: "footer_company" },
-  { id: "fc5", label: "FAQ", href: "/faq", type: "link", sortOrder: 5, visible: true, location: "footer_company" },
+  { id: "fc4", label: "Private Label", href: "/private-label", type: "link", sortOrder: 3, visible: true, location: "footer_company" },
+  { id: "fc5", label: "FAQ", href: "/faq", type: "link", sortOrder: 4, visible: true, location: "footer_company" },
   { id: "fc6", label: "Contact", href: "/contact", type: "link", sortOrder: 6, visible: true, location: "footer_company" },
 ];
 
@@ -46,12 +44,16 @@ function mapNav(
   };
 }
 
+function isNotCert(item: NavigationItemData): boolean {
+  return !item.href.includes("certif") && !item.label.toLowerCase().includes("certif");
+}
+
 async function getNavByLocation(
   location: NavigationItemData["location"],
   fallback: NavigationItemData[],
 ): Promise<NavigationItemData[]> {
   if (!isDbConfigured()) {
-    return fallback.filter((item) => item.visible);
+    return fallback.filter((item) => item.visible && isNotCert(item));
   }
   try {
     const rows = await prisma.navigationItem.findMany({
@@ -59,11 +61,11 @@ async function getNavByLocation(
       orderBy: { sortOrder: "asc" },
     });
     if (rows.length === 0) {
-      return fallback.filter((item) => item.visible);
+      return fallback.filter((item) => item.visible && isNotCert(item));
     }
-    return rows.filter((row) => row.visible).map(mapNav);
+    return rows.filter((row) => row.visible).map(mapNav).filter(isNotCert);
   } catch {
-    return fallback.filter((item) => item.visible);
+    return fallback.filter((item) => item.visible && isNotCert(item));
   }
 }
 
@@ -81,15 +83,15 @@ export async function getFooterExportNav(): Promise<NavigationItemData[]> {
 
 export async function getAllNavigationAdmin(): Promise<NavigationItemData[]> {
   if (!isDbConfigured()) {
-    return [...STATIC_HEADER, ...STATIC_FOOTER_COMPANY, ...STATIC_FOOTER_EXPORT];
+    return [...STATIC_HEADER, ...STATIC_FOOTER_COMPANY, ...STATIC_FOOTER_EXPORT].filter(isNotCert);
   }
   try {
     const rows = await prisma.navigationItem.findMany({
       orderBy: [{ location: "asc" }, { sortOrder: "asc" }],
     });
-    return rows.map(mapNav);
+    return rows.map(mapNav).filter(isNotCert);
   } catch {
-    return [...STATIC_HEADER, ...STATIC_FOOTER_COMPANY, ...STATIC_FOOTER_EXPORT];
+    return [...STATIC_HEADER, ...STATIC_FOOTER_COMPANY, ...STATIC_FOOTER_EXPORT].filter(isNotCert);
   }
 }
 

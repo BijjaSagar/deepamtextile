@@ -19,27 +19,7 @@ function mapCert(row: CertificationData): CertificationDisplay {
 }
 
 export async function getCertifications(): Promise<CertificationDisplay[]> {
-  if (!isDbConfigured()) return staticCerts;
-  try {
-    const rows = await prisma.certification.findMany({
-      where: { visible: true },
-      orderBy: { sortOrder: "asc" },
-    });
-    if (rows.length === 0) return staticCerts;
-    return rows.map((r) =>
-      mapCert({
-        id: r.id,
-        name: r.name,
-        code: r.code,
-        description: r.description,
-        pdfUrl: r.pdfUrl,
-        sortOrder: r.sortOrder,
-        visible: r.visible,
-      }),
-    );
-  } catch {
-    return staticCerts;
-  }
+  return [];
 }
 
 export async function getAllCertificationsAdmin(): Promise<CertificationData[]> {

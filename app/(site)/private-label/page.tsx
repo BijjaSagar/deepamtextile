@@ -59,7 +59,7 @@ const privateLabelFeatures = [
   {
     title: "Quality Assurance",
     description:
-      "Same ISO-certified production and lab testing as our hospitality programs—consistent every batch.",
+      "Same premium export-grade production and lab testing as our hospitality programs—consistent every batch.",
   },
   {
     title: "Exclusive Programs",

@@ -131,7 +131,7 @@ export default async function AboutPage() {
                 <p>
                   Our vertically integrated facility spans modern production floors with 200+ high-speed airjet and rapier looms,
                   automated dyeing, finishing, cutting, stitching, and quality laboratories.
-                  We deliver 550+ MT monthly capacity and maintain certifications including ISO 9001, OEKO-TEX, GOTS, BSCI, and SEDEX.
+                  We deliver 550+ MT monthly capacity with rigorous quality control, modern laboratory testing, and international export standards.
                 </p>
                 <p>
                   Whether you are a five-star hotel group replenishing par levels, a
@@ -145,7 +145,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="border-y border-hairline bg-taupe py-section-mobile md:py-section-desktop">
+      <section className="border-y border-sky-100 bg-gradient-to-r from-[#0284c7] to-[#0369a1] py-section-mobile text-white md:py-section-desktop shadow-inner">
         <div className="mx-auto max-w-container px-6 md:px-8">
           <StatStrip stats={companyStats} dark />
         </div>

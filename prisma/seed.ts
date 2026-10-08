@@ -156,15 +156,8 @@ async function main() {
       slug: "manufacturing",
       metaTitle: "Manufacturing",
       metaDescription:
-        "Vertical textile manufacturing from yarn selection to export packaging. ISO-certified facility in Solapur, India serving international buyers.",
+        "Vertical textile manufacturing from yarn selection to export packaging. Premier manufacturing facility in Solapur, India serving international buyers.",
       sections: DEFAULT_MANUFACTURING_SECTIONS,
-    },
-    {
-      slug: "certifications",
-      metaTitle: "Certifications",
-      metaDescription:
-        "ISO 9001:2015, OEKO-TEX Standard 100, BCI, GOTS, BSCI, and SEDEX/SMETA compliance for export textile manufacturing from India.",
-      sections: {},
     },
     {
       slug: "private-label",
@@ -184,7 +177,7 @@ async function main() {
       slug: "faq",
       metaTitle: "FAQ",
       metaDescription:
-        "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, customization, and certifications for Deepam Textiles export buyers.",
+        "Frequently asked questions about MOQs, samples, lead times, shipping, payment terms, and customization for Deepam Textiles export buyers.",
       sections: DEFAULT_FAQ_SECTIONS,
     },
     {
