@@ -195,6 +195,7 @@ async function main() {
       update: {
         metaTitle: page.metaTitle,
         metaDescription: page.metaDescription,
+        sections: page.sections as Prisma.InputJsonValue,
       },
       create: {
         ...page,
@@ -202,6 +203,10 @@ async function main() {
       },
     });
   }
+
+  await prisma.pageContent.deleteMany({
+    where: { slug: "certifications" },
+  });
 
   // Default admin: admin@deepamtextile.com / changeme123 — see DEPLOYMENT.md
   const adminEmail = (
