@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `Inquiry` (
 -- --------------------------------------------------------
 -- Initial Seed data for: AdminUser
 -- --------------------------------------------------------
-INSERT INTO `AdminUser` (`id`, `email`, `passwordHash`, `createdAt`, `updatedAt`) VALUES ('cmuftx1ba0000rxowpqt7awjh', 'admin@deepamtextile.com', '$2a$10$s/NkyAPotGEYZMTq0.etxOW5Hd18mnTKobwUvnBq4ZpCh7OUDMqi6', 1790272323046, 1790272323046) ON DUPLICATE KEY UPDATE `updatedAt`=VALUES(`updatedAt`);
+INSERT INTO `AdminUser` (`id`, `email`, `passwordHash`, `createdAt`, `updatedAt`) VALUES ('cmuftx1ba0000rxowpqt7awjh', 'admin@deepamtextile.com', '$2a$12$vp6wdDikx2fIBcXZp4MB..V9cL81CQV3Ra/zB2Wqf9ALVLjMGVsQq', 1790272323046, 1790272323046) ON DUPLICATE KEY UPDATE `updatedAt`=VALUES(`updatedAt`);
 
 -- --------------------------------------------------------
 -- Initial Seed data for: SiteContent

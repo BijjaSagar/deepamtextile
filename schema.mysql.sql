@@ -42,7 +42,7 @@ CREATE TABLE `AdminUser` (
 
 LOCK TABLES `AdminUser` WRITE;
 /*!40000 ALTER TABLE `AdminUser` DISABLE KEYS */;
-INSERT INTO `AdminUser` VALUES ('cmum8os960012rxfateec7e6h','admin@deepamtextile.com','$2a$12$WfYRD/LdYIiJ9GV8TX5hOutqDpRvfSOtq3Wmczfgijxe6B0YQl/x6','Deepam Admin','admin',1,'2026-09-29 05:32:09.355','2026-09-29 05:32:09.355');
+INSERT INTO `AdminUser` VALUES ('cmum8os960012rxfateec7e6h','admin@deepamtextile.com','$2a$12$vp6wdDikx2fIBcXZp4MB..V9cL81CQV3Ra/zB2Wqf9ALVLjMGVsQq','Deepam Admin','admin',1,'2026-09-29 05:32:09.355','2026-09-29 05:32:09.355');
 /*!40000 ALTER TABLE `AdminUser` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -503,7 +503,7 @@ export async function seedInitialDataIfEmpty(): Promise<{
     const adminEmail = (
       process.env.ADMIN_EMAIL ?? "admin@deepamtextile.com"
     ).toLowerCase();
-    const adminPassword = process.env.ADMIN_PASSWORD ?? "RIYA@lovesdad143";
+    const adminPassword = process.env.ADMIN_PASSWORD ?? "DeepamAdmin2026!";
 
     const existingAdmin = await prisma.adminUser.findUnique({
       where: { email: adminEmail },

@@ -208,11 +208,10 @@ async function main() {
     where: { slug: "certifications" },
   });
 
-  // Default admin: admin@deepamtextile.com / changeme123 — see DEPLOYMENT.md
   const adminEmail = (
     process.env.ADMIN_EMAIL ?? "admin@deepamtextile.com"
   ).toLowerCase();
-  const adminPassword = process.env.ADMIN_PASSWORD ?? "changeme123";
+  const adminPassword = process.env.ADMIN_PASSWORD ?? "DeepamAdmin2026!";
   const existingAdmin = await prisma.adminUser.findUnique({
     where: { email: adminEmail },
   });
