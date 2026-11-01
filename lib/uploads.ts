@@ -28,7 +28,9 @@ export function isStandaloneDeploy(cwd = process.cwd()): boolean {
   const appRoot = resolveAppRoot(cwd);
   return (
     isFlatStandaloneDeploy(appRoot) ||
-    existsSync(path.join(appRoot, ".next", "standalone", "server.js"))
+    existsSync(path.join(appRoot, ".next", "standalone", "server.js")) ||
+    appRoot.includes("/domains/") ||
+    appRoot.includes("/hbuilds/")
   );
 }
 
@@ -54,8 +56,13 @@ export function resolveAppRoot(cwd = process.cwd()): string {
   return cwd;
 }
 
-/** Default persistent dir: sibling of app root, e.g. ~/domains/deepamtextile.com/uploads-data */
+/** Default persistent dir: domain-level uploads-data outside deploy versions */
 export function defaultPersistentUploadsDir(appRoot = resolveAppRoot()): string {
+  // If running inside Hostinger (/home/.../domains/<domain>/...)
+  const domainMatch = appRoot.match(/^(.*?\/domains\/[^/]+)/);
+  if (domainMatch) {
+    return path.join(domainMatch[1], "uploads-data");
+  }
   return path.resolve(appRoot, "..", "uploads-data");
 }
 

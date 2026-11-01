@@ -48,6 +48,14 @@ describe("resolveUploadsStorageDir", () => {
     );
   });
 
+  it("defaults persistent dir to domain uploads-data when inside hbuilds versions", () => {
+    const cwd =
+      "/home/u618910819/domains/deepamtextiles.com/hbuilds/versions/01a195d3-4042-709b-9e01-b70fcced5e1a/nodejs";
+    expect(defaultPersistentUploadsDir(cwd)).toBe(
+      "/home/u618910819/domains/deepamtextiles.com/uploads-data",
+    );
+  });
+
   it("resolveAppRoot walks up from nested standalone cwd to app root", () => {
     const appRoot = "/home/user/domains/deepamtextile.com/nodejs";
     expect(resolveAppRoot(appRoot)).toBe(appRoot);

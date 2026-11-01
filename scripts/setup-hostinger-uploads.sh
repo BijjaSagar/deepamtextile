@@ -41,25 +41,28 @@ merge_into_persistent "$ROOT/nodejs/public/uploads"
 merge_into_persistent "$ROOT/.next/standalone/public/uploads"
 
 # Replace deploy-dir uploads with symlink to persistent storage.
-if [[ -e "$TARGET_LINK" ]] && [[ ! -L "$TARGET_LINK" ]]; then
-  echo "→ Replacing real directory $TARGET_LINK with symlink"
-  rm -rf "$TARGET_LINK"
-fi
-
-if [[ ! -L "$TARGET_LINK" ]]; then
-  mkdir -p "$(dirname "$TARGET_LINK")"
-  ln -sfn "$PERSISTENT" "$TARGET_LINK"
-  echo "→ Symlink: $TARGET_LINK → $PERSISTENT"
-else
-  current="$(readlink -f "$TARGET_LINK" 2>/dev/null || readlink "$TARGET_LINK" || true)"
-  if [[ "$current" != "$PERSISTENT" ]]; then
-    rm -f "$TARGET_LINK"
-    ln -sfn "$PERSISTENT" "$TARGET_LINK"
-    echo "→ Updated symlink: $TARGET_LINK → $PERSISTENT"
-  else
-    echo "→ Symlink OK: $TARGET_LINK → $PERSISTENT"
+for link in "$TARGET_LINK" "$LEGACY_UPLOADS"; do
+  [[ -z "$link" ]] && continue
+  if [[ -e "$link" ]] && [[ ! -L "$link" ]]; then
+    echo "→ Replacing real directory $link with symlink"
+    rm -rf "$link"
   fi
-fi
+
+  if [[ ! -L "$link" ]]; then
+    mkdir -p "$(dirname "$link")"
+    ln -sfn "$PERSISTENT" "$link"
+    echo "→ Symlink: $link → $PERSISTENT"
+  else
+    current="$(readlink -f "$link" 2>/dev/null || readlink "$link" || true)"
+    if [[ "$current" != "$PERSISTENT" ]]; then
+      rm -f "$link"
+      ln -sfn "$PERSISTENT" "$link"
+      echo "→ Updated symlink: $link → $PERSISTENT"
+    else
+      echo "→ Symlink OK: $link → $PERSISTENT"
+    fi
+  fi
+done
 
 FILE_COUNT="$(hostinger_count_upload_files "$PERSISTENT")"
 echo "→ Persistent uploads: $FILE_COUNT files in $PERSISTENT"

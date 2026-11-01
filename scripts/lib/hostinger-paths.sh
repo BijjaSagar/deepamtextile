@@ -10,7 +10,11 @@ hostinger_app_root() {
 
 hostinger_domain_dir() {
   local root="${1:-$(hostinger_app_root)}"
-  echo "$(cd "$root/.." && pwd)"
+  if [[ "$root" =~ ^(.*\/domains\/[^/]+) ]]; then
+    echo "${BASH_REMATCH[1]}"
+  else
+    echo "$(cd "$root/.." && pwd)"
+  fi
 }
 
 hostinger_persistent_uploads() {
