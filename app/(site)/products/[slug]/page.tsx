@@ -7,6 +7,7 @@ import {
 } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductGallery } from "@/components/ProductGallery";
+import { ProductDescription } from "@/components/ProductDescription";
 import { CTABand } from "@/components/CTABand";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { StaggerChildren } from "@/components/motion/StaggerChildren";
@@ -206,9 +207,10 @@ export default async function ProductCategoryPage({ params }: PageProps) {
         <div className="mx-auto max-w-container px-6 md:px-8">
           <StaggerChildren className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <p className="font-body text-lg leading-relaxed text-muted">
-                {category.description}
-              </p>
+              <ProductDescription
+                content={category.description}
+                className="mb-8"
+              />
               <StaggerChildren className="mt-8 grid gap-4 sm:grid-cols-2">
                 <div className="border border-hairline bg-oat p-6">
                   <p className="font-body text-xs uppercase tracking-[0.12em] text-muted">

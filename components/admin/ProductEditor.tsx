@@ -10,6 +10,7 @@ import {
 } from "@/components/admin/AdminShell";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import { ProductGalleryField } from "@/components/admin/ProductGalleryField";
+import { DescriptionEditor } from "@/components/admin/DescriptionEditor";
 import { getApiErrorMessage, getApiData } from "@/lib/api-response";
 import { resolveProductCardImage } from "@/lib/image-props";
 
@@ -194,15 +195,10 @@ export function ProductEditor({ product }: { product: ProductCategoryData }) {
             onChange={(e) => setData({ ...data, shortDescription: e.target.value })}
           />
         </div>
-        <div className="mt-4">
-          <label className="font-body text-sm text-taupe">Description</label>
-          <textarea
-            className="mt-1 w-full rounded-md border border-hairline px-3 py-2 font-body text-sm"
-            rows={4}
-            value={data.description}
-            onChange={(e) => setData({ ...data, description: e.target.value })}
-          />
-        </div>
+        <DescriptionEditor
+          value={data.description}
+          onChange={(description) => setData({ ...data, description })}
+        />
       </AdminCard>
 
       {(

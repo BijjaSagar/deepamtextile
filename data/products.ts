@@ -132,7 +132,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Plush, absorbent bath towels engineered for luxury hospitality and premium retail.",
     description:
-      "Our signature bath towels combine long-staple cotton with precision terry construction for exceptional loft, absorbency, and durability through commercial laundering cycles. Designed for five-star hotels, boutique resorts, and discerning retail brands across North America.",
+      "Our signature bath towels combine long-staple cotton with precision terry construction for exceptional loft, absorbency, and durability through commercial laundering cycles. Designed for five-star hotels, boutique resorts, and discerning retail brands across North America.\n\n## Engineered for Commercial Performance\nCrafted to withstand high-temperature institutional laundering without fiber degradation, our terry pile maintains consistent softness and weight over hundreds of wash cycles.\n\n### Material & Weaving Precision\n- 100% long-staple combed cotton selected for high tensile strength and minimal linting\n- Double-needle lockstitched side and end hems prevent unraveling under commercial wash stress\n- High-velocity air-jet woven loops deliver immediate moisture absorption and rapid drying",
     heroImage: "/images/products/bath-towels.jpg",
     cardImage: "/images/products/bath-towels.jpg",
     features: [
@@ -176,7 +176,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Refined hand towels with consistent weight and finish for guest bathrooms and retail sets.",
     description:
-      "Hand towels that balance softness with quick-drying performance. Each piece is calibrated for uniform GSM across production runs—critical for hospitality procurement and private label consistency.",
+      "Hand towels that balance softness with quick-drying performance. Each piece is calibrated for uniform GSM across production runs—critical for hospitality procurement and private label consistency.\n\n## Daily Hospitality & Retail Durability\nDesigned for frequent laundering in high-traffic hotel suites and guest bathrooms, ensuring shape retention and plush hand feel throughout the product lifecycle.\n\n### Key Specifications\n- Uniform GSM tolerance ±5% ensures consistent feel across multiple production batches\n- Quick-dry loop construction reduces commercial tumble-drying time and energy costs\n- Reinforced header tape provides structural stability during laundering and pressing",
     heroImage: "/images/products/hand-towels.jpg",
     cardImage: "/images/products/hand-towels.jpg",
     features: [
@@ -216,7 +216,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Soft, gentle face towels and washcloths for spa, hospitality, and skincare retail.",
     description:
-      "Face towels crafted with a tighter loop for a smoother surface against skin. Ideal for facial care routines, spa treatments, and premium guest amenities where tactile quality defines the brand experience.",
+      "Face towels crafted with a tighter loop for a smoother surface against skin. Ideal for facial care routines, spa treatments, and premium guest amenities where tactile quality defines the brand experience.\n\n## Gentle Touch & Clean Edge Finish\nEngineered specifically for sensitive skin applications in boutique wellness resorts and luxury hospitality bathrooms.\n\n### Quality Highlights\n- Ultra-soft combed cotton velour or zero-twist terry face\n- Bleach-safe and chlorine-resistant dye formulations\n- Dimensional stability with precision square cutting and reinforced hems",
     heroImage: "/images/products/face-towels.jpg",
     cardImage: "/images/products/face-towels.jpg",
     features: [
@@ -257,7 +257,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Non-slip, highly absorbent bath mats built for daily commercial use.",
     description:
-      "Bath mats with dense pile construction and reinforced backing options. Engineered to withstand heavy foot traffic in hotel bathrooms while maintaining shape and absorbency over thousands of wash cycles.",
+      "Bath mats with dense pile construction and reinforced backing options. Engineered to withstand heavy foot traffic in hotel bathrooms while maintaining shape and absorbency over thousands of wash cycles.\n\n## Heavy-Duty Floor Comfort & Safety\nBuilt to provide instant moisture absorption and slip resistance upon stepping out of baths or showers.\n\n### Performance Features\n- High-density tufted pile engineered for heavy water retention and rapid evaporation\n- Anti-skid latex or textured woven border options suitable for commercial laundry wash cycles\n- Reinforced edge binding protects against fraying in institutional laundry tunnels",
     heroImage: "/images/products/bath-mats.jpg",
     cardImage: "/images/products/bath-mats.jpg",
     features: [
@@ -298,7 +298,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Complete linen programs with matched weights, colours, and replenishment planning.",
     description:
-      "End-to-end hotel linen sourcing: bath towels, hand towels, face cloths, bath mats, and pool towels in coordinated palettes. We support par-level planning, seasonal refreshes, and brand-standard compliance for multi-property groups.",
+      "End-to-end hotel linen sourcing: bath towels, hand towels, face cloths, bath mats, and pool towels in coordinated palettes. We support par-level planning, seasonal refreshes, and brand-standard compliance for multi-property groups.\n\n## Comprehensive Par-Level Hospitality Programs\nDesigned for hotel procurement directors seeking consistent batch-to-batch quality and reliable shipping schedules.\n\n### Program Advantages\n- Unified colour matching across all sizes using standard Pantone references\n- Institutional packaging with batch-coded carton labels for streamlined housekeeping inventory\n- Flexible replenishment schedules with staged container deliveries to USA and Canada",
     heroImage: "/images/products/hotel-linen.jpg",
     cardImage: "/images/products/hotel-linen.jpg",
     features: [
@@ -339,7 +339,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Kimono, shawl, and hooded robes in terry and waffle weaves for hospitality and retail.",
     description:
-      "Luxury bath robes with tailored fit, reinforced seams, and premium finishing. Available in terry, waffle, and microfiber constructions for spa, suite, and retail channels across North America.",
+      "Luxury bath robes with tailored fit, reinforced seams, and premium finishing. Available in terry, waffle, and microfiber constructions for spa, suite, and retail channels across North America.\n\n## Tailored Luxury for Spa & Hospitality\nDesigned to offer exceptional drape, warmth, and post-bath comfort with reinforced stress points for commercial wash durability.\n\n### Construction Details\n- Generous unisex sizing with adjustable belt loops and deep patch pockets\n- Available in plush 400-500 GSM terry, lightweight diamond waffle, or velour\n- Custom embroidery options for hotel crests and corporate brand identity",
     heroImage: "/images/products/bath-robes.jpg",
     cardImage: "/images/products/bath-robes.jpg",
     features: [
@@ -381,7 +381,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Absorbent, lint-free kitchen towels for hospitality kitchens and gourmet retail.",
     description:
-      "Flat-weave and terry kitchen towels designed for professional kitchens and premium home goods. Striped, checked, and solid patterns with excellent absorbency and minimal lint transfer.",
+      "Flat-weave and terry kitchen towels designed for professional kitchens and premium home goods. Striped, checked, and solid patterns with excellent absorbency and minimal lint transfer.\n\n## Commercial Kitchen Performance\nBuilt for rigorous food service environments, culinary studios, and high-end homeware retail brands.\n\n### Key Attributes\n- 100% low-lint cotton construction for streak-free glassware and dish drying\n- High-temperature wash resistance with colorfast vat dyeing\n- Reinforced hanging loops sewn into corners for convenient kitchen station access",
     heroImage: "/images/products/kitchen-towels.jpg",
     cardImage: "/images/products/kitchen-towels.jpg",
     features: [
@@ -421,7 +421,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Vibrant, quick-dry beach towels for resort retail and hospitality pool programs.",
     description:
-      "Large-format beach towels with reactive dye prints, velour finishes, and sand-resistant construction. Built for resort boutiques, pool cabanas, and seasonal retail across coastal markets.",
+      "Large-format beach towels with reactive dye prints, velour finishes, and sand-resistant construction. Built for resort boutiques, pool cabanas, and seasonal retail across coastal markets.\n\n## Vibrant Resort & Coastal Collection\nCombining generous dimensions with vivid colourfast printing and ultra-soft velour shearing.\n\n### Design & Material Excellence\n- One-side sheared velour for silky smooth print clarity and sand-repellent surface\n- Reverse absorbent terry loop for instant drying after ocean or pool swimming\n- Chlorine-resistant reactive printing maintaining brightness under direct sunlight",
     heroImage: "/images/products/beach-towels.jpg",
     cardImage: "/images/products/beach-towels.jpg",
     features: [
@@ -462,7 +462,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Durable, chlorine-resistant pool towels for hotels, clubs, and aquatic centres.",
     description:
-      "Pool towels engineered for chlorine exposure, sun fading, and high-volume laundering. Lighter weight than bath towels with faster dry times—ideal for pool decks and fitness facilities.",
+      "Pool towels engineered for chlorine exposure, sun fading, and high-volume laundering. Lighter weight than bath towels with faster dry times—ideal for pool decks and fitness facilities.\n\n## UV & Chlorine Resistant Engineering\nCrafted to endure relentless sun exposure and heavy chemical water conditions in resorts and athletic clubs.\n\n### Technical Highlights\n- 100% vat-dyed yarns provide superior resistance against chlorine fading and solar degradation\n- High-durability dobby borders and reinforced side hems withstand frequent laundering\n- Optimized GSM range balances plush feel with fast ambient air drying",
     heroImage: "/images/products/pool-towels.jpg",
     cardImage: "/images/products/pool-towels.jpg",
     features: [
@@ -502,7 +502,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Ultra-soft spa towels in white and natural tones for treatment rooms and wellness brands.",
     description:
-      "Spa-grade towels with exceptional softness, consistent white brightness, and gentle loop construction. Designed for treatment tables, relaxation lounges, and premium wellness retail.",
+      "Spa-grade towels with exceptional softness, consistent white brightness, and gentle loop construction. Designed for treatment tables, relaxation lounges, and premium wellness retail.\n\n## Elevated Touch for Wellness & Therapy\nTailored to enhance guest tranquility and tactile comfort across luxury medical spas and resort wellness centers.\n\n### Specification Details\n- Zero-twist combed cotton delivers ultra-fluffy texture with zero abrasive sensation\n- Resistant to discoloration from essential oils, lotions, and organic skincare treatments\n- Standardized dimensions tailored for massage tables and treatment chairs",
     heroImage: "/images/products/spa-towels.jpg",
     cardImage: "/images/products/spa-towels.jpg",
     features: [
@@ -543,7 +543,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Full private label programs—from product development to packaging and export logistics.",
     description:
-      "Partner with Deepam Textiles to launch or scale your towel and linen brand. We offer end-to-end private label services: product development, sampling, custom weaving, branding, packaging, and FOB/CIF export to USA and Canada.",
+      "Partner with Deepam Textiles to launch or scale your towel and linen brand. We offer end-to-end private label services: product development, sampling, custom weaving, branding, packaging, and FOB/CIF export to USA and Canada.\n\n## Full Turnkey Brand Manufacturing\nFrom initial yarn selection to custom barcoded retail boxes, we bring your proprietary textile concepts to market.\n\n### Turnkey Capabilities\n- Custom weaving including jacquard logos, dobby borders, and relief textures\n- Pantone-matched custom dyeing with low minimum order quantities\n- Complete retail packaging: FSC-certified hang tags, belly bands, polybags, and barcodes",
     heroImage: "/images/products/private-label.jpg",
     cardImage: "/images/products/private-label.jpg",
     features: [
@@ -583,7 +583,7 @@ export const productCategories: ProductCategory[] = [
     shortDescription:
       "Custom-branded towels for corporate gifting, events, and promotional campaigns.",
     description:
-      "Cost-effective promotional towels with screen printing, embroidery, or jacquard logo placement. Ideal for corporate gifts, golf tournaments, fitness brands, and trade show giveaways targeting North American markets.",
+      "Cost-effective promotional towels with screen printing, embroidery, or jacquard logo placement. Ideal for corporate gifts, golf tournaments, fitness brands, and trade show giveaways targeting North American markets.\n\n## High-Impact Branded Merchandise\nDeliver lasting promotional value with genuine textile quality that recipients keep and use for years.\n\n### Branding Options\n- Precision jacquard woven logos across towel borders or full towel body\n- High-definition embroidery supporting complex multi-color crests\n- Durable screen printing with eco-friendly water-based inks for events and promotions",
     heroImage: "/images/products/promotional-towels.jpg",
     cardImage: "/images/products/promotional-towels.jpg",
     features: [

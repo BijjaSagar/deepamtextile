@@ -20,7 +20,8 @@
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
     "admin:reset": "tsx scripts/reset-admin.ts",
-    "backfill:product-cards": "tsx scripts/backfill-product-card-images.ts"
+    "backfill:product-cards": "tsx scripts/backfill-product-card-images.ts",
+    "update:product-descriptions": "tsx scripts/update-product-descriptions.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
