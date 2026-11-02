@@ -164,7 +164,7 @@ export function AdminSaveButton({
   label?: string;
 }) {
   return (
-    <Button onClick={onClick} disabled={saving}>
+    <Button type="button" onClick={() => onClick()} disabled={saving}>
       {saving ? "Saving…" : label}
     </Button>
   );

@@ -7,6 +7,8 @@ import { getCategoryBySlugAdmin } from "@/lib/data/products";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminProductEditPage({ params }: PageProps) {
   await requireAdminPage();
   const { slug } = await params;
@@ -22,7 +24,7 @@ export default async function AdminProductEditPage({ params }: PageProps) {
         ← Back to products
       </Link>
       <AdminPageHeader title={product.name} description={`Edit ${slug}`} />
-      <ProductEditor product={product} />
+      <ProductEditor key={product.slug + (product.updatedAt ?? "")} product={product} />
     </>
   );
 }

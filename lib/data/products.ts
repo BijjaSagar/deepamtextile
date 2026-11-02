@@ -197,6 +197,7 @@ export async function getProductCategories(): Promise<ProductCategoryData[]> {
 export async function getAllProductCategoriesAdmin(): Promise<
   ProductCategoryData[]
 > {
+  noStore();
   if (!isDbConfigured()) return staticCategories.map(withSeoFields);
   try {
     const rows = await prisma.productCategory.findMany({
@@ -235,6 +236,7 @@ export async function getCategoryBySlug(
 export async function getCategoryBySlugAdmin(
   slug: string,
 ): Promise<ProductCategoryData | undefined> {
+  noStore();
   if (!isDbConfigured()) {
     const category = staticGetBySlug(slug);
     return category ? withSeoFields(category) : undefined;

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { ProductCategoryData } from "@/lib/types/cms";
 import {
   AdminCard,
@@ -63,10 +64,15 @@ export function ProductsList({ products }: { products: ProductCategoryData[] }) 
 }
 
 export function ProductEditor({ product }: { product: ProductCategoryData }) {
+  const router = useRouter();
   const [data, setData] = useState({
     ...product,
     galleryImages: product.galleryImages ?? [],
   });
+  const [sizesJson, setSizesJson] = useState(() =>
+    JSON.stringify(product.sizes ?? [], null, 2),
+  );
+  const [sizesError, setSizesError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{
     text: string;
@@ -86,40 +92,80 @@ export function ProductEditor({ product }: { product: ProductCategoryData }) {
     galleryCount: data.galleryImages.length,
   });
 
-  async function handleSave(overrideData?: Partial<ProductCategoryData>) {
+  async function handleSave(overrideData?: unknown) {
     setSaving(true);
     setMessage(null);
-    const payload = {
-      ...data,
-      ...overrideData,
-    };
-    const res = await fetch(`/api/admin/products/${product.slug}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const body = await res.json().catch(() => null);
-    if (res.ok) {
-      const saved = getApiData<ProductCategoryData>(body);
-      if (saved) {
-        console.log("[ProductEditor] saved product", {
-          slug: saved.slug,
-          cardImage: saved.cardImage,
-          updatedAt: saved.updatedAt,
+
+    // Defense against React MouseEvent being passed when used as onClick handler
+    const cleanOverride: Partial<ProductCategoryData> | undefined =
+      overrideData &&
+      typeof overrideData === "object" &&
+      !("nativeEvent" in overrideData) &&
+      !("target" in overrideData) &&
+      !("bubbles" in overrideData)
+        ? (overrideData as Partial<ProductCategoryData>)
+        : undefined;
+
+    try {
+      const payload: ProductCategoryData = {
+        ...data,
+        ...cleanOverride,
+      };
+
+      console.log("[ProductEditor] persisting product", {
+        slug: product.slug,
+        name: payload.name,
+        shortDescription: payload.shortDescription,
+        descriptionLength: payload.description?.length,
+      });
+
+      const res = await fetch(`/api/admin/products/${product.slug}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const body = await res.json().catch(() => null);
+
+      if (res.ok) {
+        const saved = getApiData<ProductCategoryData>(body);
+        if (saved) {
+          console.log("[ProductEditor] saved product successfully", {
+            slug: saved.slug,
+            cardImage: saved.cardImage,
+            updatedAt: saved.updatedAt,
+          });
+          setData({
+            ...saved,
+            galleryImages: saved.galleryImages ?? [],
+          });
+          setSizesJson(JSON.stringify(saved.sizes ?? [], null, 2));
+        }
+        setMessage({
+          text: "✅ Product updated and saved to live site successfully!",
+          type: "success",
         });
-        setData({
-          ...saved,
-          galleryImages: saved.galleryImages ?? [],
+        router.refresh();
+      } else {
+        const errText = getApiErrorMessage(body) || "Failed to save product";
+        console.error("[ProductEditor] save failed", errText);
+        setMessage({
+          text: errText,
+          type: "error",
         });
       }
-      setMessage({ text: "Product saved to live site.", type: "success" });
-    } else {
+    } catch (err) {
+      console.error("[ProductEditor] save unexpected error", err);
       setMessage({
-        text: getApiErrorMessage(body),
+        text:
+          err instanceof Error
+            ? err.message
+            : "An unexpected error occurred while saving",
         type: "error",
       });
+    } finally {
+      setSaving(false);
     }
-    setSaving(false);
   }
 
   function setArrayField(
@@ -261,22 +307,45 @@ export function ProductEditor({ product }: { product: ProductCategoryData }) {
       </AdminCard>
 
       <AdminCard>
-        <label className="font-display text-lg text-taupe">Sizes (JSON)</label>
+        <div className="flex items-center justify-between">
+          <label className="font-display text-lg text-taupe">Sizes (JSON)</label>
+          {sizesError && (
+            <span className="font-body text-xs font-semibold text-red-600">
+              {sizesError}
+            </span>
+          )}
+        </div>
         <textarea
           className="mt-2 w-full rounded-md border border-hairline px-3 py-2 font-mono text-sm"
           rows={6}
-          value={JSON.stringify(data.sizes, null, 2)}
+          value={sizesJson}
           onChange={(e) => {
+            const val = e.target.value;
+            setSizesJson(val);
             try {
-              setData({ ...data, sizes: JSON.parse(e.target.value) });
+              const parsed = JSON.parse(val);
+              setData((prev) => ({ ...prev, sizes: parsed }));
+              setSizesError(null);
             } catch {
-              // ignore invalid JSON while typing
+              setSizesError("Invalid JSON syntax in Sizes");
             }
           }}
         />
       </AdminCard>
 
-      <AdminSaveButton saving={saving} onClick={handleSave} label="Save product" />
+      {message && (
+        <AdminMessage
+          message={message.text}
+          type={message.type}
+        />
+      )}
+
+      <div className="sticky bottom-4 z-20 flex flex-col gap-3 rounded-xl border border-hairline bg-white/95 p-4 shadow-lg backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
+        <p className="font-body text-xs text-muted">
+          Editing <span className="font-semibold text-taupe">{data.name}</span> (<code className="text-xs text-taupe">/products/{product.slug}</code>)
+        </p>
+        <AdminSaveButton saving={saving} onClick={() => handleSave()} label="Save product" />
+      </div>
     </div>
   );
 }

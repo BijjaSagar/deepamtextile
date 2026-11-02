@@ -42,8 +42,9 @@ export const PUT = withApiHandler(
         galleryImages,
       });
 
-      console.log("[admin/products PUT] persisting product images", {
+      console.log("[admin/products PUT] persisting product", {
         slug,
+        name: body.name,
         cardImage,
         heroImage: body.heroImage,
         galleryCount: galleryImages.length,
@@ -59,30 +60,33 @@ export const PUT = withApiHandler(
           heroImage: body.heroImage,
           cardImage,
           galleryImages,
-          features: body.features,
-          variants: body.variants ?? [],
-          materials: body.materials,
-          sizes: body.sizes,
-          gsmRange: body.gsmRange,
-          customization: body.customization,
-          packaging: body.packaging,
-          idealFor: body.idealFor,
-          leadTime: body.leadTime,
-          moq: body.moq,
+          features: Array.isArray(body.features) ? body.features : [],
+          variants: Array.isArray(body.variants) ? body.variants : [],
+          materials: Array.isArray(body.materials) ? body.materials : [],
+          sizes: body.sizes ?? [],
+          gsmRange: body.gsmRange ?? "",
+          customization: Array.isArray(body.customization) ? body.customization : [],
+          packaging: Array.isArray(body.packaging) ? body.packaging : [],
+          idealFor: Array.isArray(body.idealFor) ? body.idealFor : [],
+          leadTime: body.leadTime ?? "",
+          moq: body.moq ?? "",
           metaTitle: body.metaTitle ?? null,
           metaDescription: body.metaDescription ?? null,
-          sortOrder: body.sortOrder,
-          visible: body.visible,
+          ...(typeof body.sortOrder === "number" ? { sortOrder: body.sortOrder } : {}),
+          ...(typeof body.visible === "boolean" ? { visible: body.visible } : {}),
         },
       });
       await revalidateSite();
       return apiSuccess(mapProduct(product));
     } catch (error) {
+      console.error("[admin/products PUT error]", error);
       const message =
         error instanceof Error &&
         /Unknown column|galleryImages/i.test(error.message)
           ? "Database schema is out of date. Run: npx prisma migrate deploy"
-          : "Failed to update product";
+          : error instanceof Error
+            ? error.message
+            : "Failed to update product";
       return apiError(message, 500, "UPDATE_FAILED");
     }
   },
