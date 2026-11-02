@@ -11,6 +11,7 @@ type ImageUploadFieldProps = {
   label: string;
   value: string;
   onChange: (url: string) => void;
+  onAutoSave?: (url: string) => Promise<void> | void;
   hint?: string;
   /** e.g. `products/bath-towels` → public/uploads/products/bath-towels/ */
   uploadFolder?: string;
@@ -20,6 +21,7 @@ export function ImageUploadField({
   label,
   value,
   onChange,
+  onAutoSave,
   hint,
   uploadFolder,
 }: ImageUploadFieldProps) {
@@ -50,6 +52,9 @@ export function ImageUploadField({
       }
       console.log("[ImageUploadField] upload success", { url, uploadFolder });
       onChange(url);
+      if (onAutoSave) {
+        void onAutoSave(url);
+      }
     } catch {
       setError("Upload failed");
     } finally {
@@ -118,7 +123,10 @@ export function ImageUploadField({
             variant="ghost"
             size="sm"
             className="text-muted"
-            onClick={() => onChange("")}
+            onClick={() => {
+              onChange("");
+              if (onAutoSave) void onAutoSave("");
+            }}
           >
             Clear
           </Button>

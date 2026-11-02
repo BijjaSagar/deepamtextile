@@ -807,10 +807,10 @@ export const howWeWorkSteps = [
 
 export const audienceSegments = [
   {
-    title: "Hospitality",
+    title: "Hospitality Solutions",
     description:
-      "Matched linen programs, par-level planning, and commercial-laundry tested GSM consistency for hotels and resorts.",
-    href: "/products/hotel-linen",
+      "Direct bath linen manufacturing in Solapur, curated hotel bed linen, and turnkey hotel supplies & FF&E procurement.",
+    href: "/hospitality",
   },
   {
     title: "Retailers & Brands",

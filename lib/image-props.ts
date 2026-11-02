@@ -177,8 +177,8 @@ export function cmsImageSrc(src: string, cacheVersion?: CacheVersion): string {
 
   const filenameTs = UPLOAD_FILENAME_TS_RE.exec(pathname)?.[1] ?? null;
   const version =
-    filenameTs ??
     normalizeCacheVersion(cacheVersion) ??
+    filenameTs ??
     null;
 
   if (!version) {

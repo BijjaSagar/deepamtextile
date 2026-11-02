@@ -86,13 +86,17 @@ export function ProductEditor({ product }: { product: ProductCategoryData }) {
     galleryCount: data.galleryImages.length,
   });
 
-  async function handleSave() {
+  async function handleSave(overrideData?: Partial<ProductCategoryData>) {
     setSaving(true);
     setMessage(null);
+    const payload = {
+      ...data,
+      ...overrideData,
+    };
     const res = await fetch(`/api/admin/products/${product.slug}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     });
     const body = await res.json().catch(() => null);
     if (res.ok) {
@@ -108,7 +112,7 @@ export function ProductEditor({ product }: { product: ProductCategoryData }) {
           galleryImages: saved.galleryImages ?? [],
         });
       }
-      setMessage({ text: "Product saved.", type: "success" });
+      setMessage({ text: "Product saved to live site.", type: "success" });
     } else {
       setMessage({
         text: getApiErrorMessage(body),
@@ -156,15 +160,17 @@ export function ProductEditor({ product }: { product: ProductCategoryData }) {
             label="Hero image"
             value={data.heroImage}
             onChange={(heroImage) => setData({ ...data, heroImage })}
+            onAutoSave={(heroImage) => handleSave({ heroImage })}
             uploadFolder={folder}
-            hint="Product detail hero. Save after upload."
+            hint="Product detail hero. Auto-saved to live site immediately on upload."
           />
           <ImageUploadField
             label="Card image (listing thumbnail)"
             value={data.cardImage}
             onChange={(cardImage) => setData({ ...data, cardImage })}
+            onAutoSave={(cardImage) => handleSave({ cardImage })}
             uploadFolder={folder}
-            hint="Shown on /products and homepage Product Portfolio. Optional if hero or gallery has uploads — those are used automatically on save."
+            hint="Shown on /products and homepage Product Portfolio. Auto-saved to live site immediately on upload."
           />
         </div>
         <p className="mt-3 font-body text-xs text-muted">

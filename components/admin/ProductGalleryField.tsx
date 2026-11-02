@@ -27,7 +27,7 @@ type ProductGalleryFieldProps = {
   onChange: (images: string[]) => void;
   productSlug: string;
   productName?: string;
-  onSaveQuick?: () => void;
+  onSaveQuick?: (override?: { galleryImages: string[] }) => Promise<void> | void;
   saving?: boolean;
 };
 
@@ -112,10 +112,25 @@ export function ProductGalleryField({
         if (addedUrls.length > 0) {
           const updated = [...images, ...addedUrls];
           onChange(updated);
-          setHasUnsavedChanges(true);
-          setSuccessMsg(
-            `Successfully added ${addedUrls.length} image${addedUrls.length > 1 ? "s" : ""} to ${productName || productSlug} gallery!`,
-          );
+          if (onSaveQuick) {
+            try {
+              await onSaveQuick({ galleryImages: updated });
+              setHasUnsavedChanges(false);
+              setSuccessMsg(
+                `Successfully uploaded ${addedUrls.length} image${addedUrls.length > 1 ? "s" : ""} and saved to live site!`,
+              );
+            } catch {
+              setHasUnsavedChanges(true);
+              setSuccessMsg(
+                `Added ${addedUrls.length} image${addedUrls.length > 1 ? "s" : ""}. Click "Save Gallery" to publish.`,
+              );
+            }
+          } else {
+            setHasUnsavedChanges(true);
+            setSuccessMsg(
+              `Successfully added ${addedUrls.length} image${addedUrls.length > 1 ? "s" : ""} to ${productName || productSlug} gallery!`,
+            );
+          }
         }
       } catch (err) {
         console.error("[ProductGalleryField] upload error", err);
@@ -130,7 +145,7 @@ export function ProductGalleryField({
         if (inputRef.current) inputRef.current.value = "";
       }
     },
-    [images, onChange, productName, productSlug, uploadFolder],
+    [images, onChange, onSaveQuick, productName, productSlug, uploadFolder],
   );
 
   function handleDragOver(e: DragEvent<HTMLDivElement>) {
@@ -155,39 +170,83 @@ export function ProductGalleryField({
     }
   }
 
-  function removeAt(index: number) {
+  async function removeAt(index: number) {
     const updated = images.filter((_, i) => i !== index);
     onChange(updated);
-    setHasUnsavedChanges(true);
-    setSuccessMsg("Image removed from gallery.");
+    if (onSaveQuick) {
+      try {
+        await onSaveQuick({ galleryImages: updated });
+        setHasUnsavedChanges(false);
+        setSuccessMsg("Image removed and saved to live site.");
+      } catch {
+        setHasUnsavedChanges(true);
+        setSuccessMsg("Image removed from gallery. Click Save Gallery to publish.");
+      }
+    } else {
+      setHasUnsavedChanges(true);
+      setSuccessMsg("Image removed from gallery.");
+    }
   }
 
-  function move(index: number, direction: -1 | 1) {
+  async function move(index: number, direction: -1 | 1) {
     const next = index + direction;
     if (next < 0 || next >= images.length) return;
     const copy = [...images];
     [copy[index], copy[next]] = [copy[next], copy[index]];
     onChange(copy);
-    setHasUnsavedChanges(true);
+    if (onSaveQuick) {
+      try {
+        await onSaveQuick({ galleryImages: copy });
+        setHasUnsavedChanges(false);
+        setSuccessMsg("Gallery order saved to live site.");
+      } catch {
+        setHasUnsavedChanges(true);
+      }
+    } else {
+      setHasUnsavedChanges(true);
+    }
   }
 
-  function makeCover(index: number) {
+  async function makeCover(index: number) {
     if (index === 0) return;
     const copy = [...images];
     const [selected] = copy.splice(index, 1);
     copy.unshift(selected);
     onChange(copy);
-    setHasUnsavedChanges(true);
-    setSuccessMsg("Set as cover / first gallery image.");
+    if (onSaveQuick) {
+      try {
+        await onSaveQuick({ galleryImages: copy });
+        setHasUnsavedChanges(false);
+        setSuccessMsg("Cover image updated and saved to live site.");
+      } catch {
+        setHasUnsavedChanges(true);
+        setSuccessMsg("Set as cover / first gallery image.");
+      }
+    } else {
+      setHasUnsavedChanges(true);
+      setSuccessMsg("Set as cover / first gallery image.");
+    }
   }
 
-  function handleAddUrl() {
+  async function handleAddUrl() {
     const trimmed = customUrl.trim();
     if (!trimmed) return;
     if (!images.includes(trimmed)) {
-      onChange([...images, trimmed]);
-      setHasUnsavedChanges(true);
-      setSuccessMsg("Image URL added to gallery.");
+      const updated = [...images, trimmed];
+      onChange(updated);
+      if (onSaveQuick) {
+        try {
+          await onSaveQuick({ galleryImages: updated });
+          setHasUnsavedChanges(false);
+          setSuccessMsg("Image URL added and saved to live site.");
+        } catch {
+          setHasUnsavedChanges(true);
+          setSuccessMsg("Image URL added to gallery.");
+        }
+      } else {
+        setHasUnsavedChanges(true);
+        setSuccessMsg("Image URL added to gallery.");
+      }
     }
     setCustomUrl("");
   }

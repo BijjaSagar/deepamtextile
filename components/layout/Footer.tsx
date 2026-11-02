@@ -61,7 +61,7 @@ export function Footer({
 
           <div>
             <p className="mb-4 font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
-              Explore
+              Explore &amp; Solutions
             </p>
             <ul className="space-y-3">
               {filteredCompanyLinks.map((link) => (
@@ -74,6 +74,22 @@ export function Footer({
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/hospitality/hotel-bath-and-bed-linen"
+                  className="font-body text-[13.5px] text-white/85 transition-colors hover:text-white"
+                >
+                  Hotel Bath &amp; Bed Linen
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hospitality/hotel-supplies-and-procurement"
+                  className="font-body text-[13.5px] text-white/85 transition-colors hover:text-white"
+                >
+                  Hotel Supplies &amp; Procurement
+                </Link>
+              </li>
             </ul>
           </div>
 

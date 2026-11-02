@@ -36,7 +36,9 @@ export function Header({
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [mobileHospitalityOpen, setMobileHospitalityOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [hospitalityOpen, setHospitalityOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -55,6 +57,7 @@ export function Header({
   useEffect(() => {
     if (!mobileOpen) {
       setMobileProductsOpen(false);
+      setMobileHospitalityOpen(false);
     }
   }, [mobileOpen]);
 
@@ -130,6 +133,64 @@ export function Header({
                   className="mt-4 inline-block border-t border-hairline pt-4 font-body text-sm font-medium text-sage-deep"
                 >
                   View all products →
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="group relative"
+            onMouseEnter={() => setHospitalityOpen(true)}
+            onMouseLeave={() => setHospitalityOpen(false)}
+          >
+            <Link
+              href="/hospitality"
+              className="nav-link-underline inline-flex items-center gap-1 font-body text-xs uppercase tracking-[0.13em] text-taupe transition-colors hover:text-sage-deep"
+            >
+              Hospitality
+              <ChevronDown
+                className={cn(
+                  "h-4 w-4 transition-transform",
+                  hospitalityOpen && "rotate-180",
+                )}
+              />
+            </Link>
+            <div
+              className={cn(
+                "absolute left-0 top-full z-50 pt-1",
+                hospitalityOpen
+                  ? "pointer-events-auto visible opacity-100"
+                  : "pointer-events-none invisible opacity-0",
+              )}
+            >
+              <div className="w-[360px] border border-hairline bg-pearl p-5 shadow-xl">
+                <Link
+                  href="/hospitality/hotel-bath-and-bed-linen"
+                  className="group/item block rounded-md p-2.5 transition-colors hover:bg-oat/60"
+                >
+                  <span className="block font-display text-sm font-medium text-taupe group-hover/item:text-sage-deep">
+                    Hotel Bath &amp; Bed Linen
+                  </span>
+                  <span className="mt-0.5 block font-body text-xs text-muted">
+                    Towels, bath sheets, mats, bathrobes, pool towels &amp; curated bed linen.
+                  </span>
+                </Link>
+                <Link
+                  href="/hospitality/hotel-supplies-and-procurement"
+                  className="group/item mt-1 block rounded-md p-2.5 transition-colors hover:bg-oat/60"
+                >
+                  <span className="block font-display text-sm font-medium text-taupe group-hover/item:text-sage-deep">
+                    Hotel Supplies &amp; Procurement
+                  </span>
+                  <span className="mt-0.5 block font-body text-xs text-muted">
+                    FF&amp;E furniture, bathroom accessories, amenities &amp; turnkey export.
+                  </span>
+                </Link>
+                <Link
+                  href="/hospitality"
+                  className="mt-3 block border-t border-hairline pt-3 font-body text-xs font-semibold text-sage-deep transition-colors hover:text-taupe"
+                >
+                  Hospitality Solutions Overview →
                 </Link>
               </div>
             </div>
@@ -237,6 +298,51 @@ export function Header({
                       onClick={() => setMobileOpen(false)}
                     >
                       View all products →
+                    </Link>
+                  </div>
+                )}
+              </div>
+              <div className="border-b border-hairline">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between py-4 font-display text-2xl text-taupe"
+                  onClick={() => setMobileHospitalityOpen((open) => !open)}
+                  aria-expanded={mobileHospitalityOpen}
+                  aria-controls="mobile-hospitality-menu"
+                >
+                  Hospitality
+                  <ChevronDown
+                    className={cn(
+                      "h-5 w-5 transition-transform",
+                      mobileHospitalityOpen && "rotate-180",
+                    )}
+                  />
+                </button>
+                {mobileHospitalityOpen && (
+                  <div
+                    id="mobile-hospitality-menu"
+                    className="flex flex-col gap-2 pb-4"
+                  >
+                    <Link
+                      href="/hospitality/hotel-bath-and-bed-linen"
+                      className="py-1.5 font-body text-sm font-medium text-taupe hover:text-sage-deep"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Hotel Bath &amp; Bed Linen
+                    </Link>
+                    <Link
+                      href="/hospitality/hotel-supplies-and-procurement"
+                      className="py-1.5 font-body text-sm font-medium text-taupe hover:text-sage-deep"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Hotel Supplies &amp; Procurement
+                    </Link>
+                    <Link
+                      href="/hospitality"
+                      className="border-t border-hairline pt-3 font-body text-xs font-semibold text-sage-deep"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Hospitality Overview →
                     </Link>
                   </div>
                 )}

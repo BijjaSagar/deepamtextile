@@ -207,6 +207,33 @@ export default async function ProductCategoryPage({ params }: PageProps) {
         <div className="mx-auto max-w-container px-6 md:px-8">
           <StaggerChildren className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
+              {category.slug === "hotel-linen" && (
+                <div className="mb-8 rounded-xl border border-sage/40 bg-sage/5 p-6 shadow-xs">
+                  <p className="font-body text-xs font-semibold uppercase tracking-wider text-sage-deep">
+                    Dedicated Hospitality Solutions
+                  </p>
+                  <h3 className="mt-1 font-display text-xl text-taupe">
+                    Looking for full-property programs or turnkey hotel procurement?
+                  </h3>
+                  <p className="mt-2 font-body text-xs leading-relaxed text-muted sm:text-sm">
+                    We offer dedicated solutions tailored for hotel owners, general managers, and procurement directors:
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <Link
+                      href="/hospitality/hotel-bath-and-bed-linen"
+                      className="inline-flex items-center gap-1.5 rounded-md bg-sage-deep px-3.5 py-1.5 font-body text-xs font-semibold text-white shadow-xs transition-colors hover:bg-sage-deep/90"
+                    >
+                      Hotel Bath &amp; Bed Linen Program →
+                    </Link>
+                    <Link
+                      href="/hospitality/hotel-supplies-and-procurement"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 py-1.5 font-body text-xs font-semibold text-taupe shadow-xs transition-colors hover:bg-oat"
+                    >
+                      Hotel Supplies &amp; Procurement →
+                    </Link>
+                  </div>
+                </div>
+              )}
               <ProductDescription
                 content={category.description}
                 className="mb-8"
